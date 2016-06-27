@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">NDR</string>
     <string name="menu">Home</string>
+
+    <!-- *** Activity Secciones  *** -->
     <string name="secciones">Secciones</string>
+    <string name="info_general">Información General</string>
+    <string name="antec_medic">Antecedentes y Medicamentos</string>
+    <string name="medidas">Medidas</string>
+    <string name="pres_art">Presión Arterial</string>
+    <string name="laboratorio">Laboratorio</string>
+
 </resources>
