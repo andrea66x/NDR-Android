@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="fiec.ndr.MenuPrincipal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OPCIONES"
+        android:id="@+id/txt_opciones"
+        android:textStyle="bold"
+        android:textSize="50dp"
+        android:textColor="#087f2b"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="15dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:src="@mipmap/nuevo_item"
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="44dp"
+        android:background="@drawable/rounded_corners"
+        android:layout_below="@+id/txt_opciones"
+        android:layout_alignLeft="@+id/txt_opciones"
+        android:layout_alignStart="@+id/txt_opciones"
+        android:layout_marginTop="32dp"
+        android:onClick="nuevoFormulario"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton2"
+        android:src="@mipmap/buscar"
+        android:background="@drawable/rounded_corners"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_toRightOf="@+id/imageButton"
+        android:layout_toEndOf="@+id/imageButton"
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="48dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton3"
+        android:src="@mipmap/formularios"
+        android:background="@drawable/rounded_corners"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/imageButton"
+        android:layout_alignStart="@+id/imageButton" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton4"
+        android:src="@mipmap/sincronizar"
+        android:background="@drawable/rounded_corners"
+        android:layout_alignTop="@+id/imageButton3"
+        android:layout_alignLeft="@+id/imageButton2"
+        android:layout_alignStart="@+id/imageButton2" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton5"
+        android:layout_marginTop="31dp"
+        android:src="@mipmap/informacion"
+        android:background="@drawable/rounded_corners"
+        android:layout_below="@+id/imageButton3"
+        android:layout_alignLeft="@+id/imageButton3"
+        android:layout_alignStart="@+id/imageButton3" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton6"
+        android:src="@mipmap/salir"
+        android:background="@drawable/rounded_corners"
+        android:layout_alignTop="@+id/imageButton5"
+        android:layout_alignLeft="@+id/imageButton4"
+        android:layout_alignStart="@+id/imageButton4" />
+
+</RelativeLayout>
