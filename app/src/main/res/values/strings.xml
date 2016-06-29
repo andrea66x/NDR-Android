@@ -10,4 +10,9 @@
     <string name="pres_art">Presión Arterial</string>
     <string name="laboratorio">Laboratorio</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- *** Activity Información General  *** -->
+
 </resources>
