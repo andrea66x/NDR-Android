@@ -28,5 +28,8 @@
     <string name="fech_nac">Fecha de Nac:</string>
     <string name="telefono">Teléfono:</string>
     <string name="est_civil">Estado Civil:</string>
+    <string name="origen">Origen:</string>
+    <string name="af_ecuat">Af/Ecuat</string>
+    <string name="indi_mest">Indi/Mest</string>
 
 </resources>

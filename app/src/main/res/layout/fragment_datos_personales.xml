@@ -84,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/femenino"
-                        android:id="@+id/radioButton"
+                        android:id="@+id/rd_fem"
                         android:checked="true"
                         android:layout_column="1" />
 
@@ -92,7 +92,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/masculino"
-                        android:id="@+id/radioButton2"
+                        android:id="@+id/rb_masc"
                         android:layout_column="2" />
                 </RadioGroup>
             </TableRow>
@@ -169,6 +169,33 @@
                     android:id="@+id/sp_estcivil"
                     android:layout_column="1" />
 
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="@string/origen"
+                    android:id="@+id/tv_origen"
+                    android:layout_column="0"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+                <RadioGroup>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/af_ecuat"
+                        android:id="@+id/rb_origen1"
+                        android:checked="true"
+                        android:layout_column="1" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/indi_mest"
+                        android:id="@+id/rb_origen2"
+                        android:layout_column="2" />
+                </RadioGroup>
             </TableRow>
 
         </TableLayout>
