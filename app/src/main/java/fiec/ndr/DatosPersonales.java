@@ -7,6 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -18,6 +24,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class DatosPersonales extends Fragment {
+    View rootView;
+    Spinner spinner;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -58,13 +66,40 @@ public class DatosPersonales extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_datos_personales, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_datos_personales, container, false);
+        spinner = (Spinner) rootView.findViewById(R.id.sp_estcivil);
+        List list = new ArrayList();
+        list.add("soltero");
+        list.add("unido");
+        list.add("casado");
+        list.add("divorciado");
+        list.add("viudo");
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this.getActivity(),android.R.layout.simple_dropdown_item_1line,list);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        return rootView;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

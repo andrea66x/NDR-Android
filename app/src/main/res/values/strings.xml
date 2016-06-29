@@ -14,5 +14,19 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- *** Activity Información General  *** -->
+    <string name="vivienda">Vivienda</string>
+    <string name="econ_fmliar">Economía Familiar</string>
+
+    <!-- Fragment Datos Personales -->
+    <string name="nombre">Nombre:</string>
+    <string name="ap_paterno">Apellito Paterno:</string>
+    <string name="ap_materno">Apellito Materno:</string>
+    <string name="sexo">Sexo:</string>
+    <string name="femenino">Femenino:</string>
+    <string name="masculino">Masculino:</string>
+    <string name="edad">Edad:</string>
+    <string name="fech_nac">Fecha de Nac:</string>
+    <string name="telefono">Teléfono:</string>
+    <string name="est_civil">Estado Civil:</string>
 
 </resources>

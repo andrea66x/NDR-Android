@@ -39,7 +39,7 @@ public class InformacionGeneral extends AppCompatActivity {
                     return new DatosPersonales();
                 case 1:
                     return new Vivienda();
-                case 3:
+                case 2:
                     return new EconomiaFamiliar();
                 default:
                     return new DatosPersonales();
@@ -58,7 +58,7 @@ public class InformacionGeneral extends AppCompatActivity {
                     return "Datos Personales";
                 case 1:
                     return "Vivienda";
-                case 3:
+                case 2:
                     return "Economía Familiar";
                 default:
                     return "Datos Personales";
