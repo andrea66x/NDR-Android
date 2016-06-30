@@ -32,4 +32,22 @@
     <string name="af_ecuat">Af/Ecuat</string>
     <string name="indi_mest">Indi/Mest</string>
 
+    <!-- *** Login Activity  *** -->
+    <string name="hint_correo">Correo</string>
+    <string name="hint_contrasena">Contraseña</string>
+    <string name="btn_entrar">Ingresar</string>
+    <string name="acc_entrar">Ingresar</string>
+    <string name="error_correo_invalido">Este correo es invalido.</string>
+    <string name="error_contrasena_corta">Esta contraseña es muy corta.</string>
+    <string name="error_contrasena">Esta contraseña es incorrecta.</string>
+    <string name="error_requerido">Campo requerido.</string>
+
+    <!-- *** Labels Menú Principal  *** -->
+    <string name="lbl_nuevo">Nueva Encuesta:</string>
+    <string name="lbl_buscar">Buscar Encuesta:</string>
+    <string name="lbl_informacion">Información:</string>
+    <string name="lbl_salir">Salir del Sistema:</string>
+    <string name="lbl_sincronizar">Sincronizar Base de Datos:</string>
+    <string name="lbl_formularios">Formularios:</string>
+
 </resources>

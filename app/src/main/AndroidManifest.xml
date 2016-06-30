@@ -9,7 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".LoginActivity" >
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +21,8 @@
 
         <activity
             android:name=".MenuPrincipal"
-            android:label="@string/menu" >
+            android:label="@string/menu"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MENUPRINCIPAL" />
 

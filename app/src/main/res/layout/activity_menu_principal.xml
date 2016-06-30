@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,84 +7,199 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fiec.ndr.MenuPrincipal">
+    tools:context="fiec.ndr.MenuPrincipal"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OPCIONES"
+        android:text="Menú Principal"
         android:id="@+id/txt_opciones"
         android:textStyle="bold"
-        android:textSize="50dp"
+        android:textSize="40sp"
         android:textColor="#087f2b"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:padding="15dp" />
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nuevo_form"
-        android:src="@mipmap/nuevo_item"
-        android:background="@drawable/rounded_corners"
-        android:onClick="nuevoFormulario"
-        android:layout_alignTop="@+id/imageButton2"
-        android:layout_alignLeft="@+id/imageButton3"
-        android:layout_alignStart="@+id/imageButton3" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton2"
-        android:src="@mipmap/buscar"
-        android:background="@drawable/rounded_corners"
-        android:layout_below="@+id/txt_opciones"
-        android:layout_alignRight="@+id/txt_opciones"
-        android:layout_alignEnd="@+id/txt_opciones"
-        android:layout_marginRight="56dp"
-        android:layout_marginEnd="56dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton3"
-        android:src="@mipmap/formularios"
-        android:background="@drawable/rounded_corners"
-        android:layout_marginLeft="44dp"
-        android:layout_marginStart="44dp"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/txt_opciones"
-        android:layout_alignStart="@+id/txt_opciones" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton4"
-        android:src="@mipmap/sincronizar"
-        android:background="@drawable/rounded_corners"
-        android:layout_alignTop="@+id/imageButton3"
-        android:layout_alignLeft="@+id/imageButton2"
-        android:layout_alignStart="@+id/imageButton2" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/lbl_nuevo"
+                    android:layout_weight="1"
+                    android:layout_gravity="start|center"
+                    android:text="@string/lbl_nuevo" />
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_nueva"
+                    android:src="@mipmap/nuevo_item"
+                    android:background="@drawable/rounded_corners"
+                    android:onClick="nuevoFormulario"
+                    android:layout_gravity="center|end"
+                    android:minWidth="50dp"
+                    android:maxWidth="50dp" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton5"
-        android:layout_marginTop="50dp"
-        android:src="@mipmap/informacion"
-        android:background="@drawable/rounded_corners"
-        android:layout_below="@+id/imageButton3"
-        android:layout_alignLeft="@+id/imageButton3"
-        android:layout_alignStart="@+id/imageButton3" />
+            </LinearLayout>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton6"
-        android:src="@mipmap/salir"
-        android:background="@drawable/rounded_corners"
-        android:layout_alignTop="@+id/imageButton5"
-        android:layout_alignLeft="@+id/imageButton4"
-        android:layout_alignStart="@+id/imageButton4" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp" >
 
-</RelativeLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textView"
+                    android:layout_weight="1"
+                    android:layout_gravity="start|center"
+                    android:text="@string/lbl_buscar" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_buscar"
+                    android:src="@mipmap/buscar"
+                    android:background="@drawable/rounded_corners"
+                    android:onClick="nuevoFormulario"
+                    android:layout_gravity="center|end"
+                    android:minWidth="50dp"
+                    android:maxWidth="50dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textView2"
+                    android:layout_weight="1"
+                    android:layout_gravity="start|center"
+                    android:text="@string/lbl_formularios" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_formularios"
+                    android:src="@mipmap/formularios"
+                    android:background="@drawable/rounded_corners"
+                    android:onClick="nuevoFormulario"
+                    android:layout_gravity="center|end"
+                    android:minWidth="50dp"
+                    android:maxWidth="50dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textView3"
+                    android:layout_weight="1"
+                    android:layout_gravity="start|center"
+                    android:text="@string/lbl_sincronizar" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_sincronizar"
+                    android:src="@mipmap/sincronizar"
+                    android:background="@drawable/rounded_corners"
+                    android:onClick="nuevoFormulario"
+                    android:layout_gravity="center|end"
+                    android:minWidth="50dp"
+                    android:maxWidth="50dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textView4"
+                    android:layout_weight="1"
+                    android:layout_gravity="start|center"
+                    android:text="@string/lbl_informacion" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_informacion"
+                    android:src="@mipmap/informacion"
+                    android:background="@drawable/rounded_corners"
+                    android:onClick="nuevoFormulario"
+                    android:layout_gravity="center|end"
+                    android:minWidth="50dp"
+                    android:maxWidth="50dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textView5"
+                    android:layout_weight="1"
+                    android:layout_gravity="start|center"
+                    android:text="@string/lbl_salir" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_salir"
+                    android:src="@mipmap/salir"
+                    android:background="@drawable/rounded_corners"
+                    android:onClick="nuevoFormulario"
+                    android:layout_gravity="center|end"
+                    android:minWidth="50dp"
+                    android:maxWidth="50dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,70 +7,61 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fiec.ndr.LoginActivity">
+    tools:context="fiec.ndr.LoginActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:gravity="center">
+
 
     <ImageView
         android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:id="@+id/logo"
-        android:src="@mipmap/logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="250dp"
+        android:id="@+id/logo_ingreso"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/logo" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Correo"
-        android:id="@+id/tv_correo"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/et_correo"
-        android:layout_below="@+id/tv_correo"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <EditText
+            android:id="@+id/correo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_correo"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Contraseña"
-        android:id="@+id/tv_password"
-        android:layout_below="@+id/et_correo"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/contrasena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_contrasena"
+            android:imeActionId="@+id/login"
+            android:imeActionLabel="@string/acc_entrar"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_ingreso"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ingresar"
-        android:id="@+id/btnIngresar"
-        android:layout_below="@+id/et_password"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="31dp"
-        android:layout_alignRight="@+id/et_password"
-        android:layout_alignEnd="@+id/et_password" />
+        android:layout_marginTop="16dp"
+        android:text="@string/btn_entrar"
+        android:textStyle="bold" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/et_password"
-        android:layout_below="@+id/tv_password"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/et_correo"
-        android:layout_alignEnd="@+id/et_correo" />
+</LinearLayout>
 
-</RelativeLayout>
