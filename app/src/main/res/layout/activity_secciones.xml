@@ -9,75 +9,43 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fiec.ndr.Secciones">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/info_general"
-        android:id="@+id/btnInfGen"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="36dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="#46c14e"
-        android:textSize="20sp"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/antec_medic"
-        android:id="@+id/button3"
-        android:layout_below="@+id/btnInfGen"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp"
-        android:layout_alignRight="@+id/btnInfGen"
-        android:layout_alignEnd="@+id/btnInfGen"
-        android:background="#35df65"
-        android:textSize="20sp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/medidas"
-        android:id="@+id/button4"
-        android:layout_below="@+id/button3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="#29d6dd"
-        android:textSize="20sp" />
+        <Button
+            android:id="@+id/btn_encuesta"
+            android:background="@drawable/btn_azul"
+            android:text="@string/btn_encuesta"
+            style="@style/btn_style"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pres_art"
-        android:id="@+id/button5"
-        android:layout_below="@+id/button4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp"
-        android:layout_alignRight="@+id/button4"
-        android:layout_alignEnd="@+id/button4"
-        android:background="#2db9ee"
-       android:textSize="20sp" />
+        <Button
+            android:id="@+id/btn_inf_general"
+            android:background="@drawable/btn_verde"
+            android:text="@string/btn_inf_general"
+            style="@style/btn_style"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/laboratorio"
-        android:id="@+id/button6"
-        android:layout_below="@+id/button5"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp"
-        android:layout_alignRight="@+id/button5"
-        android:layout_alignEnd="@+id/button5"
-        android:background="#6c84ed"
-        android:textSize="20sp" />
+        <Button
+            android:id="@+id/btn_medidas"
+            android:background="@drawable/btn_morado"
+            android:text="@string/btn_medidas"
+            style="@style/btn_style"/>
+
+        <Button
+            android:id="@+id/btn_presion"
+            android:background="@drawable/btn_amarillo"
+            android:text="@string/btn_presion"
+            style="@style/btn_style"/>
+
+        <Button
+            android:id="@+id/btn_laboratorio"
+            android:background="@drawable/btn_rojo"
+            android:text="@string/btn_laboratorio"
+            style="@style/btn_style"/>
 
 
+    </LinearLayout>
 </RelativeLayout>

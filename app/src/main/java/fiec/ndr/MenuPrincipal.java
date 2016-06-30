@@ -18,4 +18,28 @@ public class MenuPrincipal extends AppCompatActivity {
         Intent intent = new Intent(this, Secciones.class);
         startActivity(intent);
     }
+
+    public void buscarEncuesta(View view){
+        Intent intent = new Intent(this, Secciones.class);
+        startActivity(intent);
+    }
+
+    public void formularios(View view){
+        Intent intent = new Intent(this, Secciones.class);
+        startActivity(intent);
+    }
+
+    public void sincronizarBase(View view){
+        Intent intent = new Intent(this, Secciones.class);
+        startActivity(intent);
+    }
+
+    public void informacion(View view){
+        Intent intent = new Intent(this, Secciones.class);
+        startActivity(intent);
+    }
+
+    public void salirSistema(View view){
+        System.exit(0);
+    }
 }

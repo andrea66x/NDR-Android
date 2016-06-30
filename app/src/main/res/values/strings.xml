@@ -50,4 +50,11 @@
     <string name="lbl_sincronizar">Sincronizar Base de Datos:</string>
     <string name="lbl_formularios">Formularios:</string>
 
+    <!-- *** Botones Secciones Nuevo Formulario  *** -->
+    <string name="btn_inf_general">Información General</string>
+    <string name="btn_encuesta">Preparación</string>
+    <string name="btn_medidas">Medidas</string>
+    <string name="btn_presion">Presión Arterial</string>
+    <string name="btn_laboratorio">Laboratorio</string>
+
 </resources>
