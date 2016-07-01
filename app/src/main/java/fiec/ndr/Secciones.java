@@ -21,9 +21,25 @@ public class Secciones extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.btn_encuesta:
+                Intent int_encuesta = new Intent(this,InformacionGeneral.class);
+                startActivity(int_encuesta);
+                break;
             case R.id.btn_inf_general:
                 Intent int_infgen = new Intent(this,InformacionGeneral.class);
                 startActivity(int_infgen);
+                break;
+            case R.id.btn_medidas:
+                Intent int_medidas = new Intent(this,InformacionGeneral.class);
+                startActivity(int_medidas);
+                break;
+            case R.id.btn_presion:
+                Intent int_presion = new Intent(this,InformacionGeneral.class);
+                startActivity(int_presion);
+                break;
+            case R.id.btn_laboratorio:
+                Intent int_laboratorio = new Intent(this,InformacionGeneral.class);
+                startActivity(int_laboratorio);
                 break;
 
             default:
