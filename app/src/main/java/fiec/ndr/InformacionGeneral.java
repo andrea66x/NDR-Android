@@ -23,16 +23,19 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class InformacionGeneral extends AppCompatActivity {
+public class InformacionGeneral extends AppCompatActivity{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
     private ViewPager mViewPager;
 
     @Override
@@ -63,6 +66,22 @@ public class InformacionGeneral extends AppCompatActivity {
     }
 
 
+/*
+    public void convertToJson(){
+        JSONObject miJson = new JSONObject();
+        String dato = nombres.getText().toString();
+        try{
+            miJson.put("tipo","datos_personales");
+            miJson.put("nombres",dato);
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        String json = miJson.toString();
+        tv.setText(json);
+    }*/
+
+
     /* Fragmento Datos*/
     public static class DatosFragment extends Fragment {
 
@@ -91,6 +110,7 @@ public class InformacionGeneral extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_datos_personales, container, false);
+
             /*Datos Personales*/
             btn_calendario=(ImageButton) rootView.findViewById(R.id.btn_dato_fecha);
             cal = Calendar.getInstance();
@@ -271,7 +291,9 @@ public class InformacionGeneral extends AppCompatActivity {
     public static class HabitosFragment extends Fragment {
 
         private static final String ARG_SECTION_NUMBER = "section_number";
-
+        static Button btn_guardar;
+        static TextView tv;
+        static EditText et1, et2, et3;
         public HabitosFragment() {
         }
 
@@ -287,7 +309,35 @@ public class InformacionGeneral extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_habitos, container, false);
+            tv = (TextView) rootView.findViewById(R.id.salidaJson);
+            et1 = (EditText) rootView.findViewById(R.id.et_dato1);
+            et2 = (EditText) rootView.findViewById(R.id.et_dato2);
+            et3 = (EditText) rootView.findViewById(R.id.et_dato3);
+            btn_guardar = (Button) rootView.findViewById(R.id.btn_GuardarDP);
+            btn_guardar.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    convertToJson();
+                }
+            });
+
             return rootView;
+        }
+
+        public void convertToJson(){
+            JSONObject miJson = new JSONObject();
+            try{
+                miJson.put("tipo","hábitos");
+                miJson.put("habito1",et1.getText());
+                miJson.put("habito2",et2.getText());
+                miJson.put("habito3",et3.getText());
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            String json = miJson.toString();
+            tv.setText(json);
         }
     }
 
