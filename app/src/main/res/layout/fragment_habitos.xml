@@ -52,9 +52,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_GuardarDP"
+                android:id="@+id/btn_GuardarHb"
                 android:text="Guardar"
-                android:textStyle="bold"/>
+                android:background="#f955e3"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
 
             <TextView
                 android:layout_width="match_parent"
