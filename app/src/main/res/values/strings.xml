@@ -57,4 +57,8 @@
     <string name="btn_presion">Presión Arterial</string>
     <string name="btn_laboratorio">Laboratorio</string>
 
+    <!-- *** Titulos Dialogs Spinners  *** -->
+    <string name="dia_spn_etnia">Selecciona una Etnia:</string>
+    <string name="dia_spn_estado">Selecciona un Estado:</string>
+
 </resources>

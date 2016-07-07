@@ -1,12 +1,280 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fiec.ndr.InformacionGeneral">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="fiec.ndr.InformacionGeneral$ViviendaFragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/vivienda" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:layout_marginTop="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Canton:"
+                    android:id="@+id/txtV_estadoC"
+                    android:layout_weight="1"
+                    android:gravity="center|start" />
+
+                <Spinner
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/datos_estado_civil"
+                    android:gravity="center|end"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:layout_marginTop="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Provincia:"
+                    android:id="@+id/txtV_Etnia"
+                    android:layout_weight="1"
+                    android:gravity="center|start" />
+
+                <Spinner
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/datos_etnia"
+                    android:gravity="center|end"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dato_marginv"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Nombres:"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:id="@+id/txtV_nombres"
+                    android:layout_weight="1"
+                    android:gravity="top|start" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/datos_nombres"
+                    android:gravity="bottom|start" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dato_marginv"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Apellidos:"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:id="@+id/txtV_apellidos"
+                    android:layout_weight="1"
+                    android:gravity="top|start" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/datos_apellidos"
+                    android:gravity="bottom|start" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:layout_marginTop="@dimen/dato_marginv"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Sexo:"
+                    android:id="@+id/txtV_sexo"
+                    android:layout_weight="1"
+                    android:gravity="start" />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center|end">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Masculino"
+                        android:id="@+id/datos_sexo_m"
+                        android:checked="false"
+                        android:paddingRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Femenino"
+                        android:id="@+id/datos_sexo_f"
+                        android:checked="false"
+                        android:paddingRight="10dp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dato_marginv"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Fecha de Nacimiento:"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:id="@+id/txtV_fechaNacimiento"
+                    android:layout_weight="1"
+                    android:gravity="top|start" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp" >
+
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/datos_fecha"
+                        android:inputType="date"
+                        android:ems="10"
+                        android:layout_gravity="start|center"
+                        android:layout_marginRight="10dp" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btn_dato_fecha"
+                        android:src="@mipmap/calendar"
+                        android:background="@drawable/rounded_corners"
+                        android:layout_gravity="center|end"
+                        android:minWidth="50dp"
+                        android:maxWidth="50dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:layout_marginTop="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Edad:"
+                    android:id="@+id/txtV_edad"
+                    android:layout_weight="1"
+                    android:layout_gravity="start|center"
+                    android:gravity="center|start" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/datos_edad"
+                    android:layout_weight="1"
+                    android:gravity="center|end"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:layout_marginTop="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Teléfonos:"
+                    android:id="@+id/txtV_telefonos"
+                    android:layout_weight="1"
+                    android:layout_gravity="start|center"
+                    android:gravity="center|start" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:ems="10"
+                    android:id="@+id/datos_telefono"
+                    android:layout_weight="1"
+                    android:gravity="center|end" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

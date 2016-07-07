@@ -116,10 +116,10 @@ public class InformacionGeneral extends AppCompatActivity {
             estados.add("Viudo");
 
             // Creating adapter for spinner
-            ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, estados);
+            ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, estados);
 
             // Drop down layout style - list view with radio button
-            dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            dataAdapter1.setDropDownViewResource(R.layout.spinners);
 
             // attaching data adapter to spinner
             spinner_estado_civil.setAdapter(dataAdapter1);
@@ -134,10 +134,10 @@ public class InformacionGeneral extends AppCompatActivity {
             etnias.add("Mestizo");
 
             // Creating adapter for spinner
-            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, etnias);
+            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, etnias);
 
             // Drop down layout style - list view with radio button
-            dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            dataAdapter2.setDropDownViewResource(R.layout.spinners);
 
             // attaching data adapter to spinner
             spinner_etnia.setAdapter(dataAdapter2);
