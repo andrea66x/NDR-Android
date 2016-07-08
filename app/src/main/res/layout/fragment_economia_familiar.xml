@@ -19,6 +19,48 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dato_marginv"
+            android:paddingBottom="@dimen/dato_marginv"
+            android:paddingTop="@dimen/dato_marginv">
+
+            <TextView
+                android:id="@+id/txtV_cabezaFam"
+                style="@style/lblTextStyle"
+                android:text="¿Es usted cabeza de familia?:"
+                android:gravity="top|start" />
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SI"
+                    android:id="@+id/datos_cbz_fam_si"
+                    android:checked="false"
+                    android:paddingRight="10dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NO"
+                    android:id="@+id/datos_cbz_fam_no"
+                    android:checked="false"
+                    android:paddingRight="10dp"
+                    android:layout_marginLeft="30dp" />
+            </RadioGroup>
+        </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -27,9 +69,9 @@
                 android:paddingTop="@dimen/dato_marginv">
 
                 <TextView
-                    android:id="@+id/txtV_cabezaFam"
+                    android:id="@+id/txtV_ingresos"
                     style="@style/lblTextStyle"
-                    android:text="¿Es usted cabeza de Familia?:"
+                    android:text="¿Tiene ingresos propios?:"
                     android:gravity="top|start" />
                 <RadioGroup
                     android:layout_width="wrap_content"
@@ -40,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="SI"
-                        android:id="@+id/datos_cbz_fam_si"
+                        android:id="@+id/datos_ingresos_si"
                         android:checked="false"
                         android:paddingRight="10dp" />
 
@@ -48,7 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="NO"
-                        android:id="@+id/datos_cbz_fam_no"
+                        android:id="@+id/datos_ingresos_no"
                         android:checked="false"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
@@ -59,6 +101,166 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_findeMes"
+                    style="@style/lblTextStyle"
+                    android:text="¿Llega a fin de mes?:"
+                    android:gravity="top|start" />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SI"
+                        android:id="@+id/datos_findeMes_si"
+                        android:checked="false"
+                        android:paddingRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NO"
+                        android:id="@+id/datos_findeMes_no"
+                        android:checked="false"
+                        android:paddingRight="10dp"
+                        android:layout_marginLeft="30dp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_ocupacion"
+                    style="@style/lblTextStyle"
+                    android:text="Ocupación:"
+                    android:gravity="top|start" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinerbox"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/datos_ocupacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:spinnerMode="dialog"
+                        android:textAlignment="center"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/drop" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_trabajo"
+                    style="@style/lblTextStyle"
+                    android:text="¿De qué trabaja?:"
+                    android:gravity="top|start" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:id="@+id/datos_trabajo"
+                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:gravity="bottom|start"
+                    android:background="@drawable/txtbox"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_estudios"
+                    style="@style/lblTextStyle"
+                    android:text="Ocupación:"
+                    android:gravity="top|start" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinerbox"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/datos_estudios"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:spinnerMode="dialog"
+                        android:textAlignment="center"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/drop" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
 
         </LinearLayout>

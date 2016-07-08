@@ -302,6 +302,36 @@ public class InformacionGeneral extends AppCompatActivity{
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_economia_familiar, container, false);
+
+            //Spinner para la ocupación:
+            Spinner spinner_ocupacion = (Spinner) rootView.findViewById(R.id.datos_ocupacion);
+            List<String> ocupacion = new ArrayList<String>();
+            ocupacion.add("Jubilado");
+            ocupacion.add("No Trabaja");
+            ocupacion.add("Estudia");
+            ocupacion.add("Ama de Casa");
+            ocupacion.add("Empleado");
+            ocupacion.add("Cuenta Propia");
+            ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, ocupacion);
+            dataAdapter1.setDropDownViewResource(R.layout.spinners);
+            spinner_ocupacion.setAdapter(dataAdapter1);
+
+            //Spinner para los estudios:
+            Spinner spinner_estudio = (Spinner) rootView.findViewById(R.id.datos_estudios);
+            List<String> estudios = new ArrayList<String>();
+            estudios.add("Analfabeto");
+            estudios.add("Primarios Completos");
+            estudios.add("Primarios Incompletos");
+            estudios.add("Secundarios Completos");
+            estudios.add("Secundarios Incompletos");
+            estudios.add("Terciarios Completos");
+            estudios.add("Terciarios Incompletos");
+            estudios.add("Universitarios Completos");
+            estudios.add("Universitarios Incompletos");
+            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, estudios);
+            dataAdapter2.setDropDownViewResource(R.layout.spinners);
+            spinner_estudio.setAdapter(dataAdapter2);
+
             return rootView;
         }
     }
