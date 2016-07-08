@@ -20,6 +20,8 @@ public class Secciones extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secciones);
+        btnNuevaEncuesta = (Button) findViewById(R.id.btn_inf_general);
+        btnNuevaEncuesta.setOnClickListener(this);
     }
 
     public void onClickBtnSecciones(View v) {

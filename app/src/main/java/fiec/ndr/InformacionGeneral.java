@@ -1,5 +1,6 @@
 package fiec.ndr;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +30,8 @@ public class InformacionGeneral extends AppCompatActivity{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private static Formulario miFormulario;
+    private static String codigo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,15 @@ public class InformacionGeneral extends AppCompatActivity{
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+        miFormulario = new Formulario();
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null){
+            codigo = (String) bundle.get("CODIGO");
+        }
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(0);
@@ -74,6 +86,8 @@ public class InformacionGeneral extends AppCompatActivity{
         static EditText et_nombres;
         static EditText et_apellidos;
         static Button btn_guardar;
+        TextView tv_codigo;
+
 
         public DatosFragment() {
         }
@@ -92,6 +106,8 @@ public class InformacionGeneral extends AppCompatActivity{
             View rootView = inflater.inflate(R.layout.fragment_datos_personales, container, false);
 
             /*Datos Personales*/
+            tv_codigo = (TextView) rootView.findViewById(R.id.tv_codigo);
+            tv_codigo.setText(codigo);
             et_nombres = (EditText) rootView.findViewById(R.id.datos_nombres);
             et_apellidos = (EditText) rootView.findViewById(R.id.datos_apellidos);
 
@@ -155,6 +171,14 @@ public class InformacionGeneral extends AppCompatActivity{
             spinner_etnia.setAdapter(dataAdapter2);
 
             return rootView;
+        }
+
+        @Override
+        public void onPause(){
+            super.onPause();
+            miFormulario.setNombres(et_nombres.getText().toString());
+            miFormulario.setApellidos(et_apellidos.getText().toString());
+
         }
 
         public String convertToJson(){
@@ -324,7 +348,8 @@ public class InformacionGeneral extends AppCompatActivity{
 
                 @Override
                 public void onClick(View v) {
-                    convertToJson();
+                    //convertToJson();
+                    Toast.makeText(v.getContext(),miFormulario.getNombres(),Toast.LENGTH_SHORT).show();
                 }
             });
 
