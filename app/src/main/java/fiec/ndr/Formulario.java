@@ -4,8 +4,8 @@ package fiec.ndr;
  * Created by Andrea on 07/07/2016.
  */
 public class Formulario {
-    private String tipo,codigo,nombres,apellidos,sexo,fec_nac,est_civil,origen;
-    private int edad,telefono;
+    private String tipo,codigo,nombres,apellidos,sexo,fec_nac,est_civil,origen,telefono;
+    private int edad;
 
 
     public Formulario() {
@@ -41,9 +41,9 @@ public class Formulario {
 
     public void setEdad(int edad){this.edad = edad;}
 
-    public int getTelefono(){return telefono;}
+    public String getTelefono(){return telefono;}
 
-    public void setTelefono(int telefono){this.telefono = telefono;}
+    public void setTelefono(String telefono){this.telefono = telefono;}
 
     public String getEst_civil() {return est_civil;}
 

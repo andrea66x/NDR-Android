@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -90,8 +91,13 @@ public class InformacionGeneral extends AppCompatActivity{
 
         static EditText et_nombres;
         static EditText et_apellidos;
-        static Button btn_guardar;
-        TextView tv_codigo;
+        static RadioGroup radioSexGroup;
+        static RadioButton radioSexButton;
+        static EditText et_fecNac;
+        static EditText et_edad;
+        static EditText et_telefono;
+        static Spinner sp_EstCivil;
+        static Spinner sp_origen;
 
 
         public DatosFragment() {
@@ -113,6 +119,12 @@ public class InformacionGeneral extends AppCompatActivity{
             /*Datos Personales*/
             et_nombres = (EditText) rootView.findViewById(R.id.datos_nombres);
             et_apellidos = (EditText) rootView.findViewById(R.id.datos_apellidos);
+            radioSexGroup = (RadioGroup) rootView.findViewById(R.id.radioSex);
+            et_fecNac = (EditText) rootView.findViewById(R.id.datos_fecha);
+            et_edad = (EditText) rootView.findViewById(R.id.datos_edad);
+            et_telefono = (EditText) rootView.findViewById(R.id.datos_telefono);
+            sp_EstCivil = (Spinner) rootView.findViewById(R.id.datos_estado_civil);
+            sp_origen = (Spinner) rootView.findViewById(R.id.datos_etnia);
 
             btn_calendario=(ImageButton) rootView.findViewById(R.id.btn_dato_fecha);
             cal = Calendar.getInstance();
@@ -127,14 +139,6 @@ public class InformacionGeneral extends AppCompatActivity{
                 }
             });
 
-            btn_guardar = (Button) rootView.findViewById(R.id.btn_GuardarDP);
-            btn_guardar.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    String json = convertToJson();
-                    Toast.makeText(v.getContext(),json,Toast.LENGTH_SHORT).show();
-                }
-            });
 
             // Spinner element
             Spinner spinner_estado_civil = (Spinner) rootView.findViewById(R.id.datos_estado_civil);
@@ -181,6 +185,15 @@ public class InformacionGeneral extends AppCompatActivity{
             super.onPause();
             miFormulario.setNombres(et_nombres.getText().toString());
             miFormulario.setApellidos(et_apellidos.getText().toString());
+            miFormulario.setEdad(Integer.parseInt(et_edad.getText().toString()));
+            miFormulario.setCodigo(codigo);
+            miFormulario.setFec_nac(et_fecNac.getText().toString());
+            miFormulario.setTelefono(et_telefono.getText().toString());
+            miFormulario.setTipo("Datos Personales");
+            radioSexButton = (RadioButton) getActivity().findViewById(radioSexGroup.getCheckedRadioButtonId());
+            miFormulario.setSexo(radioSexButton.getText().toString());
+            miFormulario.setEst_civil(sp_EstCivil.getSelectedItem().toString());
+            miFormulario.setOrigen(sp_origen.getSelectedItem().toString());
 
         }
 
@@ -659,7 +672,7 @@ public class InformacionGeneral extends AppCompatActivity{
                 @Override
                 public void onClick(View v) {
                     //convertToJson();
-                    Toast.makeText(v.getContext(),miFormulario.getNombres(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(),convertToJson(),Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -741,19 +754,27 @@ public class InformacionGeneral extends AppCompatActivity{
             return rootView;
         }
 
-        public void convertToJson(){
+        public String convertToJson(){
             JSONObject miJson = new JSONObject();
             try{
-                miJson.put("tipo","habitos");
-                miJson.put("habito1","Prueba 1");
-                miJson.put("habito2","Prueba 2");
-                miJson.put("habito3","Prueba 3");
+                miJson.put("codigo",miFormulario.getCodigo());
+                miJson.put("tipo","datos personales");
+                miJson.put("nombres",miFormulario.getNombres());
+                miJson.put("apellidos",miFormulario.getApellidos());
+                miJson.put("sexo",miFormulario.getSexo());
+                miJson.put("edad",miFormulario.getEdad());
+                miJson.put("fec_nac",miFormulario.getFec_nac());
+                miJson.put("telefono",miFormulario.getTelefono());
+                miJson.put("est_civil",miFormulario.getEst_civil());
+                miJson.put("origen",miFormulario.getOrigen());
+
             } catch (JSONException e){
                 e.printStackTrace();
             }
 
             String json = miJson.toString();
-            tv.setText(json);
+            return json;
+            //tv.setText(json);
         }
     }
 

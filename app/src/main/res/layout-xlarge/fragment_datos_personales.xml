@@ -212,7 +212,8 @@
                     android:ems="3"
                     android:id="@+id/datos_edad"
                     android:layout_gravity="center"
-                    android:background="@drawable/txtbox"/>
+                    android:background="@drawable/txtbox"
+                    android:hint="0"/>
 
             </LinearLayout>
 
