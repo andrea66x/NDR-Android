@@ -30,7 +30,6 @@
                     android:id="@+id/txtV_nombres"
                     style="@style/lblTextStyle"
                     android:text="Nombres:"
-
                     android:gravity="top|start" />
 
                 <EditText
@@ -109,7 +108,8 @@
                         android:text="Femenino"
                         android:id="@+id/datos_sexo_f"
                         android:checked="false"
-                        android:paddingRight="10dp" />
+                        android:paddingRight="10dp"
+                        android:layout_marginLeft="30dp" />
                 </RadioGroup>
             </LinearLayout>
 

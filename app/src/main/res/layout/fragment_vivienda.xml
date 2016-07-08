@@ -10,7 +10,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
             android:orientation="vertical"
@@ -21,7 +22,6 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/dato_marginv"
                 android:paddingTop="@dimen/dato_marginv"
                 android:paddingBottom="@dimen/dato_marginv">
 
@@ -59,6 +59,219 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_Canton"
+                    style="@style/lblTextStyle"
+                    android:text="Cantón:"
+                    android:gravity="top|start" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinerbox"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                    <Spinner
+                        android:id="@+id/datos_canton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:spinnerMode="dialog"
+                        android:textAlignment="center"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/drop" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_Vivienda"
+                    style="@style/lblTextStyle"
+                    android:text="¿Dónde esta su vivienda?:"
+                    android:gravity="top|start" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinerbox"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                    <Spinner
+                        android:id="@+id/datos_vivienda"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:spinnerMode="dialog"
+                        android:textAlignment="center"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/drop" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_direccion"
+                    style="@style/lblTextStyle"
+                    android:text="Dirección:"
+                    android:gravity="top|start" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:id="@+id/datos_nombres"
+                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+                    android:gravity="bottom|start"
+                    android:background="@drawable/txtbox"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_personas"
+                    style="@style/lblTextStyle"
+                    android:text="¿Con cuantas personas vive?:"
+                    android:gravity="top|start" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="3"
+                    android:maxLength="3"
+                    android:id="@+id/datos_personas"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_agua"
+                    style="@style/lblTextStyle"
+                    android:text="¿Como llega el agua a su hogar?:"
+                    android:gravity="top|start" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinerbox"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                    <Spinner
+                        android:id="@+id/datos_agua"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:spinnerMode="dialog"
+                        android:textAlignment="center"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/drop" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_cloacas"
+                    style="@style/lblTextStyle"
+                    android:text="¿Posee Cloacas?:"
+                    android:gravity="top|start" />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SI"
+                        android:id="@+id/datos_cloaca_si"
+                        android:checked="false"
+                        android:paddingRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NO"
+                        android:id="@+id/datos_cloaca_no"
+                        android:checked="false"
+                        android:paddingRight="10dp"
+                        android:layout_marginLeft="30dp"/>
+                </RadioGroup>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
