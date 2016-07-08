@@ -8,20 +8,16 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Secciones extends AppCompatActivity {
-    Button btnNuevaEncuesta;
     Button btnGeneral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secciones);
-        btnNuevaEncuesta = (Button) findViewById(R.id.btn_inf_general);
-        btnNuevaEncuesta.setOnClickListener(this);
     }
 
     public void onClickBtnSecciones(View v) {
