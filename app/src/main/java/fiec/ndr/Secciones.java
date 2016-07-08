@@ -98,13 +98,13 @@ public class Secciones extends AppCompatActivity {
         boolean checkeralph = false;
         boolean checkernum = false;
         if (value.length() == 7) {
-            if (Character.isDigit(value.charAt(0)) && Character.isDigit(value.charAt(1)))
+            if (Character.isLetter(value.charAt(0)) && Character.isLetter(value.charAt(1)))
                 checkeralph = true;
             if (Character.isLetter(value.charAt(2))
-                    && Character.isLetter(value.charAt(3))
-                    && Character.isLetter(value.charAt(4))
-                    && Character.isLetter(value.charAt(5))
-                    && Character.isLetter(value.charAt(6)))
+                    && Character.isDigit(value.charAt(3))
+                    && Character.isDigit(value.charAt(4))
+                    && Character.isDigit(value.charAt(5))
+                    && Character.isDigit(value.charAt(6)))
                 checkernum = true;
         }
         if (checkeralph && checkernum)
