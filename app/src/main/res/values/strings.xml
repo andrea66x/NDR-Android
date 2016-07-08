@@ -60,5 +60,9 @@
     <!-- *** Titulos Dialogs Spinners  *** -->
     <string name="dia_spn_etnia">Selecciona una Etnia:</string>
     <string name="dia_spn_estado">Selecciona un Estado:</string>
+    <string name="title_activity_preparacion">Preparacion</string>
+    <string name="title_activity_medidas">Medidas</string>
+    <string name="title_activity_presion_arterial">Presion Arterial</string>
+    <string name="title_activity_laboratorio">Laboratorio</string>
 
 </resources>

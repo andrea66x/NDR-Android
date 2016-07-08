@@ -20,31 +20,36 @@
             android:id="@+id/btn_encuesta"
             android:background="@drawable/btn_azul"
             android:text="@string/btn_encuesta"
-            style="@style/btn_style"/>
+            style="@style/btn_style"
+            android:onClick="onClickBtnSecciones" />
 
         <Button
             android:id="@+id/btn_inf_general"
             android:background="@drawable/btn_verde"
             android:text="@string/btn_inf_general"
-            style="@style/btn_style"/>
+            style="@style/btn_style"
+            android:onClick="onClickBtnSecciones"/>
 
         <Button
             android:id="@+id/btn_medidas"
             android:background="@drawable/btn_morado"
             android:text="@string/btn_medidas"
-            style="@style/btn_style"/>
+            style="@style/btn_style"
+            android:onClick="onClickBtnSecciones"/>
 
         <Button
             android:id="@+id/btn_presion"
             android:background="@drawable/btn_amarillo"
             android:text="@string/btn_presion"
-            style="@style/btn_style"/>
+            style="@style/btn_style"
+            android:onClick="onClickBtnSecciones"/>
 
         <Button
             android:id="@+id/btn_laboratorio"
             android:background="@drawable/btn_rojo"
             android:text="@string/btn_laboratorio"
-            style="@style/btn_style"/>
+            style="@style/btn_style"
+            android:onClick="onClickBtnSecciones"/>
 
 
     </LinearLayout>

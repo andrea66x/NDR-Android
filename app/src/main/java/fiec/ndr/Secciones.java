@@ -5,92 +5,114 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class Secciones extends AppCompatActivity implements View.OnClickListener{
+public class Secciones extends AppCompatActivity {
     Button btnNuevaEncuesta;
+    Button btnGeneral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secciones);
-        btnNuevaEncuesta = (Button) findViewById(R.id.btn_inf_general);
-        btnNuevaEncuesta.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_encuesta:
-                Intent int_encuesta = new Intent(this,InformacionGeneral.class);
-                startActivity(int_encuesta);
-                break;
-            case R.id.btn_inf_general:
-                nuevoFormulario(v);
-                break;
-            case R.id.btn_medidas:
-                Intent int_medidas = new Intent(this,InformacionGeneral.class);
-                startActivity(int_medidas);
-                break;
-            case R.id.btn_presion:
-                Intent int_presion = new Intent(this,InformacionGeneral.class);
-                startActivity(int_presion);
-                break;
-            case R.id.btn_laboratorio:
-                Intent int_laboratorio = new Intent(this,InformacionGeneral.class);
-                startActivity(int_laboratorio);
-                break;
-
-            default:
-                break;
-        }
+    public void onClickBtnSecciones(View v) {
+        nuevoFormulario(v);
     }
 
-    public void nuevoFormulario(View view){
-        if (view == btnNuevaEncuesta) {
+    public void nuevoFormulario(View view) {
 
-            // Create Object of Dialog class
-            final Dialog codigoDialog = new Dialog(this);
-            // Set GUI of login screen
-            codigoDialog.setContentView(R.layout.codigo_dialog);
-            codigoDialog.setTitle("Ingresa el Código del Paciente:");
+        final Dialog codigoDialog = new Dialog(this);
+        btnGeneral = (Button) view;
+        codigoDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        codigoDialog.setCancelable(false);
+        codigoDialog.setContentView(R.layout.codigo_dialog);
 
-            // Init button of login GUI
-            Button btnEntrar = (Button) codigoDialog.findViewById(R.id.btnEntrar);
-            Button btnCancelar = (Button) codigoDialog.findViewById(R.id.btnCancelar);
-            final EditText txtCodigo = (EditText)codigoDialog.findViewById(R.id.codigo_encuesta);
+        TextView titulo = (TextView) codigoDialog.findViewById(R.id.titulo);
+        titulo.setText("Ingresa el Código del Paciente:");
 
-            // Attached listener for login GUI button
-            btnEntrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(txtCodigo.getText().toString().trim().length() > 0)
-                    {
-                        Intent intent = new Intent(getApplicationContext(), InformacionGeneral.class);
-                        startActivity(intent);
+        // Init button of login GUI
+        Button btnEntrar = (Button) codigoDialog.findViewById(R.id.btnEntrar);
+        final Button btnCancelar = (Button) codigoDialog.findViewById(R.id.btnCancelar);
+        final EditText txtCodigo = (EditText) codigoDialog.findViewById(R.id.codigo_encuesta);
+
+        // Attached listener for login GUI button
+        btnEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (codigoCorrecto(txtCodigo.getText().toString().trim())) {
+                    switch (btnGeneral.getId()) {
+                        case R.id.btn_inf_general:
+                            Intent int_info_general = new Intent(getApplicationContext(), InformacionGeneral.class);
+                            startActivity(int_info_general);
+                            codigoDialog.dismiss();
+                            break;
+                        case R.id.btn_medidas:
+                            Intent int_medidas = new Intent(getApplicationContext(), Medidas.class);
+                            startActivity(int_medidas);
+                            codigoDialog.dismiss();
+                            break;
+                        case R.id.btn_presion:
+                            Intent int_presion = new Intent(getApplicationContext(), Presion_arterial.class);
+                            startActivity(int_presion);
+                            codigoDialog.dismiss();
+                            break;
+                        case R.id.btn_laboratorio:
+                            Intent int_laboratorio = new Intent(getApplicationContext(), Laboratorio.class);
+                            startActivity(int_laboratorio);
+                            codigoDialog.dismiss();
+                            break;
+
+                        default:
+                            break;
                     }
-                    else
-                    {
-                        Toast.makeText(Secciones.this,
-                                "Por favor ingresa un código!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(Secciones.this,
+                            "Por favor ingresa un código válido!", Toast.LENGTH_SHORT).show();
 
-                    }
                 }
-            });
-            btnCancelar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    codigoDialog.dismiss();
-                }
-            });
+            }
+        });
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                codigoDialog.dismiss();
+            }
+        });
 
-            // Make dialog box visible.
+        // Make dialog box visible.
+        if (btnGeneral.getId() != R.id.btn_encuesta)
             codigoDialog.show();
+        else {
+            Intent int_encuesta = new Intent(this, Preparacion.class);
+            startActivity(int_encuesta);
         }
+    }
 
+    public boolean codigoCorrecto(final String value) {
+        int index = 0;
+        boolean checkeralph = false;
+        boolean checkernum = false;
+        if (value.length() == 7) {
+            if (Character.isDigit(value.charAt(0)) && Character.isDigit(value.charAt(1)))
+                checkeralph = true;
+            if (Character.isLetter(value.charAt(2))
+                    && Character.isLetter(value.charAt(3))
+                    && Character.isLetter(value.charAt(4))
+                    && Character.isLetter(value.charAt(5))
+                    && Character.isLetter(value.charAt(6)))
+                checkernum = true;
+        }
+        if (checkeralph && checkernum)
+            return true;
+        else
+            return false;
     }
 
 }
