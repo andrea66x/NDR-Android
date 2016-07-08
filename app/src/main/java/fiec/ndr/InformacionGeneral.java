@@ -1,11 +1,13 @@
 package fiec.ndr;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 
 public class InformacionGeneral extends AppCompatActivity{
 
@@ -69,7 +72,6 @@ public class InformacionGeneral extends AppCompatActivity{
             }
         });*/
     }
-
 
     /* Fragmento Datos*/
     public static class DatosFragment extends Fragment {
@@ -480,5 +482,19 @@ public class InformacionGeneral extends AppCompatActivity{
             }
             return null;
         }
+    }
+
+/*Metodo para prevenir salir del formulario al presionar el boton atras*/
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Salir")
+                .setMessage("¿Estás seguro de querer salir?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        InformacionGeneral.super.onBackPressed();
+                    }
+                }).create().show();
     }
 }
