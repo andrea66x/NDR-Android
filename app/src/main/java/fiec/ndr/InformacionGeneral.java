@@ -605,6 +605,27 @@ public class InformacionGeneral extends AppCompatActivity{
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_antecedentes, container, false);
+            final LinearLayout lyt_ant_fam_renal = (LinearLayout) rootView.findViewById(R.id.lyt_ant_fam_renal);
+
+            RadioGroup rg_ant_renal = (RadioGroup) rootView.findViewById(R.id.rg_ant_renal);
+            rg_ant_renal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId)
+                {
+                    switch(checkedId)
+                    {
+                        case R.id.datos_ant_renal_si:
+                            lyt_ant_fam_renal.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.datos_ant_renal_no:
+                            lyt_ant_fam_renal.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
             return rootView;
         }
     }

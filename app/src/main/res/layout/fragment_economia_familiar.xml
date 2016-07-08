@@ -231,7 +231,7 @@
                 <TextView
                     android:id="@+id/txtV_estudios"
                     style="@style/lblTextStyle"
-                    android:text="Ocupación:"
+                    android:text="Estudios:"
                     android:gravity="top|start" />
 
                 <RelativeLayout
