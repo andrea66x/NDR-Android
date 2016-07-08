@@ -6,48 +6,268 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fiec.ndr.InformacionGeneral">
+    tools:context="fiec.ndr.InformacionGeneral$HabitosFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/text1"
-                android:text="Hábito 1"/>
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/dato_marginv">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_dato1"/>
+                <TextView
+                    android:id="@+id/txtV_tabaco"
+                    style="@style/lblTextStyle"
+                    android:text="¿Tabaco?:"
+                    android:gravity="top|start" />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:id="@+id/rg_tabaco">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SI"
+                        android:id="@+id/datos_tabaco_si"
+                        android:checked="false"
+                        android:paddingRight="10dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/text2"
-                android:text="Hábito 2"/>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NO"
+                        android:id="@+id/datos_tabaco_no"
+                        android:checked="false"
+                        android:paddingRight="10dp"
+                        android:layout_marginLeft="30dp" />
+                </RadioGroup>
+            </LinearLayout>
 
-            <EditText
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_dato2"/>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:visibility="gone"
+                android:id="@+id/lyt_tabaco">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/text3"
-                android:text="Hábito 3"/>
+                <TextView
+                    android:id="@+id/txtV_frc_tabaco"
+                    style="@style/lblTextStyle"
+                    android:text="¿Con que frecuencia al día?:"
+                    android:gravity="top|start" />
 
-            <EditText
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="3"
+                    android:maxLength="3"
+                    android:id="@+id/datos_frc_tabaco"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_dato3"/>
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_alcohol"
+                    style="@style/lblTextStyle"
+                    android:text="¿Alcohol?:"
+                    android:gravity="top|start" />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:id="@+id/rg_alcohol">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SI"
+                        android:id="@+id/datos_alcohol_si"
+                        android:checked="false"
+                        android:paddingRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NO"
+                        android:id="@+id/datos_alcohol_no"
+                        android:checked="false"
+                        android:paddingRight="10dp"
+                        android:layout_marginLeft="30dp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:visibility="gone"
+                android:id="@+id/lyt_alcohol">
+
+                <TextView
+                    android:id="@+id/txtV_frc_alcohol"
+                    style="@style/lblTextStyle"
+                    android:text="¿Con que frecuencia a la semana?:"
+                    android:gravity="top|start" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="3"
+                    android:maxLength="3"
+                    android:id="@+id/datos_frc_alcohol"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_seguro"
+                    style="@style/lblTextStyle"
+                    android:text="¿Otros?:"
+                    android:gravity="top|start" />
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:id="@+id/rg_otros">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SI"
+                        android:id="@+id/datos_otros_si"
+                        android:checked="false"
+                        android:paddingRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NO"
+                        android:id="@+id/datos_otros_no"
+                        android:checked="false"
+                        android:paddingRight="10dp"
+                        android:layout_marginLeft="30dp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:visibility="gone"
+                android:id="@+id/lyt_otros">
+
+                <TextView
+                    android:id="@+id/txtV_vicios"
+                    style="@style/lblTextStyle"
+                    android:text="¿Cuál?:"
+                    android:gravity="top|start" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:id="@+id/datos_seguro_medico"
+                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:gravity="bottom|start"
+                    android:background="@drawable/txtbox"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_Provincia"
+                    style="@style/lblTextStyle"
+                    android:text="Ejercicios:"
+                    android:gravity="top|start" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinerbox"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                    <Spinner
+                        android:id="@+id/datos_ejercicios"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:spinnerMode="dialog"
+                        android:textAlignment="center"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/drop" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -64,6 +284,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/salidaJson"
                 android:text="salidajson"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

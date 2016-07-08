@@ -653,9 +653,6 @@ public class InformacionGeneral extends AppCompatActivity{
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_habitos, container, false);
             tv = (TextView) rootView.findViewById(R.id.salidaJson);
-            et1 = (EditText) rootView.findViewById(R.id.et_dato1);
-            et2 = (EditText) rootView.findViewById(R.id.et_dato2);
-            et3 = (EditText) rootView.findViewById(R.id.et_dato3);
             btn_guardar = (Button) rootView.findViewById(R.id.btn_GuardarHb);
             btn_guardar.setOnClickListener(new View.OnClickListener(){
 
@@ -666,6 +663,81 @@ public class InformacionGeneral extends AppCompatActivity{
                 }
             });
 
+
+            final LinearLayout lyt_tabaco = (LinearLayout) rootView.findViewById(R.id.lyt_tabaco);
+            final LinearLayout lyt_alcohol = (LinearLayout) rootView.findViewById(R.id.lyt_alcohol);
+            final LinearLayout lyt_otros = (LinearLayout) rootView.findViewById(R.id.lyt_otros);
+
+            RadioGroup rg_tabaco = (RadioGroup) rootView.findViewById(R.id.rg_tabaco);
+            rg_tabaco.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId)
+                {
+                    switch(checkedId)
+                    {
+                        case R.id.datos_tabaco_si:
+                            lyt_tabaco.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.datos_tabaco_no:
+                            lyt_tabaco.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+
+            RadioGroup rg_alcohol = (RadioGroup) rootView.findViewById(R.id.rg_alcohol);
+            rg_alcohol.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId)
+                {
+                    switch(checkedId)
+                    {
+                        case R.id.datos_alcohol_si:
+                            lyt_alcohol.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.datos_alcohol_no:
+                            lyt_alcohol.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+
+            RadioGroup rg_otros = (RadioGroup) rootView.findViewById(R.id.rg_otros);
+            rg_otros.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId)
+                {
+                    switch(checkedId)
+                    {
+                        case R.id.datos_otros_si:
+                            lyt_otros.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.datos_otros_no:
+                            lyt_otros.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+
+            Spinner spinner_act_fisica = (Spinner) rootView.findViewById(R.id.datos_ejercicios);
+            List<String> act_fisica = new ArrayList<>();
+            act_fisica.add("No hago actividad física");
+            act_fisica.add("Solo hago ejercicios en el tiempo libre");
+            act_fisica.add("Hago ejercicios mas de 3 veces por semana");
+            act_fisica.add("Hago ejercicios todos los dias");
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, act_fisica);
+            dataAdapter.setDropDownViewResource(R.layout.spinners);
+            spinner_act_fisica.setAdapter(dataAdapter);
+
             return rootView;
         }
 
@@ -673,9 +745,9 @@ public class InformacionGeneral extends AppCompatActivity{
             JSONObject miJson = new JSONObject();
             try{
                 miJson.put("tipo","habitos");
-                miJson.put("habito1",et1.getText());
-                miJson.put("habito2",et2.getText());
-                miJson.put("habito3",et3.getText());
+                miJson.put("habito1","Prueba 1");
+                miJson.put("habito2","Prueba 2");
+                miJson.put("habito3","Prueba 3");
             } catch (JSONException e){
                 e.printStackTrace();
             }
