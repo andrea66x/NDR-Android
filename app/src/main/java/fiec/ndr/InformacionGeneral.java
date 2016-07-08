@@ -107,7 +107,7 @@ public class InformacionGeneral extends AppCompatActivity{
 
             /*Datos Personales*/
             tv_codigo = (TextView) rootView.findViewById(R.id.tv_codigo);
-            tv_codigo.setText(codigo);
+            tv_codigo.setText(codigo.toUpperCase());
             et_nombres = (EditText) rootView.findViewById(R.id.datos_nombres);
             et_apellidos = (EditText) rootView.findViewById(R.id.datos_apellidos);
 

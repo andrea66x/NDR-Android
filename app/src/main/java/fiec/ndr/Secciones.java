@@ -48,6 +48,8 @@ public class Secciones extends AppCompatActivity {
                     switch (btnGeneral.getId()) {
                         case R.id.btn_inf_general:
                             Intent int_info_general = new Intent(getApplicationContext(), InformacionGeneral.class);
+                            String codigo = txtCodigo.getText().toString();
+                            int_info_general.putExtra("CODIGO",codigo);
                             startActivity(int_info_general);
                             codigoDialog.dismiss();
                             break;
