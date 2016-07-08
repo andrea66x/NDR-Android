@@ -17,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,7 +62,7 @@ public class InformacionGeneral extends AppCompatActivity{
         if (bundle != null){
             codigo = (String) bundle.get("CODIGO");
         }
-        setTitle("Informacion General: " + codigo);
+        setTitle("Información General: " + codigo);
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(0);
@@ -137,7 +139,7 @@ public class InformacionGeneral extends AppCompatActivity{
             // Spinner element
             Spinner spinner_estado_civil = (Spinner) rootView.findViewById(R.id.datos_estado_civil);
             // Spinner Drop down elements
-            List<String> estados = new ArrayList<String>();
+            List<String> estados = new ArrayList<>();
             estados.add("Soltero");
             estados.add("Casado");
             estados.add("Divorciado");
@@ -145,7 +147,7 @@ public class InformacionGeneral extends AppCompatActivity{
             estados.add("Viudo");
 
             // Creating adapter for spinner
-            ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, estados);
+            ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, estados);
 
             // Drop down layout style - list view with radio button
             dataAdapter1.setDropDownViewResource(R.layout.spinners);
@@ -156,14 +158,14 @@ public class InformacionGeneral extends AppCompatActivity{
             // Spinner element
             Spinner spinner_etnia = (Spinner) rootView.findViewById(R.id.datos_etnia);
             // Spinner Drop down elements
-            List<String> etnias = new ArrayList<String>();
+            List<String> etnias = new ArrayList<>();
             etnias.add("Afroecuatoriano");
             etnias.add("Blanco");
             etnias.add("Indio");
             etnias.add("Mestizo");
 
             // Creating adapter for spinner
-            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, etnias);
+            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, etnias);
 
             // Drop down layout style - list view with radio button
             dataAdapter2.setDropDownViewResource(R.layout.spinners);
@@ -221,19 +223,19 @@ public class InformacionGeneral extends AppCompatActivity{
 
             //Spinner para la provincia:
             Spinner spinner_provincia = (Spinner) rootView.findViewById(R.id.datos_provincia);
-            List<String> provincias = new ArrayList<String>();
+            List<String> provincias = new ArrayList<>();
             provincias.add("Guayas");
             provincias.add("Esmeraldas");
             provincias.add("Los Ríos");
             provincias.add("El Oro");
             provincias.add("Manabí");
-            ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, provincias);
+            ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, provincias);
             dataAdapter1.setDropDownViewResource(R.layout.spinners);
             spinner_provincia.setAdapter(dataAdapter1);
 
             //Spinner para el canton:
             Spinner spinner_canton = (Spinner) rootView.findViewById(R.id.datos_canton);
-            List<String> cantones = new ArrayList<String>();
+            List<String> cantones = new ArrayList<>();
             cantones.add("Balzar");
             cantones.add("Guayaquil");
             cantones.add("Manta");
@@ -254,27 +256,27 @@ public class InformacionGeneral extends AppCompatActivity{
             cantones.add("Manta");
             cantones.add("Portoviejo");
             cantones.add("Esmeraldas");
-            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, cantones);
+            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, cantones);
             dataAdapter2.setDropDownViewResource(R.layout.spinners);
             spinner_canton.setAdapter(dataAdapter2);
 
             //Spinner para la vivienda:
             Spinner spinner_vivienda = (Spinner) rootView.findViewById(R.id.datos_vivienda);
-            List<String> vivienda = new ArrayList<String>();
+            List<String> vivienda = new ArrayList<>();
             vivienda.add("Ciudad");
             vivienda.add("Campo");
             vivienda.add("Alrededor de la Ciudad");
-            ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, vivienda);
+            ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, vivienda);
             dataAdapter3.setDropDownViewResource(R.layout.spinners);
             spinner_vivienda.setAdapter(dataAdapter3);
 
             //Spinner para el agua:
             Spinner spinner_agua = (Spinner) rootView.findViewById(R.id.datos_agua);
-            List<String> agua = new ArrayList<String>();
+            List<String> agua = new ArrayList<>();
             agua.add("Intubada");
             agua.add("Cisterna");
             agua.add("Tanquero");
-            ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, agua);
+            ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, agua);
             dataAdapter4.setDropDownViewResource(R.layout.spinners);
             spinner_agua.setAdapter(dataAdapter4);
 
@@ -305,20 +307,20 @@ public class InformacionGeneral extends AppCompatActivity{
 
             //Spinner para la ocupación:
             Spinner spinner_ocupacion = (Spinner) rootView.findViewById(R.id.datos_ocupacion);
-            List<String> ocupacion = new ArrayList<String>();
+            List<String> ocupacion = new ArrayList<>();
             ocupacion.add("Jubilado");
             ocupacion.add("No Trabaja");
             ocupacion.add("Estudia");
             ocupacion.add("Ama de Casa");
             ocupacion.add("Empleado");
             ocupacion.add("Cuenta Propia");
-            ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, ocupacion);
+            ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, ocupacion);
             dataAdapter1.setDropDownViewResource(R.layout.spinners);
             spinner_ocupacion.setAdapter(dataAdapter1);
 
             //Spinner para los estudios:
             Spinner spinner_estudio = (Spinner) rootView.findViewById(R.id.datos_estudios);
-            List<String> estudios = new ArrayList<String>();
+            List<String> estudios = new ArrayList<>();
             estudios.add("Analfabeto");
             estudios.add("Primarios Completos");
             estudios.add("Primarios Incompletos");
@@ -328,7 +330,7 @@ public class InformacionGeneral extends AppCompatActivity{
             estudios.add("Terciarios Incompletos");
             estudios.add("Universitarios Completos");
             estudios.add("Universitarios Incompletos");
-            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinners, estudios);
+            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, estudios);
             dataAdapter2.setDropDownViewResource(R.layout.spinners);
             spinner_estudio.setAdapter(dataAdapter2);
 
@@ -356,6 +358,111 @@ public class InformacionGeneral extends AppCompatActivity{
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_salud, container, false);
+            final LinearLayout lyt_seguro = (LinearLayout) rootView.findViewById(R.id.lyt_seguro);
+            final LinearLayout lyt_chequeo = (LinearLayout) rootView.findViewById(R.id.lyt_chequeo);
+            final LinearLayout lyt_tiempo_diabetes = (LinearLayout) rootView.findViewById(R.id.lyt_tiempo_diabetes);
+            final LinearLayout lyt_renal = (LinearLayout) rootView.findViewById(R.id.lyt_renal);
+            final LinearLayout lyt_enfermedad = (LinearLayout) rootView.findViewById(R.id.lyt_enfermedad);
+
+            RadioGroup rg_seguro = (RadioGroup) rootView.findViewById(R.id.rg_seguro);
+            rg_seguro.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId)
+                {
+                    switch(checkedId)
+                    {
+                        case R.id.datos_seguro_si:
+                            lyt_seguro.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.datos_seguro_no:
+                            lyt_seguro.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+
+            RadioGroup rg_chequeo = (RadioGroup) rootView.findViewById(R.id.rg_chequeo);
+            rg_chequeo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId)
+                {
+                    switch(checkedId)
+                    {
+                        case R.id.datos_chequeo_si:
+                            lyt_chequeo.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.datos_chequeo_no:
+                            lyt_chequeo.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+
+            RadioGroup rg_tmp_diabetes = (RadioGroup) rootView.findViewById(R.id.rg_tmp_diabetes);
+            rg_tmp_diabetes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId)
+                {
+                    switch(checkedId)
+                    {
+                        case R.id.datos_diabetes_si:
+                            lyt_tiempo_diabetes.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.datos_diabetes_no:
+                            lyt_tiempo_diabetes.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+
+            RadioGroup rg_renal = (RadioGroup) rootView.findViewById(R.id.rg_renal);
+            rg_renal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId)
+                {
+                    switch(checkedId)
+                    {
+                        case R.id.datos_renal_si:
+                            lyt_renal.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.datos_renal_no:
+                            lyt_renal.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+
+            RadioGroup rg_enfermedad = (RadioGroup) rootView.findViewById(R.id.rg_enfermedad);
+            rg_enfermedad.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId)
+                {
+                    switch(checkedId)
+                    {
+                        case R.id.datos_enfermedad_si:
+                            lyt_enfermedad.setVisibility(View.VISIBLE);
+                            break;
+                        case R.id.datos_enfermedad_no:
+                            lyt_enfermedad.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
             return rootView;
         }
     }
