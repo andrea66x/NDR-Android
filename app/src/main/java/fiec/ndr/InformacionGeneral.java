@@ -57,6 +57,7 @@ public class InformacionGeneral extends AppCompatActivity{
         if (bundle != null){
             codigo = (String) bundle.get("CODIGO");
         }
+        setTitle("Informacion General: " + codigo);
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(0);
@@ -106,8 +107,6 @@ public class InformacionGeneral extends AppCompatActivity{
             View rootView = inflater.inflate(R.layout.fragment_datos_personales, container, false);
 
             /*Datos Personales*/
-            tv_codigo = (TextView) rootView.findViewById(R.id.tv_codigo);
-            tv_codigo.setText(codigo.toUpperCase());
             et_nombres = (EditText) rootView.findViewById(R.id.datos_nombres);
             et_apellidos = (EditText) rootView.findViewById(R.id.datos_apellidos);
 

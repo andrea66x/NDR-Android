@@ -102,7 +102,7 @@ public class Secciones extends AppCompatActivity {
         if (value.length() == 7) {
             if (Character.isLetter(value.charAt(0)) && Character.isLetter(value.charAt(1)))
                 checkeralph = true;
-            if (Character.isLetter(value.charAt(2))
+            if (Character.isDigit(value.charAt(2))
                     && Character.isDigit(value.charAt(3))
                     && Character.isDigit(value.charAt(4))
                     && Character.isDigit(value.charAt(5))
