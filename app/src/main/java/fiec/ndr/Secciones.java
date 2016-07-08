@@ -70,6 +70,8 @@ public class Secciones extends AppCompatActivity implements View.OnClickListener
                     if(txtCodigo.getText().toString().trim().length() > 0)
                     {
                         Intent intent = new Intent(getApplicationContext(), InformacionGeneral.class);
+                        String codigo = txtCodigo.getText().toString();
+                        intent.putExtra("CODIGO",codigo);
                         startActivity(intent);
                     }
                     else
