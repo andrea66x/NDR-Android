@@ -1,12 +1,16 @@
 package fiec.ndr;
 
+import android.content.Context;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 /**
  * Created by Andrea on 07/07/2016.
  */
 public class Formulario {
     private String tipo,codigo,nombres,apellidos,sexo,fec_nac,est_civil,origen,telefono;
     private int edad;
-
 
     public Formulario() {
     }
@@ -52,4 +56,9 @@ public class Formulario {
     public String getOrigen() {return origen;}
 
     public void setOrigen(String origen) {this.origen = origen;}
+
+
+    /*** Guardar archivo Json ***/
+
+
 }

@@ -279,6 +279,21 @@
                 android:textStyle="bold"
                 android:textSize="20sp"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_LeerHb"
+                android:text="Leer archivo"
+                android:background="#2255ff"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

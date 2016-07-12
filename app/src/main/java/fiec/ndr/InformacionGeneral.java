@@ -27,6 +27,12 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -38,6 +44,7 @@ public class InformacionGeneral extends AppCompatActivity{
     private ViewPager mViewPager;
     private static Formulario miFormulario;
     private static String codigo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -648,6 +655,7 @@ public class InformacionGeneral extends AppCompatActivity{
 
         private static final String ARG_SECTION_NUMBER = "section_number";
         static Button btn_guardar;
+        static Button btn_leer;
         static TextView tv;
         static EditText et1, et2, et3;
         public HabitosFragment() {
@@ -668,14 +676,45 @@ public class InformacionGeneral extends AppCompatActivity{
             tv = (TextView) rootView.findViewById(R.id.salidaJson);
             btn_guardar = (Button) rootView.findViewById(R.id.btn_GuardarHb);
             btn_guardar.setOnClickListener(new View.OnClickListener(){
-
                 @Override
                 public void onClick(View v) {
                     //convertToJson();
-                    Toast.makeText(v.getContext(),convertToJson(),Toast.LENGTH_LONG).show();
+                    String texto = convertToJson();
+                    try {
+                        FileOutputStream fileOutputStream = v.getContext().openFileOutput("mi_archivo.txt", MODE_PRIVATE);
+                        fileOutputStream.write(texto.getBytes());
+                        Toast.makeText(v.getContext(),"Archivo guardado correctamente",Toast.LENGTH_LONG).show();
+                        fileOutputStream.close();
+                    }catch (FileNotFoundException e){
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //Toast.makeText(v.getContext(),convertToJson(),Toast.LENGTH_LONG).show();
                 }
             });
 
+            btn_leer = (Button) rootView.findViewById(R.id.btn_LeerHb);
+            btn_leer.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    try {
+                        FileInputStream fileInputStream = v.getContext().openFileInput("mi_archivo.txt");
+                        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                        StringBuffer stringBuffer = new StringBuffer();
+                        String lines;
+                        while((lines = bufferedReader.readLine()) != null){
+                            stringBuffer.append(lines+"\n");
+                        }
+                        Toast.makeText(v.getContext(),stringBuffer.toString(),Toast.LENGTH_LONG).show();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
             final LinearLayout lyt_tabaco = (LinearLayout) rootView.findViewById(R.id.lyt_tabaco);
             final LinearLayout lyt_alcohol = (LinearLayout) rootView.findViewById(R.id.lyt_alcohol);
