@@ -1,11 +1,13 @@
 package fiec.ndr.inf_general;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,15 +23,18 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import fiec.ndr.Formulario;
 import fiec.ndr.R;
 
 public class DatosFragment extends Fragment {
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
     private ImageButton btn_calendario;
     private EditText dato_fecha_nac;
@@ -44,6 +49,43 @@ public class DatosFragment extends Fragment {
     static Spinner sp_EstCivil;
     static Spinner sp_origen;
 
+    Map<String, String> datos_inf_gen = new HashMap<String, String>();
+
+
+    ///////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+    /////////////////// INTERFACES ///////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+
+
+    changeTab interface_Datos;
+
+    public interface changeTab {
+        void onChangeTab(Map<String, String> datos_inf_gen);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // Esto me asegura que el activity que llama a la interfaz
+        // la haya implementado, sino lanza una excepcion.
+        try {
+            interface_Datos = (changeTab) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " Error: Se debe implementar la interfaz changeTab");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        interface_Datos = null; // previene el "leaking"
+        super.onDetach();
+    }
+
 
     public DatosFragment() {
     }
@@ -55,6 +97,7 @@ public class DatosFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }*/
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,9 +114,9 @@ public class DatosFragment extends Fragment {
         sp_EstCivil = (Spinner) rootView.findViewById(R.id.datos_estado_civil);
         sp_origen = (Spinner) rootView.findViewById(R.id.datos_etnia);
 
-        btn_calendario=(ImageButton) rootView.findViewById(R.id.btn_dato_fecha);
+        btn_calendario = (ImageButton) rootView.findViewById(R.id.btn_dato_fecha);
 
-        dato_fecha_nac = (EditText)rootView.findViewById(R.id.datos_fecha);
+        dato_fecha_nac = (EditText) rootView.findViewById(R.id.datos_fecha);
         btn_calendario.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Show the DatePickerDialog
@@ -144,8 +187,8 @@ public class DatosFragment extends Fragment {
 
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            Toast.makeText(getContext(),String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear+1)
-                    + "-" + String.valueOf(year),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1)
+                    + "-" + String.valueOf(year), Toast.LENGTH_SHORT).show();
         }
     };
 /*
@@ -185,7 +228,8 @@ public class DatosFragment extends Fragment {
         DatePickerDialog.OnDateSetListener ondateSet;
         private int year, month, day;
 
-        public DatePickerFragment() {}
+        public DatePickerFragment() {
+        }
 
         public void setCallBack(DatePickerDialog.OnDateSetListener ondate) {
             ondateSet = ondate;
@@ -204,6 +248,18 @@ public class DatosFragment extends Fragment {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new DatePickerDialog(getActivity(), ondateSet, year, month, day);
         }
+    }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        // Nos aseguramos que el tab sea visible.
+        if (this.isVisible())
+            if (!isVisibleToUser) {
+                interface_Datos.onChangeTab(datos_inf_gen);
+                Log.d("DATOS PERSONALES","Sali del Fragment Datos Personales");
+            }
     }
 
 }

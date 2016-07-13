@@ -7,11 +7,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import java.util.Map;
+
+import fiec.ndr.inf_general.DatosFragment;
 import fiec.ndr.inf_general.SectionsPagerAdapter;
 
 
-public class InformacionGeneral extends AppCompatActivity {
+public class InformacionGeneral extends AppCompatActivity implements DatosFragment.changeTab{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;//Adapter para las secciones
     private ViewPager mViewPager;   //Variable para el pageviewer
@@ -69,6 +74,13 @@ public class InformacionGeneral extends AppCompatActivity {
                         InformacionGeneral.super.onBackPressed();
                     }
                 }).create().show();
+    }
+
+    @Override
+    public void onChangeTab(Map<String, String> datos_inf_gen) {
+
+        Log.d("DATOS PERSONALES","LLame correctamente la funcion desde datos.");
+
     }
 }
 
