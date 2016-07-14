@@ -39,22 +39,29 @@
         <activity
             android:name=".InformacionGeneral"
             android:label="@string/info_general" />
+
         <activity
             android:name=".Preparacion"
             android:label="@string/title_activity_preparacion"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".Medidas"
             android:label="@string/title_activity_medidas"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".Presion_arterial"
             android:label="@string/title_activity_presion_arterial"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".Laboratorio"
             android:label="@string/title_activity_laboratorio"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <uses-feature android:name="android.hardware.camera" android:required="false"></uses-feature>
+
     </application>
 
 </manifest>

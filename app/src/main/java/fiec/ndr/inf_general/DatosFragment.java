@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fiec.ndr.Formulario;
 import fiec.ndr.R;
 
 public class DatosFragment extends Fragment {

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.Map;
 
+import fiec.ndr.Formularios.Frm_General;
 import fiec.ndr.inf_general.DatosFragment;
 import fiec.ndr.inf_general.SectionsPagerAdapter;
 
@@ -20,7 +21,7 @@ public class InformacionGeneral extends AppCompatActivity implements DatosFragme
 
     private SectionsPagerAdapter mSectionsPagerAdapter;//Adapter para las secciones
     private ViewPager mViewPager;   //Variable para el pageviewer
-    private static Formulario miFormulario; //Objeto para guardar la instancia del formulario
+    private static Frm_General miFormulario; //Objeto para guardar la instancia del formulario
     private static String codigo;   //Variable para guardar el codigo del formulario
 
 
@@ -41,7 +42,7 @@ public class InformacionGeneral extends AppCompatActivity implements DatosFragme
         tabLayout.setupWithViewPager(mViewPager);
 
         // Instanciamos el formulario.
-        miFormulario = new Formulario();
+        miFormulario = new Frm_General();
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
