@@ -298,7 +298,8 @@
                         android:background="@android:color/transparent"
                         android:gravity="center"
                         android:spinnerMode="dialog"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:entries="@array/opcionesEstadoCivil" />
 
                     <ImageView
                         android:layout_width="wrap_content"

@@ -52,10 +52,8 @@ public class DatosFragment extends Fragment {
 
 
     ///////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////
     /////////////////// INTERFACES ///////////////////////////////////
     ///////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////
 
 
     changeTab interface_Datos;
@@ -103,7 +101,7 @@ public class DatosFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_datos_personales, container, false);
 
-            /*Datos Personales*/
+        //Capturamos los componentes del formulario, con los datos.
         et_nombres = (EditText) rootView.findViewById(R.id.datos_nombres);
         et_apellidos = (EditText) rootView.findViewById(R.id.datos_apellidos);
         radioSexGroup = (RadioGroup) rootView.findViewById(R.id.radioSex);
@@ -124,23 +122,17 @@ public class DatosFragment extends Fragment {
         });
 
 
-        // Spinner element
+        // Obtengo el spinner deseado.
         Spinner spinner_estado_civil = (Spinner) rootView.findViewById(R.id.datos_estado_civil);
-        // Spinner Drop down elements
-        List<String> estados = new ArrayList<>();
-        estados.add("Soltero");
-        estados.add("Casado");
-        estados.add("Divorciado");
-        estados.add("Unión Libre");
-        estados.add("Viudo");
 
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, estados);
+        // Paso el array de las opciones y el aspecto que tendra la caja selectora.
+        ArrayAdapter<CharSequence> dataAdapter1=ArrayAdapter.createFromResource(rootView.getContext(),
+                R.array.opcionesEstadoCivil, R.layout.spinners);
 
-        // Drop down layout style - list view with radio button
+        // Paso el formato que tendra las opciones al mostrar el dialog spinner.
         dataAdapter1.setDropDownViewResource(R.layout.spinners);
 
-        // attaching data adapter to spinner
+        // Coloco la data en el spinner deseado
         spinner_estado_civil.setAdapter(dataAdapter1);
 
         // Spinner element

@@ -44,64 +44,6 @@ public class Frm_General {
 
      public Frm_General(){
 
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.fecha_nac = fecha_nac;
-        this.sexo = sexo;
-        this.telefono = telefono;
-        this.edad = edad;
-        this.estado_cvl = estado_cvl;
-        this.etnia = etnia;
-        this.provincia = provincia;
-        this.canton = canton;
-        this.ubc_vivienda = ubc_vivienda;
-        this.direccion = direccion;
-        this.num_personas_vive = num_personas_vive;
-        this.tpo_agua = tpo_agua;
-        this.b_cloacas = b_cloacas;
-        this.b_cabeza_fam = b_cabeza_fam;
-        this.b_ingresos_pro = b_ingresos_pro;
-        this.b_llega_fin = b_llega_fin;
-        this.cargo = cargo;
-        this.ocupacion = ocupacion;
-        this.estudios = estudios;
-        this.b_seguros = b_seguros;
-        this.b_chequeos = b_chequeos;
-        this.b_diabetes = b_diabetes;
-        this.b_presion = b_presion;
-        this.b_enf_renal = b_enf_renal;
-        this.b_enf_otra = b_enf_otra;
-        this.seguros = seguros;
-        this.chequeo_mes = chequeo_mes;
-        this.chequeo_frec = chequeo_frec;
-        this.diabetes_anios = diabetes_anios;
-        this.enf_renal = enf_renal;
-        this.enf_otra = enf_otra;
-        this.b_insulina = b_insulina;
-        this.b_hipo_orales = b_hipo_orales;
-        this.b_med_presion = b_med_presion;
-        this.b_analgesicos = b_analgesicos;
-        this.b_otro_medc = b_otro_medc;
-        this.medc_esp = medc_esp;
-        this.hipo_orales = hipo_orales;
-        this.med_presion = med_presion;
-        this.analgesicos = analgesicos;
-        this.otro_medc = otro_medc;
-        this.b_gluco_alta = b_gluco_alta;
-        this.b_dbt_fam_directos = b_dbt_fam_directos;
-        this.b_dbt_fam_otros = b_dbt_fam_otros;
-        this.b_dbt_embarazo = b_dbt_embarazo;
-        this.b_bebes_peso = b_bebes_peso;
-        this.b_presion_fam = b_presion_fam;
-        this.b_renal_fam = b_renal_fam;
-        this.renal_fam = renal_fam;
-        this.b_tabaco = b_tabaco;
-        this.b_alcohol = b_alcohol;
-        this.b_hab_otros = b_hab_otros;
-        this.frc_tabaco_dia = frc_tabaco_dia;
-        this.frc_alcohol_sem = frc_alcohol_sem;
-        this.ejercicios = ejercicios;
-        this.hab_otros = hab_otros;
     }
 
     public String getNombres() {

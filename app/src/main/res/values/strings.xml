@@ -65,4 +65,13 @@
     <string name="title_activity_presion_arterial">Presion Arterial</string>
     <string name="title_activity_laboratorio">Laboratorio</string>
 
+
+    <string-array name="opcionesEstadoCivil">
+        <item>Soltero</item>
+        <item>Casado</item>
+        <item>Divorciado</item>
+        <item>Unión Libre</item>
+        <item>Viudo</item>
+    </string-array>
+
 </resources>

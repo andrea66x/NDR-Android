@@ -11,5 +11,257 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="fiec.ndr.Medidas"
     tools:showIn="@layout/activity_medidas">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_peso"
+                    style="@style/lblTextStyle"
+                    android:text="Peso:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="3"
+                    android:maxLength="3"
+                    android:id="@+id/medidas_peso"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:hint="kg"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_estatura"
+                    style="@style/lblTextStyle"
+                    android:text="Estatura:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="3"
+                    android:maxLength="3"
+                    android:id="@+id/medidas_estatura"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:hint="cms"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_cintura"
+                    style="@style/lblTextStyle"
+                    android:text="Cintura:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="3"
+                    android:maxLength="3"
+                    android:id="@+id/medidas_cintura"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:hint="cms"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_caderas"
+                    style="@style/lblTextStyle"
+                    android:text="Caderas:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="3"
+                    android:maxLength="3"
+                    android:id="@+id/medidas_caderas"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:hint="cms"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_imc"
+                    style="@style/lblTextStyle"
+                    android:text="IMC:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="3"
+                    android:maxLength="3"
+                    android:id="@+id/medidas_imc"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:enabled="false"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_indice_cin_cad"
+                    style="@style/lblTextStyle"
+                    android:text="Indice Cintura/Cadera:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="3"
+                    android:maxLength="3"
+                    android:id="@+id/medidas_icc"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:enabled="false"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_peso_sal"
+                    style="@style/lblTextStyle"
+                    android:text="Peso Saludable:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="3"
+                    android:maxLength="3"
+                    android:id="@+id/medidas_peso_salud"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:enabled="false"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 </RelativeLayout>
+

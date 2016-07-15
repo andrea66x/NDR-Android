@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ public class Preparacion extends AppCompatActivity {
 
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageViewFoto;
-    private TextView diaText, mesText, anioText;
+    private EditText diaText, mesText, anioText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,9 @@ public class Preparacion extends AppCompatActivity {
         int mes = c.get(Calendar.MONTH);
         int anio = c.get(Calendar.YEAR);
 
-        this.diaText = (TextView)this.findViewById(R.id.form_fecha_dia);
-        this.mesText = (TextView)findViewById(R.id.form_fecha_mes);
-        this.anioText = (TextView)findViewById(R.id.form_fecha_anio);
+        this.diaText = (EditText)this.findViewById(R.id.form_fecha_dia);
+        this.mesText = (EditText)findViewById(R.id.form_fecha_mes);
+        this.anioText = (EditText)findViewById(R.id.form_fecha_anio);
 
         this.diaText.setText(Integer.toString(dia));
         this.mesText.setText(Integer.toString(mes));

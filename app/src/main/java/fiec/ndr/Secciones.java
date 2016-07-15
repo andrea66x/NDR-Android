@@ -44,27 +44,34 @@ public class Secciones extends AppCompatActivity {
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String codigo;
                 if (codigoCorrecto(txtCodigo.getText().toString().trim())) {
                     switch (btnGeneral.getId()) {
                         case R.id.btn_inf_general:
                             Intent int_info_general = new Intent(getApplicationContext(), InformacionGeneral.class);
-                            String codigo = txtCodigo.getText().toString();
+                            codigo = txtCodigo.getText().toString();
                             int_info_general.putExtra("CODIGO",codigo);
                             startActivity(int_info_general);
                             codigoDialog.dismiss();
                             break;
                         case R.id.btn_medidas:
                             Intent int_medidas = new Intent(getApplicationContext(), Medidas.class);
+                            codigo = txtCodigo.getText().toString();
+                            int_medidas.putExtra("CODIGO",codigo);
                             startActivity(int_medidas);
                             codigoDialog.dismiss();
                             break;
                         case R.id.btn_presion:
                             Intent int_presion = new Intent(getApplicationContext(), Presion_arterial.class);
+                            codigo = txtCodigo.getText().toString();
+                            int_presion.putExtra("CODIGO",codigo);
                             startActivity(int_presion);
                             codigoDialog.dismiss();
                             break;
                         case R.id.btn_laboratorio:
                             Intent int_laboratorio = new Intent(getApplicationContext(), Laboratorio.class);
+                            codigo = txtCodigo.getText().toString();
+                            int_laboratorio.putExtra("CODIGO",codigo);
                             startActivity(int_laboratorio);
                             codigoDialog.dismiss();
                             break;

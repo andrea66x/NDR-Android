@@ -11,5 +11,141 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="fiec.ndr.Presion_arterial"
     tools:showIn="@layout/activity_presion_arterial">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_peso"
+                    style="@style/lblTextStyle"
+                    android:text="PRESIÓN ARTERIAL"
+                    android:gravity="top|center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_presion1"
+                    style="@style/lblTextStyle"
+                    android:text="Toma Primera:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="4"
+                    android:maxLength="4"
+                    android:id="@+id/presion_primera"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:hint="mm/Hg"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_presion2"
+                    style="@style/lblTextStyle"
+                    android:text="Toma Segunda:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="4"
+                    android:maxLength="4"
+                    android:id="@+id/presion_segunda"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:hint="mm/Hg"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_presion3"
+                    style="@style/lblTextStyle"
+                    android:text="Toma Tercera:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="4"
+                    android:maxLength="4"
+                    android:id="@+id/presion_tercera"
+                    android:layout_gravity="center"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:hint="mm/Hg"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
 </RelativeLayout>
