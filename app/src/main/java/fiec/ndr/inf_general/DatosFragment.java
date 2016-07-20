@@ -105,7 +105,7 @@ public class DatosFragment extends Fragment {
         et_nombres = (EditText) rootView.findViewById(R.id.datos_nombres);
         et_apellidos = (EditText) rootView.findViewById(R.id.datos_apellidos);
         radioSexGroup = (RadioGroup) rootView.findViewById(R.id.radioSex);
-        et_fecNac = (EditText) rootView.findViewById(R.id.datos_fecha);
+        //et_fecNac = (EditText) rootView.findViewById(R.id.datos_fecha);
         et_edad = (EditText) rootView.findViewById(R.id.datos_edad);
         et_telefono = (EditText) rootView.findViewById(R.id.datos_telefono);
         sp_EstCivil = (Spinner) rootView.findViewById(R.id.datos_estado_civil);
@@ -113,7 +113,7 @@ public class DatosFragment extends Fragment {
 
         btn_calendario = (ImageButton) rootView.findViewById(R.id.btn_dato_fecha);
 
-        dato_fecha_nac = (EditText) rootView.findViewById(R.id.datos_fecha);
+        //dato_fecha_nac = (EditText) rootView.findViewById(R.id.datos_fecha);
         btn_calendario.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Show the DatePickerDialog
