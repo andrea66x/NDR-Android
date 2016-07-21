@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
+import fiec.ndr.AdminSQLiteOpenHelper;
 import fiec.ndr.R;
 
 public class ViviendaFragment extends Fragment {
@@ -32,9 +33,16 @@ public class ViviendaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_vivienda, container, false);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(rootView.getContext());
 
         //Spinner para la provincia:
         Spinner spinner_provincia = (Spinner) rootView.findViewById(R.id.datos_provincia);
+        List<String> provincias = admin.getProvincias();
+        ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, provincias);
+        dataAdapter1.setDropDownViewResource(R.layout.spinners);
+        spinner_provincia.setAdapter(dataAdapter1);
+
+        /*
         List<String> provincias = new ArrayList<>();
         provincias.add("Guayas");
         provincias.add("Esmeraldas");
@@ -43,7 +51,7 @@ public class ViviendaFragment extends Fragment {
         provincias.add("Manabí");
         ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, provincias);
         dataAdapter1.setDropDownViewResource(R.layout.spinners);
-        spinner_provincia.setAdapter(dataAdapter1);
+        spinner_provincia.setAdapter(dataAdapter1);*/
 
         //Spinner para el canton:
         Spinner spinner_canton = (Spinner) rootView.findViewById(R.id.datos_canton);

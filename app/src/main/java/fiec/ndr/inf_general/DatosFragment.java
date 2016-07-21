@@ -38,6 +38,7 @@ public class DatosFragment extends Fragment {
     static EditText et_apellidos;
     static RadioGroup radioSexGroup;
     static RadioButton radioSexButton;
+    static EditText et_fecNac;
     static EditText et_edad;
     static EditText et_telefono;
     static Spinner sp_EstCivil;
