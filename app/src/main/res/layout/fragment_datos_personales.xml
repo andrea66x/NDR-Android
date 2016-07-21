@@ -163,7 +163,8 @@
                         android:singleLine="true"
                         android:layout_marginRight="10dp"
                         android:hint="DD"
-                        android:ems="3" />
+                        android:ems="3"
+                        android:enabled="false" />
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -177,7 +178,8 @@
                         android:singleLine="true"
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"
-                        android:hint="MM"/>
+                        android:hint="MM"
+                        android:enabled="false" />
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -191,7 +193,8 @@
                         android:singleLine="true"
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"
-                        android:hint="AAAA"/>
+                        android:hint="AAAA"
+                        android:enabled="false" />
 
                 </LinearLayout>
 
@@ -227,7 +230,8 @@
                     android:background="@drawable/txtbox"
                     android:textAlignment="center"
                     android:textStyle="bold"
-                    android:hint="0"/>
+                    android:hint="0"
+                    android:enabled="false" />
 
             </LinearLayout>
 
@@ -247,7 +251,7 @@
                 <TextView
                     android:id="@+id/txtV_telefonos"
                     style="@style/lblTextStyle"
-                    android:text="Teléfonos:"
+                    android:text="Teléfono:"
                     android:gravity="top|start" />
 
                 <EditText

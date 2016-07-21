@@ -74,4 +74,13 @@
         <item>Viudo</item>
     </string-array>
 
+    <string-array name="opcionesEtnia">
+        <item>Indigena</item>
+        <item>Afroecuatoriano</item>
+        <item>Montubia</item>
+        <item>Mestiza</item>
+        <item>Blanca</item>
+    </string-array>
+
+
 </resources>

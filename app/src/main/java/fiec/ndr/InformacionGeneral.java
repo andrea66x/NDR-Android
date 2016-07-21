@@ -80,6 +80,7 @@ public class InformacionGeneral extends AppCompatActivity implements DatosFragme
     @Override
     public void onChangeTab(Map<String, String> datos_inf_gen) {
 
+        datos_inf_gen.get(1);
         Log.d("DATOS PERSONALES","LLame correctamente la funcion desde datos.");
 
     }

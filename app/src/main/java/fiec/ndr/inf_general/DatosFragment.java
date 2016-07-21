@@ -20,14 +20,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.Normalizer;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import fiec.ndr.R;
@@ -42,18 +38,24 @@ public class DatosFragment extends Fragment {
     static EditText et_apellidos;
     static RadioGroup radioSexGroup;
     static RadioButton radioSexButton;
-    static EditText et_fecNac;
     static EditText et_edad;
     static EditText et_telefono;
     static Spinner sp_EstCivil;
     static Spinner sp_origen;
 
+    static EditText et_dia, et_mes, et_anio;
+    GregorianCalendar cal;
+
+    private String data_nombres, data_apellidos, data_fecha_nac, data_etnia, data_estado_civil;
+    private int data_edad, data_sexo, data_telefono;
+
+
     Map<String, String> datos_inf_gen = new HashMap<String, String>();
 
 
-    ///////////////////////////////////////////////////////////////////
-    /////////////////// INTERFACES ///////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    /////////////////// INICIO - INTERFACES ///////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
 
 
     changeTab interface_Datos;
@@ -83,6 +85,9 @@ public class DatosFragment extends Fragment {
         super.onDetach();
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    ///////////////////FIN -- INTERFACES ///////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
 
     public DatosFragment() {
     }
@@ -96,6 +101,10 @@ public class DatosFragment extends Fragment {
     }*/
 
 
+    ////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////// INICIO - INICIALIZAR COMPONENTES ///////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -105,7 +114,9 @@ public class DatosFragment extends Fragment {
         et_nombres = (EditText) rootView.findViewById(R.id.datos_nombres);
         et_apellidos = (EditText) rootView.findViewById(R.id.datos_apellidos);
         radioSexGroup = (RadioGroup) rootView.findViewById(R.id.radioSex);
-        et_fecNac = (EditText) rootView.findViewById(R.id.datos_fecha);
+        et_dia = (EditText) rootView.findViewById(R.id.datos_fecha_dia);
+        et_mes = (EditText) rootView.findViewById(R.id.datos_fecha_mes);
+        et_anio = (EditText) rootView.findViewById(R.id.datos_fecha_anio);
         et_edad = (EditText) rootView.findViewById(R.id.datos_edad);
         et_telefono = (EditText) rootView.findViewById(R.id.datos_telefono);
         sp_EstCivil = (Spinner) rootView.findViewById(R.id.datos_estado_civil);
@@ -113,7 +124,6 @@ public class DatosFragment extends Fragment {
 
         btn_calendario = (ImageButton) rootView.findViewById(R.id.btn_dato_fecha);
 
-        dato_fecha_nac = (EditText) rootView.findViewById(R.id.datos_fecha);
         btn_calendario.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Show the DatePickerDialog
@@ -126,7 +136,7 @@ public class DatosFragment extends Fragment {
         Spinner spinner_estado_civil = (Spinner) rootView.findViewById(R.id.datos_estado_civil);
 
         // Paso el array de las opciones y el aspecto que tendra la caja selectora.
-        ArrayAdapter<CharSequence> dataAdapter1=ArrayAdapter.createFromResource(rootView.getContext(),
+        ArrayAdapter<CharSequence> dataAdapter1 = ArrayAdapter.createFromResource(rootView.getContext(),
                 R.array.opcionesEstadoCivil, R.layout.spinners);
 
         // Paso el formato que tendra las opciones al mostrar el dialog spinner.
@@ -135,85 +145,55 @@ public class DatosFragment extends Fragment {
         // Coloco la data en el spinner deseado
         spinner_estado_civil.setAdapter(dataAdapter1);
 
-        // Spinner element
+        // Obtengo el spinner deseado.
         Spinner spinner_etnia = (Spinner) rootView.findViewById(R.id.datos_etnia);
-        // Spinner Drop down elements
-        List<String> etnias = new ArrayList<>();
-        etnias.add("Afroecuatoriano");
-        etnias.add("Blanco");
-        etnias.add("Indio");
-        etnias.add("Mestizo");
 
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, etnias);
+        // Paso el array de las opciones y el aspecto que tendra la caja selectora.
+        ArrayAdapter<CharSequence> dataAdapter2=ArrayAdapter.createFromResource(rootView.getContext(),
+                R.array.opcionesEtnia, R.layout.spinners);
 
-        // Drop down layout style - list view with radio button
+        // Paso el formato que tendra las opciones al mostrar el dialog spinner.
         dataAdapter2.setDropDownViewResource(R.layout.spinners);
 
-        // attaching data adapter to spinner
+        // Coloco la data en el spinner deseado
         spinner_etnia.setAdapter(dataAdapter2);
+
+        radioSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                View radioButton = radioGroup.findViewById(i);
+                data_sexo = radioGroup.indexOfChild(radioButton);
+                System.out.println(data_sexo);
+            }
+        });
 
         return rootView;
     }
 
     private void showDatePicker() {
         DatePickerFragment date = new DatePickerFragment();
-        /**
-         * Set Up Current Date Into dialog
-         */
+        //Seteamos la fecha actual en el dialog.
+
         Calendar calender = Calendar.getInstance();
         Bundle args = new Bundle();
         args.putInt("year", calender.get(Calendar.YEAR));
         args.putInt("month", calender.get(Calendar.MONTH));
         args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
         date.setArguments(args);
-        /**
-         * Set Call back to capture selected date
-         */
+
         date.setCallBack(ondate);
-        date.show(getFragmentManager(), "Date Picker");
+        date.show(getFragmentManager(), "Fecha");
     }
 
     DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
 
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            Toast.makeText(getContext(), String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1)
-                    + "-" + String.valueOf(year), Toast.LENGTH_SHORT).show();
+            setearFecha(dayOfMonth,monthOfYear,year);
+            setearEdad(dayOfMonth,monthOfYear,year);
         }
     };
-/*
-    @Override
-    public void onPause(){
-        super.onPause();
-        miFormulario.setNombres(et_nombres.getText().toString());
-        miFormulario.setApellidos(et_apellidos.getText().toString());
-        miFormulario.setEdad(Integer.parseInt(et_edad.getText().toString()));
-        miFormulario.setCodigo(codigo);
-        miFormulario.setFec_nac(et_fecNac.getText().toString());
-        miFormulario.setTelefono(et_telefono.getText().toString());
-        miFormulario.setTipo("Datos Personales");
-        radioSexButton = (RadioButton) getActivity().findViewById(radioSexGroup.getCheckedRadioButtonId());
-        miFormulario.setSexo(radioSexButton.getText().toString());
-        miFormulario.setEst_civil(sp_EstCivil.getSelectedItem().toString());
-        miFormulario.setOrigen(sp_origen.getSelectedItem().toString());
 
-    }
-
-    public String convertToJson(){
-        JSONObject miJson = new JSONObject();
-        try{
-            miJson.put("tipo","datos_personales");
-            miJson.put("nombres",et_nombres.getText());
-            miJson.put("apellidos",et_apellidos.getText());
-        } catch (JSONException e){
-            e.printStackTrace();
-        }
-
-        String json = miJson.toString();
-        return json;
-    }
-*/
 
     public static class DatePickerFragment extends DialogFragment {
         DatePickerDialog.OnDateSetListener ondateSet;
@@ -241,6 +221,10 @@ public class DatosFragment extends Fragment {
         }
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////
+    /////////////////// FIN - INICIALIZAR COMPONENTES ///////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -248,9 +232,78 @@ public class DatosFragment extends Fragment {
         // Nos aseguramos que el tab sea visible.
         if (this.isVisible())
             if (!isVisibleToUser) {
+                setearHash();
                 interface_Datos.onChangeTab(datos_inf_gen);
                 Log.d("DATOS PERSONALES","Sali del Fragment Datos Personales");
             }
     }
+
+
+    public void setearFecha(int dia, int mes, int anio){
+
+        et_dia.setText(String.valueOf(dia));
+        et_mes.setText(String.valueOf(mes));
+        et_anio.setText(String.valueOf(anio));
+
+    }
+    public void setearEdad(int dia, int mes, int anio){
+
+        cal = new GregorianCalendar();
+        int y, m, d, a;
+
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        cal.set(anio, mes, dia);
+        a = y - cal.get(Calendar.YEAR);
+        if ((m < cal.get(Calendar.MONTH))
+                || ((m == cal.get(Calendar.MONTH)) && (d < cal
+                .get(Calendar.DAY_OF_MONTH)))) {
+            --a;
+        }
+        if(a < 0)
+            throw new IllegalArgumentException("Age < 0");
+
+        data_edad = a;
+        et_edad.setText(String.valueOf(data_edad));
+    }
+
+
+    public void setearHash(){
+
+        data_nombres = et_nombres.getText().toString();
+        data_apellidos = et_apellidos.getText().toString();
+
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        data_fecha_nac = format1.format(cal.getTime());
+        data_telefono = Integer.valueOf(et_telefono.getText().toString());
+        data_etnia = sp_origen.getSelectedItem().toString();
+        data_estado_civil = sp_EstCivil.getSelectedItem().toString();
+
+
+        datos_inf_gen.clear();
+        datos_inf_gen.put("nombres", data_nombres);
+        datos_inf_gen.put("apellidos", data_apellidos);
+        datos_inf_gen.put("sexo", String.valueOf(data_sexo));
+        datos_inf_gen.put("fecha_nac", data_fecha_nac);
+        datos_inf_gen.put("edad", String.valueOf(data_edad));
+        datos_inf_gen.put("telefono", String.valueOf(data_telefono));
+        datos_inf_gen.put("estado_civil", data_estado_civil);
+        datos_inf_gen.put("etnia", data_etnia);
+
+
+
+
+        /*
+        Forma de transformar de string a date:
+        String string = "January 2, 2010";
+        DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
+        Date date = format.parse(string);
+        System.out.println(date); // Sat Jan 02 00:00:00 GMT 2010
+         */
+
+
+    }
+
 
 }
