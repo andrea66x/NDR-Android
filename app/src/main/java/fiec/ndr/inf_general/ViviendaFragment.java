@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -17,6 +18,8 @@ import fiec.ndr.R;
 public class ViviendaFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+    Spinner spinner_canton;
+    AdminSQLiteOpenHelper admin;
 
     public ViviendaFragment() {
     }
@@ -33,7 +36,7 @@ public class ViviendaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_vivienda, container, false);
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(rootView.getContext());
+        admin = new AdminSQLiteOpenHelper(rootView.getContext());
 
         //Spinner para la provincia:
         Spinner spinner_provincia = (Spinner) rootView.findViewById(R.id.datos_provincia);
@@ -42,43 +45,25 @@ public class ViviendaFragment extends Fragment {
         dataAdapter1.setDropDownViewResource(R.layout.spinners);
         spinner_provincia.setAdapter(dataAdapter1);
 
-        /*
-        List<String> provincias = new ArrayList<>();
-        provincias.add("Guayas");
-        provincias.add("Esmeraldas");
-        provincias.add("Los Ríos");
-        provincias.add("El Oro");
-        provincias.add("Manabí");
-        ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, provincias);
-        dataAdapter1.setDropDownViewResource(R.layout.spinners);
-        spinner_provincia.setAdapter(dataAdapter1);*/
+        //Spinner para los cantones
+        spinner_canton = (Spinner) rootView.findViewById(R.id.datos_canton);
+        spinner_provincia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(view.getContext(),"position: "+position+"id: "+id,Toast.LENGTH_LONG).show();
+                List<String> cantones = admin.getCantones(position);
+                //Toast.makeText(view.getContext(),cantones.get(0), Toast.LENGTH_LONG).show();
+                ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<>(view.getContext(), R.layout.spinners, cantones);
+                dataAdapter2.setDropDownViewResource(R.layout.spinners);
+                spinner_canton.setAdapter(dataAdapter2);
+            }
 
-        //Spinner para el canton:
-        Spinner spinner_canton = (Spinner) rootView.findViewById(R.id.datos_canton);
-        List<String> cantones = new ArrayList<>();
-        cantones.add("Balzar");
-        cantones.add("Guayaquil");
-        cantones.add("Manta");
-        cantones.add("Portoviejo");
-        cantones.add("Esmeraldas");
-        cantones.add("Balzar");
-        cantones.add("Guayaquil");
-        cantones.add("Manta");
-        cantones.add("Portoviejo");
-        cantones.add("Esmeraldas");
-        cantones.add("Balzar");
-        cantones.add("Guayaquil");
-        cantones.add("Manta");
-        cantones.add("Portoviejo");
-        cantones.add("Esmeraldas");
-        cantones.add("Balzar");
-        cantones.add("Guayaquil");
-        cantones.add("Manta");
-        cantones.add("Portoviejo");
-        cantones.add("Esmeraldas");
-        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, cantones);
-        dataAdapter2.setDropDownViewResource(R.layout.spinners);
-        spinner_canton.setAdapter(dataAdapter2);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         //Spinner para la vivienda:
         Spinner spinner_vivienda = (Spinner) rootView.findViewById(R.id.datos_vivienda);
