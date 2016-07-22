@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,28 +29,14 @@ import fiec.ndr.R;
 
 public class DatosFragment extends Fragment {
 
-
-    private ImageButton btn_calendario;
-    private EditText dato_fecha_nac;
-
-    static EditText et_nombres;
-    static EditText et_apellidos;
+    static ImageButton btn_calendario;
+    static EditText et_nombres, et_apellidos, et_telefono,et_edad, et_dia, et_mes, et_anio;
     static RadioGroup radioSexGroup;
-    static RadioButton radioSexButton;
-    static EditText et_fecNac;
-    static EditText et_edad;
-    static EditText et_telefono;
-    static Spinner sp_EstCivil;
-    static Spinner sp_origen;
+    static Spinner sp_EstCivil,sp_origen;
 
-    static EditText et_dia, et_mes, et_anio;
-    GregorianCalendar cal;
-
-    private String data_nombres, data_apellidos, data_fecha_nac, data_etnia, data_estado_civil;
-    private int data_edad, data_sexo, data_telefono;
-
-
-    Map<String, String> datos_inf_gen = new HashMap<String, String>();
+    private GregorianCalendar cal;
+    private String data_nombres, data_apellidos, data_fecha_nac, data_etnia, data_estado_civil, data_edad, data_sexo, data_telefono;
+    private Map<String, String> datos_inf_gen = new HashMap<String, String>();
 
 
     ///////////////////////////////////////////////////////////////////////////
@@ -163,8 +148,8 @@ public class DatosFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 View radioButton = radioGroup.findViewById(i);
-                data_sexo = radioGroup.indexOfChild(radioButton);
-                System.out.println(data_sexo);
+                // 0 Para masculino, 1 para femenino.
+                data_sexo = String.valueOf(radioGroup.indexOfChild(radioButton));
             }
         });
 
@@ -227,15 +212,21 @@ public class DatosFragment extends Fragment {
     /////////////////////////////////////////////////////////////////////////////////////
 
 
+
+    /////////////////////////////////////////////////////////////////////////////////////
+    /////////////////// INICIO - METODOS AUXILIARES /////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         // Nos aseguramos que el tab sea visible.
         if (this.isVisible())
+            //Comprobamos si el fragment ya no es visible para el usuario.
             if (!isVisibleToUser) {
+                //Rellenamos el hash con los datos obtenidos de los componentes.
                 setearHash();
+                //Llamamos al interface.
                 interface_Datos.onChangeTab(datos_inf_gen);
-                Log.d("DATOS PERSONALES","Sali del Fragment Datos Personales");
             }
     }
 
@@ -265,35 +256,80 @@ public class DatosFragment extends Fragment {
         if(a < 0)
             throw new IllegalArgumentException("Age < 0");
 
-        data_edad = a;
-        et_edad.setText(String.valueOf(data_edad));
+        data_edad = String.valueOf(a);
+        et_edad.setText(data_edad);
     }
 
 
     public void setearHash(){
 
-        data_nombres = et_nombres.getText().toString();
-        data_apellidos = et_apellidos.getText().toString();
-
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-        data_fecha_nac = format1.format(cal.getTime());
-        data_telefono = Integer.valueOf(et_telefono.getText().toString());
-        data_etnia = sp_origen.getSelectedItem().toString();
-        data_estado_civil = sp_EstCivil.getSelectedItem().toString();
-
-
         datos_inf_gen.clear();
-        datos_inf_gen.put("nombres", data_nombres);
-        datos_inf_gen.put("apellidos", data_apellidos);
-        datos_inf_gen.put("sexo", String.valueOf(data_sexo));
-        datos_inf_gen.put("fecha_nac", data_fecha_nac);
-        datos_inf_gen.put("edad", String.valueOf(data_edad));
-        datos_inf_gen.put("telefono", String.valueOf(data_telefono));
-        datos_inf_gen.put("estado_civil", data_estado_civil);
-        datos_inf_gen.put("etnia", data_etnia);
 
+        datos_inf_gen.put("hashmap","datos_personales");
 
+        //Colectamos los datos de nombres.
+        data_nombres = et_nombres.getText().toString();
+        if (data_nombres != null && !data_nombres.isEmpty()&& data_nombres.matches(".*\\w.*"))
+            datos_inf_gen.put("nombres", data_nombres);
+        else
+            datos_inf_gen.put("nombres", "");
 
+        //Colectamos los datos de apellidos.
+        data_apellidos = et_apellidos.getText().toString();
+        if (data_apellidos != null && !data_apellidos.isEmpty()&& data_apellidos.matches(".*\\w.*"))
+            datos_inf_gen.put("apellidos", data_apellidos);
+        else
+            datos_inf_gen.put("apellidos", "");
+
+        //Colectamos los datos del sexo.
+        if (data_sexo != null && !data_sexo.isEmpty())
+            if(data_sexo.equals("0") || data_sexo.equals("1"))
+                datos_inf_gen.put("sexo", data_sexo);
+            else
+                datos_inf_gen.put("sexo", "-1");
+        else
+            datos_inf_gen.put("sexo", "-1");
+
+        //Colectamos los datos de la fecha de nacimiento.
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+        if(cal != null)
+            data_fecha_nac = format1.format(cal.getTime());
+        else
+            data_fecha_nac= "01-01-1900";
+        if (data_fecha_nac != null && !data_fecha_nac.isEmpty())
+            datos_inf_gen.put("fecha_nac", data_fecha_nac);
+        else
+            datos_inf_gen.put("fecha_nac", "");
+
+        //Colectamos los datos de la edad.
+        if (data_edad != null && !data_edad.isEmpty())
+            if(Integer.valueOf(data_edad)>=0)
+                datos_inf_gen.put("edad", data_edad);
+            else
+                datos_inf_gen.put("edad", "-1");
+        else
+            datos_inf_gen.put("edad", "-1");
+
+        //Colectamos los datos del telefono.
+        data_telefono = et_telefono.getText().toString();
+        if (data_telefono != null && !data_telefono.isEmpty()&& data_telefono.matches(".*\\w.*"))
+            datos_inf_gen.put("telefono", data_telefono);
+        else
+            datos_inf_gen.put("telefono", "");
+
+        //Colectamos los datos del estado civil.
+        data_estado_civil = sp_EstCivil.getSelectedItem().toString();
+        if (data_estado_civil != null && !data_estado_civil.isEmpty())
+            datos_inf_gen.put("estado_civil", data_estado_civil);
+        else
+            datos_inf_gen.put("telefono", "");
+
+        //Colectamos los datos de la etnia.
+        data_etnia = sp_origen.getSelectedItem().toString();
+        if (data_etnia != null && !data_etnia.isEmpty())
+            datos_inf_gen.put("etnia", data_etnia);
+        else
+            datos_inf_gen.put("etnia", "");
 
         /*
         Forma de transformar de string a date:
@@ -302,7 +338,6 @@ public class DatosFragment extends Fragment {
         Date date = format.parse(string);
         System.out.println(date); // Sat Jan 02 00:00:00 GMT 2010
          */
-
 
     }
 
