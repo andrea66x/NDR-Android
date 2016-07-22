@@ -14,10 +14,11 @@ import java.util.Map;
 
 import fiec.ndr.Formularios.Frm_General;
 import fiec.ndr.inf_general.DatosFragment;
+import fiec.ndr.inf_general.EconomiaFragment;
 import fiec.ndr.inf_general.SectionsPagerAdapter;
 
 
-public class InformacionGeneral extends AppCompatActivity implements DatosFragment.changeTab{
+public class InformacionGeneral extends AppCompatActivity implements DatosFragment.changeTabDatos, EconomiaFragment.changeTabEconomia{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;//Adapter para las secciones
     private ViewPager mViewPager;   //Variable para el pageviewer
@@ -78,10 +79,13 @@ public class InformacionGeneral extends AppCompatActivity implements DatosFragme
     }
 
     @Override
-    public void onChangeTab(Map<String, String> datos_inf_gen) {
-        if(datos_inf_gen.get("hashmap").equals("datos_personales"));
-            Log.d("DATOS PERSONALES","LLame correctamente la funcion desde datos.");
+    public void onChangeTabDatos(Map<String, String> datos_inf_gen) {
+        Log.d("INTERFACE CALL","LLame correctamente la funcion desde datos personales.");
+    }
 
+    @Override
+    public void onChangeTabEconomia(Map<String, String> datos_economia) {
+        Log.d("INTERFACE CALL","LLame correctamente la funcion desde economia familiar.");
     }
 }
 

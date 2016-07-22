@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fiec.ndr.InformacionGeneral$EconomiaFragment">
+    tools:context="fiec.ndr.inf_general.EconomiaFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,7 +31,9 @@
                 style="@style/lblTextStyle"
                 android:text="¿Es usted cabeza de familia?:"
                 android:gravity="top|start" />
+
             <RadioGroup
+                android:id="@+id/rg_cbzfam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -39,17 +41,15 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SI"
-                    android:id="@+id/datos_cbz_fam_si"
-                    android:checked="false"
-                    android:paddingRight="10dp" />
+                    android:text="NO"
+                    android:id="@+id/datos_cbz_fam_no"
+                    android:paddingRight="10dp"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NO"
-                    android:id="@+id/datos_cbz_fam_no"
-                    android:checked="false"
+                    android:text="SI"
+                    android:id="@+id/datos_cbz_fam_si"
                     android:paddingRight="10dp"
                     android:layout_marginLeft="30dp" />
             </RadioGroup>
@@ -73,27 +73,29 @@
                     style="@style/lblTextStyle"
                     android:text="¿Tiene ingresos propios?:"
                     android:gravity="top|start" />
+
                 <RadioGroup
+                    android:id="@+id/rg_ingresos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_gravity="center">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_ingresos_si"
-                        android:checked="false"
-                        android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="NO"
                         android:id="@+id/datos_ingresos_no"
-                        android:checked="false"
+                        android:paddingRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SI"
+                        android:id="@+id/datos_ingresos_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
+
                 </RadioGroup>
             </LinearLayout>
 
@@ -115,24 +117,27 @@
                     style="@style/lblTextStyle"
                     android:text="¿Llega a fin de mes?:"
                     android:gravity="top|start" />
+
                 <RadioGroup
+                    android:id="@+id/rg_llegafin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_gravity="center">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_findeMes_si"
-                        android:checked="false"
-                        android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="NO"
                         android:id="@+id/datos_findeMes_no"
+                        android:checked="false"
+                        android:paddingRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SI"
+                        android:id="@+id/datos_findeMes_si"
                         android:checked="false"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />

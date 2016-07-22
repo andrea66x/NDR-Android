@@ -7,7 +7,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,7 +29,7 @@ public class DatosFragment extends Fragment {
 
     static ImageButton btn_calendario;
     static EditText et_nombres, et_apellidos, et_telefono,et_edad, et_dia, et_mes, et_anio;
-    static RadioGroup radioSexGroup;
+    static RadioGroup rg_sexo;
     static Spinner sp_EstCivil,sp_origen;
 
     private GregorianCalendar cal;
@@ -44,10 +42,10 @@ public class DatosFragment extends Fragment {
     //////////////////////////////////////////////////////////////////////////
 
 
-    changeTab interface_Datos;
+    changeTabDatos interface_Datos;
 
-    public interface changeTab {
-        void onChangeTab(Map<String, String> datos_inf_gen);
+    public interface changeTabDatos {
+        void onChangeTabDatos(Map<String, String> datos_inf_gen);
     }
 
     @SuppressWarnings("deprecation")
@@ -58,7 +56,7 @@ public class DatosFragment extends Fragment {
         // Esto me asegura que el activity que llama a la interfaz
         // la haya implementado, sino lanza una excepcion.
         try {
-            interface_Datos = (changeTab) activity;
+            interface_Datos = (changeTabDatos) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " Error: Se debe implementar la interfaz changeTab");
@@ -75,17 +73,18 @@ public class DatosFragment extends Fragment {
     ///////////////////FIN -- INTERFACES ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////
 
-    public DatosFragment() {
-    }
 
-    /*public static DatosFragment newInstance(int sectionNumber) {
-        DatosFragment fragment = new DatosFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
-
+    /*
+        //Este metodo de instanciar el fragment, sirve para mantener variables
+        //cuando se recree, evitando que se llame al constructor vacio.
+        public static DatosFragment newInstance(int sectionNumber) {
+            DatosFragment fragment = new DatosFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+    */
 
     ////////////////////////////////////////////////////////////////////////////////////////
     /////////////////// INICIO - INICIALIZAR COMPONENTES ///////////////////////////////////
@@ -96,10 +95,10 @@ public class DatosFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_datos_personales, container, false);
 
-        //Capturamos los componentes del formulario, con los datos.
+        //Capturamos los componentes del formulario.
         et_nombres = (EditText) rootView.findViewById(R.id.datos_nombres);
         et_apellidos = (EditText) rootView.findViewById(R.id.datos_apellidos);
-        radioSexGroup = (RadioGroup) rootView.findViewById(R.id.radioSex);
+        rg_sexo = (RadioGroup) rootView.findViewById(R.id.rg_sexo);
         et_dia = (EditText) rootView.findViewById(R.id.datos_fecha_dia);
         et_mes = (EditText) rootView.findViewById(R.id.datos_fecha_mes);
         et_anio = (EditText) rootView.findViewById(R.id.datos_fecha_anio);
@@ -118,9 +117,6 @@ public class DatosFragment extends Fragment {
         });
 
 
-        // Obtengo el spinner deseado.
-        Spinner spinner_estado_civil = (Spinner) rootView.findViewById(R.id.datos_estado_civil);
-
         // Paso el array de las opciones y el aspecto que tendra la caja selectora.
         ArrayAdapter<CharSequence> dataAdapter1 = ArrayAdapter.createFromResource(rootView.getContext(),
                 R.array.opcionesEstadoCivil, R.layout.spinners);
@@ -129,10 +125,7 @@ public class DatosFragment extends Fragment {
         dataAdapter1.setDropDownViewResource(R.layout.spinners);
 
         // Coloco la data en el spinner deseado
-        spinner_estado_civil.setAdapter(dataAdapter1);
-
-        // Obtengo el spinner deseado.
-        Spinner spinner_etnia = (Spinner) rootView.findViewById(R.id.datos_etnia);
+        sp_EstCivil.setAdapter(dataAdapter1);
 
         // Paso el array de las opciones y el aspecto que tendra la caja selectora.
         ArrayAdapter<CharSequence> dataAdapter2=ArrayAdapter.createFromResource(rootView.getContext(),
@@ -142,9 +135,10 @@ public class DatosFragment extends Fragment {
         dataAdapter2.setDropDownViewResource(R.layout.spinners);
 
         // Coloco la data en el spinner deseado
-        spinner_etnia.setAdapter(dataAdapter2);
+        sp_origen.setAdapter(dataAdapter2);
 
-        radioSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        //Obtengo el id del radio button que ha sido seleccionado en el radio group.
+        rg_sexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 View radioButton = radioGroup.findViewById(i);
@@ -226,7 +220,7 @@ public class DatosFragment extends Fragment {
                 //Rellenamos el hash con los datos obtenidos de los componentes.
                 setearHash();
                 //Llamamos al interface.
-                interface_Datos.onChangeTab(datos_inf_gen);
+                interface_Datos.onChangeTabDatos(datos_inf_gen);
             }
     }
 
@@ -265,7 +259,7 @@ public class DatosFragment extends Fragment {
 
         datos_inf_gen.clear();
 
-        datos_inf_gen.put("hashmap","datos_personales");
+        datos_inf_gen.put("hashmap","personales");
 
         //Colectamos los datos de nombres.
         data_nombres = et_nombres.getText().toString();

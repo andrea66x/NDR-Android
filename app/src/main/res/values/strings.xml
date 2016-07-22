@@ -82,5 +82,26 @@
         <item>Blanca</item>
     </string-array>
 
+    <string-array name="opcionesOcupacion">
+        <item>Jubilado</item>
+        <item>No Trabaja</item>
+        <item>Estudia</item>
+        <item>Ama de Casa</item>
+        <item>Empleado</item>
+        <item>Cuenta Propia</item>
+    </string-array>
+
+    <string-array name="opcionesEstudios">
+        <item>Analfabeto</item>
+        <item>Primarios Completos</item>
+        <item>Primarios Incompletos</item>
+        <item>Secundarios Completos</item>
+        <item>Secundarios Incompletos</item>
+        <item>Terciarios Completos</item>
+        <item>Terciarios Incompletos</item>
+        <item>Universitarios Completos</item>
+        <item>Universitarios Incompletos</item>
+    </string-array>
+
 
 </resources>

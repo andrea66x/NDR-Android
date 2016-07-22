@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_gravity="center"
-                    android:id="@+id/radioSex">
+                    android:id="@+id/rg_sexo">
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
