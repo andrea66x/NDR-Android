@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fiec.ndr.InformacionGeneral$SaludFragment">
+    tools:context="fiec.ndr.inf_general.SaludFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,20 +35,19 @@
                     android:orientation="horizontal"
                     android:layout_gravity="center"
                     android:id="@+id/rg_seguro">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_seguro_si"
-                        android:checked="false"
-                        android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="NO"
                         android:id="@+id/datos_seguro_no"
-                        android:checked="false"
+                        android:paddingRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SI"
+                        android:id="@+id/datos_seguro_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -104,17 +103,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_chequeo_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_chequeo_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_chequeo_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_chequeo_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -128,15 +125,8 @@
                 android:paddingBottom="@dimen/dato_marginv"
                 android:layout_marginTop="@dimen/dato_marginv"
                 android:visibility="gone"
-                android:id="@+id/lyt_chequeo">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/txtV_veces_chequeo"
-                    style="@style/lblTextStyle"
-                    android:text="Frecuencia"
-                    android:gravity="top|start"
-                    android:layout_weight="1" />
+                android:id="@+id/lyt_chequeo"
+                android:gravity="center">
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -149,14 +139,14 @@
                     android:background="@drawable/txtbox"
                     android:textAlignment="center"
                     android:textStyle="bold"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:id="@+id/txtV_meses_chequeo"
                     style="@style/lblTextStyle"
-                    android:text="Mes"
-                    android:gravity="top|start"
+                    android:text="veces cada mes"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp" />
 
@@ -171,7 +161,8 @@
                     android:background="@drawable/txtbox"
                     android:textAlignment="center"
                     android:textStyle="bold"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp" />
 
             </LinearLayout>
 
@@ -196,23 +187,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_gravity="center"
-                    android:id="@+id/rg_tmp_diabetes">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_diabetes_si"
-                        android:checked="false"
-                        android:paddingRight="10dp" />
-
+                    android:id="@+id/rg_diabetes">
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="NO"
                         android:id="@+id/datos_diabetes_no"
-                        android:checked="false"
+                        android:paddingRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SI"
+                        android:id="@+id/datos_diabetes_si"
                         android:paddingRight="10dp"
-                        android:layout_marginLeft="30dp" />
+                        android:layout_marginLeft="30dp"
+                        android:checked="false" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -270,17 +260,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_presion_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_presion_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_presion_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_presion_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -311,17 +299,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_renal_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_renal_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_renal_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_renal_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -377,17 +363,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_enfermedad_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_enfermedad_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_enfermedad_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_enfermedad_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
