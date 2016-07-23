@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fiec.ndr.InformacionGeneral$MedicamentosFragment">
+    tools:context="fiec.ndr.inf_general.MedicamentosFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -125,6 +125,86 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv"
+                android:id="@+id/lyt_razones_med"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/lblTextStyle"
+                    android:id="@+id/textView6"
+                    android:text="¿Por qué no toma su medicación?"
+                    android:gravity="top|start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="left"
+                        android:padding="5dp">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Desconfianza"
+                            android:id="@+id/chk_razon_1"
+                            android:checked="false"
+                            android:layout_gravity="left" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Factores Economicos"
+                            android:id="@+id/chk_razon_2"
+                            android:checked="false"
+                            android:layout_gravity="left" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:padding="5dp">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Falta de Conocimiento"
+                            android:id="@+id/chk_razon_3"
+                            android:checked="false"
+                            android:layout_gravity="left" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Difícil acceso al tratam."
+                            android:id="@+id/chk_razon_4"
+                            android:checked="false"
+                            android:layout_gravity="left" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -335,34 +415,37 @@
                 <TextView
                     android:id="@+id/txtV_medicinas_presion_otros"
                     style="@style/lblTextStyle"
-                    android:text="Seleccione uno de los siguientes medicamentos:"
+                    android:text="Seleccione si toma uno de los siguientes medicamentos:"
                     android:gravity="top|start" />
 
-                <RelativeLayout
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/spinerbox"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center">
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="10dp">
 
-                    <Spinner
-                        android:id="@+id/datos_medicinas_presion_otros"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:background="@android:color/transparent"
-                        android:spinnerMode="dialog"
-                        android:textAlignment="center"/>
-
-                    <ImageView
+                    <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_gravity="center"
-                        android:src="@mipmap/drop" />
+                        android:text="IBERSATAN"
+                        android:id="@+id/chk_med_1"
+                        android:checked="false" />
 
-                </RelativeLayout>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ENALAPRIL"
+                        android:id="@+id/chk_med_2"
+                        android:checked="false" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CAPTOPRIL"
+                        android:id="@+id/chk_med_3"
+                        android:checked="false" />
+                </LinearLayout>
 
             </LinearLayout>
 
