@@ -137,9 +137,9 @@ public class MedicamentosFragment extends Fragment {
                     default:
                         break;
                 }
-                if(check1&&check2)
+                if(!(check1||check2))
                     lyt_razones_med.setVisibility(View.VISIBLE);
-                else if(!check1&&check2){
+                else {
                     lyt_razones_med.setVisibility(View.GONE);
                     chk_razon_1.setChecked(false);
                     chk_razon_2.setChecked(false);
@@ -176,9 +176,9 @@ public class MedicamentosFragment extends Fragment {
                         break;
                 }
 
-                if(check1&&check2)
+                if(!(check1||check2))
                     lyt_razones_med.setVisibility(View.VISIBLE);
-                else if(!check1&&check2) {
+                else {
                     lyt_razones_med.setVisibility(View.GONE);
                     chk_razon_1.setChecked(false);
                     chk_razon_2.setChecked(false);
@@ -263,4 +263,197 @@ public class MedicamentosFragment extends Fragment {
 
         return rootView;
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////
+    /////////////////// FIN - INICIALIZAR COMPONENTES ///////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////
+
+
+    /////////////////////////////////////////////////////////////////////////////////////
+    /////////////////// INICIO - METODOS AUXILIARES /////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        // Nos aseguramos que el tab sea visible.
+        if (this.isVisible())
+            //Comprobamos si el fragment ya no es visible para el usuario.
+            if (!isVisibleToUser) {
+                //Rellenamos el hash con los datos obtenidos de los componentes.
+                setearHash();
+                //Llamamos al interface.
+                interface_Medicamentos.onChangeTabMedicamentos(datos_medicamentos);
+            }
+    }
+
+    public void setearHash(){
+
+        datos_medicamentos.clear();
+
+        datos_medicamentos.put("hashmap","medicamentos");
+
+        //Colectamos los datos de si toma insulina y lo recolectamos.
+        if (data_insulina != null && !data_insulina.isEmpty()){
+            if(data_insulina.equals("0"))
+                datos_medicamentos.put("insulina", data_insulina);
+            else if(data_insulina.equals("1"))
+                datos_medicamentos.put("insulina", data_insulina);
+            else
+                datos_medicamentos.put("insulina", "-1");
+        }
+        else
+            datos_medicamentos.put("insulina", "-1");
+
+        //Colectamos los datos de si toma hipoglucemias y si la toma lo recolectamos.
+        if (data_hipoglucemias != null && !data_hipoglucemias.isEmpty()){
+            if(data_hipoglucemias.equals("0")) {
+                datos_medicamentos.put("hipoglucemias", data_hipoglucemias);
+                datos_medicamentos.put("det_hipoglucemias", "");
+            }
+            else if(data_hipoglucemias.equals("1")) {
+                datos_medicamentos.put("hipoglucemias", data_hipoglucemias);
+                det_hipoglucemias = et_hipoglucemias.getText().toString();
+                datos_medicamentos.put("det_hipoglucemias", det_hipoglucemias);
+            }
+            else{
+                datos_medicamentos.put("hipoglucemias", "-1");
+                datos_medicamentos.put("det_hipoglucemias", "");
+            }
+        }
+        else {
+            datos_medicamentos.put("hipoglucemias", "-1");
+            datos_medicamentos.put("det_hipoglucemias", "");
+        }
+
+        //Colectamos los datos de por que no toma medicamentos, si tiene diabetes.
+        if (data_hipoglucemias != null && !data_hipoglucemias.isEmpty()
+                && data_insulina!= null && !data_insulina.isEmpty()){
+            if(data_hipoglucemias.equals("0") && data_insulina.equals("0")
+                    && lyt_razones_med.getVisibility() == View.VISIBLE) {
+
+                if(chk_razon_1.isChecked())
+                    data_razon_1 = "1";
+                else
+                    data_razon_1 = "0";
+
+                if(chk_razon_2.isChecked())
+                    data_razon_2 = "1";
+                else
+                    data_razon_2 = "0";
+
+                if(chk_razon_3.isChecked())
+                    data_razon_3 = "1";
+                else
+                    data_razon_3 = "0";
+
+                if(chk_razon_4.isChecked())
+                    data_razon_4 = "1";
+                else
+                    data_razon_4 = "0";
+
+                datos_medicamentos.put("razon_1", data_razon_1 );
+                datos_medicamentos.put("razon_2", data_razon_2);
+                datos_medicamentos.put("razon_3", data_razon_3);
+                datos_medicamentos.put("razon_4", data_razon_4);
+            }
+            else{
+                datos_medicamentos.put("razon_1", "0" );
+                datos_medicamentos.put("razon_2", "0");
+                datos_medicamentos.put("razon_3", "0");
+                datos_medicamentos.put("razon_4", "0");
+            }
+        }
+        else {
+            datos_medicamentos.put("razon_1", "0" );
+            datos_medicamentos.put("razon_2", "0");
+            datos_medicamentos.put("razon_3", "0");
+            datos_medicamentos.put("razon_4", "0");
+        }
+
+        //Colectamos los datos de si toma medicinas para la presion y si la toma lo recolectamos.
+        if (data_medicina_presion != null && !data_medicina_presion.isEmpty()){
+            if(data_medicina_presion.equals("0")) {
+                datos_medicamentos.put("medicina_presion", data_medicina_presion);
+                datos_medicamentos.put("det_medicina_presion", "");
+            }
+            else if(data_medicina_presion.equals("1")) {
+                datos_medicamentos.put("medicina_presion", data_medicina_presion);
+                det_medicina_presion = et_medicina_presion.getText().toString();
+                datos_medicamentos.put("det_medicina_presion", det_medicina_presion);
+            }
+            else{
+                datos_medicamentos.put("medicina_presion", "-1");
+                datos_medicamentos.put("det_medicina_presion", "");
+            }
+        }
+        else {
+            datos_medicamentos.put("medicina_presion", "-1");
+            datos_medicamentos.put("det_medicina_presion", "");
+        }
+
+        //Colectamos los datos de si toma analgesicos y si la toma lo recolectamos.
+        if (data_analgesicos != null && !data_analgesicos.isEmpty()){
+            if(data_analgesicos.equals("0")) {
+                datos_medicamentos.put("analgesicos", data_analgesicos);
+                datos_medicamentos.put("det_analgesicos", "");
+            }
+            else if(data_analgesicos.equals("1")) {
+                datos_medicamentos.put("analgesicos", data_analgesicos);
+                det_analgesicos = et_analgesicos.getText().toString();
+                datos_medicamentos.put("det_analgesicos", det_analgesicos);
+            }
+            else{
+                datos_medicamentos.put("analgesicos", "-1");
+                datos_medicamentos.put("det_analgesicos", "");
+            }
+        }
+        else {
+            datos_medicamentos.put("analgesicos", "-1");
+            datos_medicamentos.put("det_analgesicos", "");
+        }
+
+        //Colectamos los datos de si toma otros medicamentos y si los toma los recolectamos.
+        if (data_medicinas_otros != null && !data_medicinas_otros.isEmpty()){
+            if(data_medicinas_otros.equals("0")) {
+                datos_medicamentos.put("medicinas_otros", data_medicinas_otros);
+                datos_medicamentos.put("det_medicinas_otros", "");
+            }
+            else if(data_medicinas_otros.equals("1")) {
+                datos_medicamentos.put("medicinas_otros", data_medicinas_otros);
+                det_medicinas_otros = et_medicinas_otros.getText().toString();
+                datos_medicamentos.put("det_medicinas_otros", det_medicinas_otros);
+            }
+            else{
+                datos_medicamentos.put("medicinas_otros", "-1");
+                datos_medicamentos.put("det_medicinas_otros", "");
+            }
+        }
+        else {
+            datos_medicamentos.put("medicinas_otros", "-1");
+            datos_medicamentos.put("det_medicinas_otros", "");
+        }
+
+        //Colectamos los datos de cual de los medicamentos especiales toma.
+        if(chk_med_1.isChecked())
+            data_med_1 = "1";
+        else
+            data_med_1 = "0";
+
+        if(chk_med_2.isChecked())
+            data_med_2 = "1";
+        else
+            data_med_2 = "0";
+
+        if(chk_med_3.isChecked())
+            data_med_3 = "1";
+        else
+            data_med_3 = "0";
+
+
+
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////// FIN - METODOS AUXILIARES /////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////
 }
