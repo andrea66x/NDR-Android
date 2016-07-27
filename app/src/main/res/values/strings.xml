@@ -103,5 +103,12 @@
         <item>Universitarios Incompletos</item>
     </string-array>
 
+    <string-array name="opcionesActividadFisica">
+        <item>No hago actividad física</item>
+        <item>Solo hago ejercicios en el tiempo libre</item>
+        <item>Hago ejercicios mas de 3 veces por semana</item>
+        <item>Hago ejercicios todos los dias</item>
+    </string-array>
+
 
 </resources>

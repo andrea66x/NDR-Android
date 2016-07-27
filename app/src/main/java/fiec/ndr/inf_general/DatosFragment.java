@@ -30,7 +30,7 @@ public class DatosFragment extends Fragment {
     static ImageButton btn_calendario;
     static EditText et_nombres, et_apellidos, et_telefono,et_edad, et_dia, et_mes, et_anio;
     static RadioGroup rg_sexo;
-    static Spinner sp_EstCivil,sp_origen;
+    static Spinner sp_EstCivil, sp_origen;
 
     private GregorianCalendar cal;
     private String data_nombres, data_apellidos, data_fecha_nac, data_etnia, data_estado_civil, data_edad, data_sexo, data_telefono;
@@ -316,7 +316,7 @@ public class DatosFragment extends Fragment {
         if (data_estado_civil != null && !data_estado_civil.isEmpty())
             datos_inf_gen.put("estado_civil", data_estado_civil);
         else
-            datos_inf_gen.put("telefono", "");
+            datos_inf_gen.put("estado_civil", "");
 
         //Colectamos los datos de la etnia.
         data_etnia = sp_origen.getSelectedItem().toString();

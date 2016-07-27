@@ -1,6 +1,7 @@
 package fiec.ndr.inf_general;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,80 +26,96 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fiec.ndr.R;
 
 public class HabitosFragment extends Fragment {
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
-    static Button btn_guardar;
-    static Button btn_leer;
-    static TextView tv;
-    static EditText et1, et2, et3;
-    public HabitosFragment() {
+    static LinearLayout lyt_tabaco, lyt_alcohol,lyt_otros;
+    static RadioGroup rg_tabaco, rg_alcohol, rg_otros;
+    static EditText et_frc_tabaco, et_frc_alcohol, et_frc_otros;
+    static Spinner sp_ejercicios;
+
+    private String data_tabaco, data_alcohol, data_otros, data_ejercicios;
+    private String det_frc_tabaco, det_frc_alcohol, det_frc_otros;
+
+    private Map<String, String> datos_habitos = new HashMap<String, String>();
+
+    ///////////////////////////////////////////////////////////////////////////
+    /////////////////// INICIO - INTERFACES ///////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+
+
+    changeTabHabitos interface_Habitos;
+
+    public interface changeTabHabitos {
+        void onChangeTabHabitos(Map<String, String> datos_habitos);
     }
 
-    public static HabitosFragment newInstance(int sectionNumber) {
-        HabitosFragment fragment = new HabitosFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // Esto me asegura que el activity que llama a la interfaz
+        // la haya implementado, sino lanza una excepcion.
+        try {
+            interface_Habitos = (changeTabHabitos) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " Error: Se debe implementar la interfaz changeTabAntecedentes");
+        }
     }
+
+    @Override
+    public void onDetach() {
+        interface_Habitos = null; // previene el "leaking"
+        super.onDetach();
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    ///////////////////FIN -- INTERFACES ///////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
+
+    /*
+        //Este metodo de instanciar el fragment, sirve para mantener variables
+        //cuando se recree, evitando que se llame al constructor vacio.
+        public static HabitosFragment newInstance(int sectionNumber) {
+            HabitosFragment fragment = new HabitosFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+    */
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////// INICIO - INICIALIZAR COMPONENTES ///////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_habitos, container, false);
-        tv = (TextView) rootView.findViewById(R.id.salidaJson);
-        btn_guardar = (Button) rootView.findViewById(R.id.btn_GuardarHb);
-        /*btn_guardar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                //convertToJson();
-                String texto = convertToJson();
-                try {
-                    FileOutputStream fileOutputStream = v.getContext().openFileOutput("mi_archivo.txt", MODE_PRIVATE);
-                    fileOutputStream.write(texto.getBytes());
-                    Toast.makeText(v.getContext(),"Archivo guardado correctamente",Toast.LENGTH_LONG).show();
-                    fileOutputStream.close();
-                }catch (FileNotFoundException e){
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                //Toast.makeText(v.getContext(),convertToJson(),Toast.LENGTH_LONG).show();
-            }
-        });
 
-        btn_leer = (Button) rootView.findViewById(R.id.btn_LeerHb);
-        btn_leer.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                try {
-                    FileInputStream fileInputStream = v.getContext().openFileInput("mi_archivo.txt");
-                    InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    StringBuffer stringBuffer = new StringBuffer();
-                    String lines;
-                    while((lines = bufferedReader.readLine()) != null){
-                        stringBuffer.append(lines+"\n");
-                    }
-                    Toast.makeText(v.getContext(),stringBuffer.toString(),Toast.LENGTH_LONG).show();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });*/
 
-        final LinearLayout lyt_tabaco = (LinearLayout) rootView.findViewById(R.id.lyt_tabaco);
-        final LinearLayout lyt_alcohol = (LinearLayout) rootView.findViewById(R.id.lyt_alcohol);
-        final LinearLayout lyt_otros = (LinearLayout) rootView.findViewById(R.id.lyt_otros);
+        lyt_tabaco = (LinearLayout) rootView.findViewById(R.id.lyt_tabaco);
+        lyt_alcohol = (LinearLayout) rootView.findViewById(R.id.lyt_alcohol);
+        lyt_otros = (LinearLayout) rootView.findViewById(R.id.lyt_otros);
 
-        RadioGroup rg_tabaco = (RadioGroup) rootView.findViewById(R.id.rg_tabaco);
+        rg_tabaco = (RadioGroup) rootView.findViewById(R.id.rg_tabaco);
+        rg_alcohol = (RadioGroup) rootView.findViewById(R.id.rg_alcohol);
+        rg_otros = (RadioGroup) rootView.findViewById(R.id.rg_otros);
+
+        et_frc_alcohol = (EditText) rootView.findViewById(R.id.datos_frc_alcohol);
+        et_frc_tabaco = (EditText) rootView.findViewById(R.id.datos_frc_tabaco);
+        et_frc_otros = (EditText) rootView.findViewById(R.id.datos_frc_otros);
+
+        sp_ejercicios = (Spinner) rootView.findViewById(R.id.sp_ejercicios);
+
         rg_tabaco.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -108,9 +125,13 @@ public class HabitosFragment extends Fragment {
                 {
                     case R.id.datos_tabaco_si:
                         lyt_tabaco.setVisibility(View.VISIBLE);
+                        data_tabaco = "1";
                         break;
                     case R.id.datos_tabaco_no:
                         lyt_tabaco.setVisibility(View.GONE);
+                        data_tabaco = "0";
+                        et_frc_tabaco.setText("");
+                        det_frc_alcohol = "";
                         break;
                     default:
                         break;
@@ -118,7 +139,6 @@ public class HabitosFragment extends Fragment {
             }
         });
 
-        RadioGroup rg_alcohol = (RadioGroup) rootView.findViewById(R.id.rg_alcohol);
         rg_alcohol.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -128,9 +148,13 @@ public class HabitosFragment extends Fragment {
                 {
                     case R.id.datos_alcohol_si:
                         lyt_alcohol.setVisibility(View.VISIBLE);
+                        data_alcohol = "1";
                         break;
                     case R.id.datos_alcohol_no:
                         lyt_alcohol.setVisibility(View.GONE);
+                        data_alcohol = "0";
+                        et_frc_alcohol.setText("");
+                        det_frc_alcohol = "";
                         break;
                     default:
                         break;
@@ -138,7 +162,6 @@ public class HabitosFragment extends Fragment {
             }
         });
 
-        RadioGroup rg_otros = (RadioGroup) rootView.findViewById(R.id.rg_otros);
         rg_otros.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -148,9 +171,13 @@ public class HabitosFragment extends Fragment {
                 {
                     case R.id.datos_otros_si:
                         lyt_otros.setVisibility(View.VISIBLE);
+                        data_otros = "1";
                         break;
                     case R.id.datos_otros_no:
                         lyt_otros.setVisibility(View.GONE);
+                        data_otros = "0";
+                        et_frc_otros.setText("");
+                        det_frc_otros = "";
                         break;
                     default:
                         break;
@@ -158,39 +185,118 @@ public class HabitosFragment extends Fragment {
             }
         });
 
-        Spinner spinner_act_fisica = (Spinner) rootView.findViewById(R.id.datos_ejercicios);
-        List<String> act_fisica = new ArrayList<>();
-        act_fisica.add("No hago actividad física");
-        act_fisica.add("Solo hago ejercicios en el tiempo libre");
-        act_fisica.add("Hago ejercicios mas de 3 veces por semana");
-        act_fisica.add("Hago ejercicios todos los dias");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(rootView.getContext(), R.layout.spinners, act_fisica);
+        // Paso el array de las opciones y el aspecto que tendra la caja selectora.
+        ArrayAdapter<CharSequence> dataAdapter = ArrayAdapter.createFromResource(rootView.getContext(),
+                R.array.opcionesActividadFisica, R.layout.spinners);
+
+        // Paso el formato que tendra las opciones al mostrar el dialog spinner.
         dataAdapter.setDropDownViewResource(R.layout.spinners);
-        spinner_act_fisica.setAdapter(dataAdapter);
+
+        sp_ejercicios.setAdapter(dataAdapter);
 
         return rootView;
     }
-/*
-    public String convertToJson(){
-        JSONObject miJson = new JSONObject();
-        try{
-            miJson.put("codigo",miFormulario.getCodigo());
-            miJson.put("tipo","datos personales");
-            miJson.put("nombres",miFormulario.getNombres());
-            miJson.put("apellidos",miFormulario.getApellidos());
-            miJson.put("sexo",miFormulario.getSexo());
-            miJson.put("edad",miFormulario.getEdad());
-            miJson.put("fec_nac",miFormulario.getFec_nac());
-            miJson.put("telefono",miFormulario.getTelefono());
-            miJson.put("est_civil",miFormulario.getEst_civil());
-            miJson.put("origen",miFormulario.getOrigen());
+    /////////////////////////////////////////////////////////////////////////////////////
+    /////////////////// FIN - INICIALIZAR COMPONENTES ///////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////
 
-        } catch (JSONException e){
-            e.printStackTrace();
+
+    /////////////////////////////////////////////////////////////////////////////////////
+    /////////////////// INICIO - METODOS AUXILIARES /////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        // Nos aseguramos que el tab sea visible.
+        if (this.isVisible())
+            //Comprobamos si el fragment ya no es visible para el usuario.
+            if (!isVisibleToUser) {
+                //Rellenamos el hash con los datos obtenidos de los componentes.
+                setearHash();
+                //Llamamos al interface.
+                interface_Habitos.onChangeTabHabitos(datos_habitos);
+            }
+    }
+
+    public void setearHash(){
+
+        datos_habitos.clear();
+
+        datos_habitos.put("hashmap","habitos");
+
+        //Colectamos los datos de si fuma y su frecuencia.
+        if (data_tabaco != null && !data_tabaco.isEmpty()){
+            if(data_tabaco.equals("0")) {
+                datos_habitos.put("tabaco", data_tabaco);
+                datos_habitos.put("det_frc_tabaco", "");
+            }
+            else if(data_tabaco.equals("1")) {
+                datos_habitos.put("tabaco", data_tabaco);
+                det_frc_tabaco = et_frc_tabaco.getText().toString();
+                datos_habitos.put("det_frc_tabaco", det_frc_tabaco);
+            }
+            else{
+                datos_habitos.put("tabaco", "-1");
+                datos_habitos.put("det_frc_tabaco", "");
+            }
+        }
+        else {
+            datos_habitos.put("tabaco", "-1");
+            datos_habitos.put("det_frc_tabaco", "");
         }
 
-        String json = miJson.toString();
-        return json;
-        //tv.setText(json);
-    }*/
+        //Colectamos los datos de si toma y su frecuencia.
+        if (data_alcohol != null && !data_alcohol.isEmpty()){
+            if(data_alcohol.equals("0")) {
+                datos_habitos.put("alcohol", data_alcohol);
+                datos_habitos.put("det_frc_alcohol", "");
+            }
+            else if(data_alcohol.equals("1")) {
+                datos_habitos.put("alcohol", data_tabaco);
+                det_frc_alcohol = et_frc_alcohol.getText().toString();
+                datos_habitos.put("det_frc_alcohol", det_frc_alcohol);
+            }
+            else{
+                datos_habitos.put("alcohol", "-1");
+                datos_habitos.put("det_frc_alcohol", "");
+            }
+        }
+        else {
+            datos_habitos.put("alcohol", "-1");
+            datos_habitos.put("det_frc_alcohol", "");
+        }
+
+        //Colectamos los datos de si tiene otro vicio y cual es.
+        if (data_otros != null && !data_otros.isEmpty()){
+            if(data_otros.equals("0")) {
+                datos_habitos.put("otros", data_otros);
+                datos_habitos.put("det_frc_otros", "");
+            }
+            else if(data_otros.equals("1")) {
+                datos_habitos.put("otros", data_tabaco);
+                det_frc_otros = et_frc_otros.getText().toString();
+                datos_habitos.put("det_frc_otros", det_frc_otros);
+            }
+            else{
+                datos_habitos.put("otros", "-1");
+                datos_habitos.put("det_frc_otros", "");
+            }
+        }
+        else {
+            datos_habitos.put("otros", "-1");
+            datos_habitos.put("det_frc_otros", "");
+        }
+
+        //Colectamos los datos de la actividad fisica.
+        data_ejercicios = sp_ejercicios.getSelectedItem().toString();
+        if (data_ejercicios != null && !data_ejercicios.isEmpty())
+            datos_habitos.put("ejercicios", data_ejercicios);
+        else
+            datos_habitos.put("ejercicios", "");
+
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////// FIN - METODOS AUXILIARES /////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////
 }

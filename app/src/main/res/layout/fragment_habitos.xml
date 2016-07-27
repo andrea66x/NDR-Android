@@ -212,7 +212,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:id="@+id/datos_seguro_medico"
+                    android:id="@+id/datos_frc_otros"
                     android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:gravity="bottom|start"
                     android:background="@drawable/txtbox"/>
@@ -244,7 +244,7 @@
                     android:layout_gravity="center">
 
                     <Spinner
-                        android:id="@+id/datos_ejercicios"
+                        android:id="@+id/sp_ejercicios"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -264,11 +264,6 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -279,31 +274,6 @@
                 android:textStyle="bold"
                 android:textSize="20sp"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_LeerHb"
-                android:text="Leer archivo"
-                android:background="#2255ff"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/salidaJson"
-                android:text="salidajson"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

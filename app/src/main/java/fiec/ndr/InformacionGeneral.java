@@ -16,6 +16,7 @@ import fiec.ndr.Formularios.Frm_General;
 import fiec.ndr.inf_general.AntecedentesFragment;
 import fiec.ndr.inf_general.DatosFragment;
 import fiec.ndr.inf_general.EconomiaFragment;
+import fiec.ndr.inf_general.HabitosFragment;
 import fiec.ndr.inf_general.MedicamentosFragment;
 import fiec.ndr.inf_general.SaludFragment;
 import fiec.ndr.inf_general.SectionsPagerAdapter;
@@ -23,7 +24,8 @@ import fiec.ndr.inf_general.SectionsPagerAdapter;
 
 public class InformacionGeneral extends AppCompatActivity
         implements DatosFragment.changeTabDatos, EconomiaFragment.changeTabEconomia, SaludFragment.changeTabSalud,
-        MedicamentosFragment.changeTabMedicamentos, AntecedentesFragment.changeTabAntecedentes{
+        MedicamentosFragment.changeTabMedicamentos, AntecedentesFragment.changeTabAntecedentes,
+        HabitosFragment.changeTabHabitos{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;//Adapter para las secciones
     private ViewPager mViewPager;   //Variable para el pageviewer
@@ -106,6 +108,11 @@ public class InformacionGeneral extends AppCompatActivity
     @Override
     public void onChangeTabAntecedentes(Map<String, String> datos_antecedentes) {
         Log.d("INTERFACE CALL","LLame correctamente la funcion desde antecedentes.");
+    }
+
+    @Override
+    public void onChangeTabHabitos(Map<String, String> datos_habitos) {
+        Log.d("INTERFACE CALL","LLame correctamente la funcion desde habitos.");
     }
 }
 
