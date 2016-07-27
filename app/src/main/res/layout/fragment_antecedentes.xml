@@ -323,16 +323,17 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/txtV_ant_fam_renal"
+                    android:id="@+id/txtV_ant_enf_renal"
                     style="@style/lblTextStyle"
-                    android:text="¿Quién?:"
-                    android:gravity="top|start" />
+                    android:text="¿Qué enfermedad?:"
+                    android:gravity="top|start"
+                    android:longClickable="true" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:id="@+id/datos_ant_fam_renal"
+                    android:id="@+id/datos_ant_enf_renal"
                     android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:gravity="bottom|start"
                     android:background="@drawable/txtbox"/>

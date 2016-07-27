@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.Map;
 
 import fiec.ndr.Formularios.Frm_General;
+import fiec.ndr.inf_general.AntecedentesFragment;
 import fiec.ndr.inf_general.DatosFragment;
 import fiec.ndr.inf_general.EconomiaFragment;
 import fiec.ndr.inf_general.MedicamentosFragment;
@@ -22,7 +23,7 @@ import fiec.ndr.inf_general.SectionsPagerAdapter;
 
 public class InformacionGeneral extends AppCompatActivity
         implements DatosFragment.changeTabDatos, EconomiaFragment.changeTabEconomia, SaludFragment.changeTabSalud,
-        MedicamentosFragment.changeTabMedicamentos{
+        MedicamentosFragment.changeTabMedicamentos, AntecedentesFragment.changeTabAntecedentes{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;//Adapter para las secciones
     private ViewPager mViewPager;   //Variable para el pageviewer
@@ -100,6 +101,11 @@ public class InformacionGeneral extends AppCompatActivity
     @Override
     public void onChangeTabMedicamentos(Map<String, String> datos_medicamentos) {
         Log.d("INTERFACE CALL","LLame correctamente la funcion desde medicamentos.");
+    }
+
+    @Override
+    public void onChangeTabAntecedentes(Map<String, String> datos_antecedentes) {
+        Log.d("INTERFACE CALL","LLame correctamente la funcion desde antecedentes.");
     }
 }
 
