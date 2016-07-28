@@ -22,14 +22,29 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //aquí creamos las tablas
+        db.execSQL("create table responsable(id_responsable integer primary key, user text, password text, rol text)");
         db.execSQL("create table localidad(id_localidad integer primary key, nombre text, padre_id integer NULL, FOREIGN KEY (padre_id) REFERENCES localidad (id_localidad))");
+        db.execSQL("create table preparacion(id_preparacion integer primary key, ruta_json text, ruta_img text, fecha text, lugar text, ayunas text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+        db.execSQL("create table inf_general(id_inf_general integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+        db.execSQL("create table medidas(id_medidas integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+        db.execSQL("create table presion_arterial(id_presion integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+        db.execSQL("create table laboratorio(id_laboratorio integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+        db.execSQL("create table formulario(id_formulario integer primary key, codigo text, id_preparacion integer NULL, id_inf_general integer NULL, id_medidas integer NULL, id_presion integer NULL, id_laboratorio integer NULL, FOREIGN KEY(id_preparacion) REFERENCES(preparacion),FOREIGN KEY(id_inf_general) REFERENCES(inf_general),FOREIGN KEY(id_medidas) REFERENCES(medidas),FOREIGN KEY(id_presion) REFERENCES(presion_arterial),FOREIGN KEY(id_laboratorio) REFERENCES(laboratorio))");
+
         insertarLocalidades(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
+        db.execSQL("DROP TABLE IF EXISTS responsable");
         db.execSQL("DROP TABLE IF EXISTS Localidad");
+        db.execSQL("DROP TABLE IF EXISTS preparacion");
+        db.execSQL("DROP TABLE IF EXISTS inf_general");
+        db.execSQL("DROP TABLE IF EXISTS medidas");
+        db.execSQL("DROP TABLE IF EXISTS presion_arterial");
+        db.execSQL("DROP TABLE IF EXISTS laboratorio");
+        db.execSQL("DROP TABLE IF EXISTS formulario");
         // Create tables again
         onCreate(db);
     }
