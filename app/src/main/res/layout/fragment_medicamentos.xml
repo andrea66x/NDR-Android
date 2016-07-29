@@ -38,17 +38,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_insulina_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_insulina_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_insulina_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_insulina_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -80,17 +78,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_hipoglucemias_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_hipoglucemias_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_hipoglucemias_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_hipoglucemias_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -161,7 +157,6 @@
                             android:layout_height="wrap_content"
                             android:text="Desconfianza"
                             android:id="@+id/chk_razon_1"
-                            android:checked="false"
                             android:layout_gravity="left" />
 
                         <CheckBox
@@ -169,7 +164,6 @@
                             android:layout_height="wrap_content"
                             android:text="Factores Economicos"
                             android:id="@+id/chk_razon_2"
-                            android:checked="false"
                             android:layout_gravity="left" />
                     </LinearLayout>
 
@@ -186,7 +180,6 @@
                             android:layout_height="wrap_content"
                             android:text="Falta de Conocimiento"
                             android:id="@+id/chk_razon_3"
-                            android:checked="false"
                             android:layout_gravity="left" />
 
                         <CheckBox
@@ -194,9 +187,9 @@
                             android:layout_height="wrap_content"
                             android:text="Difícil acceso al tratam."
                             android:id="@+id/chk_razon_4"
-                            android:checked="false"
                             android:layout_gravity="left" />
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <View
@@ -227,17 +220,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_medicinas_presion_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_medicinas_presion_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_medicinas_presion_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_medicinas_presion_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -293,17 +284,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_analgesicos_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_analgesicos_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_analgesicos_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_analgesicos_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -359,17 +348,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_medicinas_otros_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_medicinas_otros_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_medicinas_otros_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_medicinas_otros_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -429,22 +416,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="IBERSATAN"
-                        android:id="@+id/chk_med_1"
-                        android:checked="false" />
+                        android:id="@+id/chk_med_1"/>
 
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ENALAPRIL"
-                        android:id="@+id/chk_med_2"
-                        android:checked="false" />
+                        android:id="@+id/chk_med_2"/>
 
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CAPTOPRIL"
-                        android:id="@+id/chk_med_3"
-                        android:checked="false" />
+                        android:id="@+id/chk_med_3"/>
                 </LinearLayout>
 
             </LinearLayout>
