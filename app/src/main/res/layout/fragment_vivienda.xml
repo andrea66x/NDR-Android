@@ -176,7 +176,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:id="@+id/datos_nombres"
+                    android:id="@+id/datos_direccion"
                     android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
                     android:gravity="bottom|start"
                     android:background="@drawable/txtbox"/>
@@ -283,21 +283,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_gravity="center">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_cloaca_si"
-                        android:checked="false"
-                        android:paddingRight="10dp" />
-
+                    android:layout_gravity="center"
+                    android:id="@+id/rg_cloacas">
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="NO"
                         android:id="@+id/datos_cloaca_no"
-                        android:checked="false"
+                        android:paddingRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SI"
+                        android:id="@+id/datos_cloaca_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp"/>
                 </RadioGroup>

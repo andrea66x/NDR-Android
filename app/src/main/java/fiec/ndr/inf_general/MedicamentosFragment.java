@@ -351,23 +351,23 @@ public class MedicamentosFragment extends Fragment {
                 else
                     data_razon_4 = "0";
 
-                datos_medicamentos.put("razon_1", data_razon_1 );
+                datos_medicamentos.put("razon_1", data_razon_1);
                 datos_medicamentos.put("razon_2", data_razon_2);
                 datos_medicamentos.put("razon_3", data_razon_3);
                 datos_medicamentos.put("razon_4", data_razon_4);
             }
             else{
-                datos_medicamentos.put("razon_1", "0" );
-                datos_medicamentos.put("razon_2", "0");
-                datos_medicamentos.put("razon_3", "0");
-                datos_medicamentos.put("razon_4", "0");
+                datos_medicamentos.put("razon_1", "-1" );
+                datos_medicamentos.put("razon_2", "-1");
+                datos_medicamentos.put("razon_3", "-1");
+                datos_medicamentos.put("razon_4", "-1");
             }
         }
         else {
-            datos_medicamentos.put("razon_1", "0" );
-            datos_medicamentos.put("razon_2", "0");
-            datos_medicamentos.put("razon_3", "0");
-            datos_medicamentos.put("razon_4", "0");
+            datos_medicamentos.put("razon_1", "-1" );
+            datos_medicamentos.put("razon_2", "-1");
+            datos_medicamentos.put("razon_3", "-1");
+            datos_medicamentos.put("razon_4", "-1");
         }
 
         //Colectamos los datos de si toma medicinas para la presion y si la toma lo recolectamos.
@@ -448,7 +448,17 @@ public class MedicamentosFragment extends Fragment {
             data_med_3 = "1";
         else
             data_med_3 = "0";
-
+        if (!data_med_1.isEmpty()&&!data_med_2.isEmpty()&&
+                !data_med_3.isEmpty()){
+            datos_medicamentos.put("med_1", data_med_1);
+            datos_medicamentos.put("med_2", data_med_2);
+            datos_medicamentos.put("med_3", data_med_3);
+        }
+        else{
+            datos_medicamentos.put("med_1", "0");
+            datos_medicamentos.put("med_2", "0");
+            datos_medicamentos.put("med_3", "0");
+        }
 
 
     }

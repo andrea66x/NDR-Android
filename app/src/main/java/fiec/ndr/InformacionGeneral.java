@@ -89,36 +89,131 @@ public class InformacionGeneral extends AppCompatActivity
     @Override
     public void onChangeTabDatos(Map<String, String> datos_inf_gen) {
         Log.d("INTERFACE CALL","LLame correctamente la funcion desde datos personales.");
+        /* Descripcion del Hashmap:
+        *  hashmap:         "personales"
+        *  nombres:         Nombres del encuestado.
+        *  apellidos:       Apellidos del encuestado.
+        *  sexo:            0 para masculino, 1 para femenino.
+        *  fecha_nac:       mm-dd-aaaa.
+        *  edad:            Edad en años.
+        *  telefono:        Telefono del encuestado.
+        *  estado_civil:    Estado Civil del encuestado.
+        *  etnia:           Etnia del encuestado.
+        */
     }
 
     @Override
     public void onChangeTabVivienda(Map<String, String> datos_habitos) {
         Log.d("INTERFACE CALL","LLame correctamente la funcion desde Vivienda.");
+        /* Descripcion del Hashmap:
+        *  hashmap:         "vivienda"
+        *  provincia:       Provincia del encuestado.
+        *  canton:          Canton del encuestado.
+        *  vivienda:        Donde se ubica la vivienda del encuestado.
+        *  direccion:       Direccion del encuestado.
+        *  personas:        Numero de personas que viven junto al encuestado.
+        *  agua:            Como llega el agua.
+        *  cloacas:         0 si no tiene, 1 si tiene.
+        */
+
     }
 
     @Override
     public void onChangeTabEconomia(Map<String, String> datos_economia) {
         Log.d("INTERFACE CALL","LLame correctamente la funcion desde economia familiar.");
+        /* Descripcion del Hashmap:
+        *  hashmap:         "economia"
+        *  cbzfam:          Cabeza de familia, 0 si no es, 1 si lo es.
+        *  ingresos:        Ingresos Propios, 0 si no tiene, 1 si tiene.
+        *  llegafin:        Si llega a fin de mes, 0 si no llega, 1 si llega.
+        *  ocupacion:       Ocupacion del encuestado.
+        *  trabajo:         Trabajo del encuestado.
+        *  estudios:        Nivel de estudios del encuestado.
+        */
+
     }
 
     @Override
     public void onChangeTabSalud(Map<String, String> datos_salud) {
         Log.d("INTERFACE CALL","LLame correctamente la funcion desde salud.");
+        /* Descripcion del Hashmap:
+        *  hashmap:         "salud"
+        *  seguro:              Posee seguro, 0 si no posee, 1 si posee.
+        *  det_seguro:          En caso de seleccionar que si, cual seguro. (No Requerido)
+        *  chequeos:            Se realiza chequeos, 0 si no, 1 si los realiza.
+        *  det_vec_chequeo:     Frecuencia de chequeos cada "n" meses. (No Requerido)
+        *  det_mes_chequeo:     "n" meses. (No Requerido)
+        *  diabetes:            Tiene diabetes, 0 si no tiene, 1 si tiene.
+        *  det_tmp_diabetes:    Años que tiene diabetes. (No Requerido)
+        *  presion:             Tiene presion alta, 0 si no tiene, 1 si tiene.
+        *  renal:               Tiene una enfermedad renal, 0 si no, 1 si la tiene.
+        *  det_renal:           En caso de seleccionar que si, cual enfermedad tiene. (No Requerido)
+        *  enfermedad:          Tiene otra enfermedad, 0 si no, 1 si la tiene.
+        *  det_enfermedad:      En caso de seleccionar que si, cual enfermedad tiene. (No Requerido)
+        */
+
     }
 
     @Override
     public void onChangeTabMedicamentos(Map<String, String> datos_medicamentos) {
         Log.d("INTERFACE CALL","LLame correctamente la funcion desde medicamentos.");
+        /* Descripcion del Hashmap:
+        *  hashmap:                 "medicamentos"
+        *  insulina:                Toma insulina, 0 si no toma, 1 si toma.
+        *  hipoglucemias:           Toma hipoglucemias orales, 0 si no toma, 1 si toma.
+        *  det_hipoglucemias:       En caso de seleccionar que si, cual hipoglucemias. (No Requerido)
+        *
+        *                           *Razones que tiene el encuestado si no toma medicinas teniendo diabetes.
+        *  razon_1:                 Desconfianza, 1 si cree que es una razon, 0 si no.
+        *  razon_2:                 Economicos, 1 si cree que es una razon, 0 si no.
+        *  razon_3:                 Conocimiento, 1 si cree que es una razon, 0 si no.
+        *  razon_4:                 Difícil acceso al tratamiento, 1 si cree que es una razon, 0 si no.
+        *
+        *  medicina_presion:        Toma medicinas para la presion, 0 si no toma, 1 si toma.
+        *  det_medicina_presion:    En caso de seleccionar que si, cual medicina. (No Requerido)
+        *  analgesicos:             Toma analgesicos, 0 si no toma, 1 si toma.
+        *  det_analgesicos:         En caso de seleccionar que si, cuales analgesicos. (No Requerido)
+        *  medicinas_otros:         Toma otras medicinas, 0 si no toma, 1 si toma.
+        *  det_medicinas_otros:     En caso de seleccionar que si, cuales otras medicinas. (No Requerido)
+        *
+        *                           *Opciones de medicinas que deseamos saber si toma.
+        *  med_1:                   Iberstan, 0 si no toma, 1 si toma.
+        *  med_2:                   Enalapril, 0 si no toma, 1 si toma.
+        *  med_3:                   Captopril, 0 si no toma, 1 si toma.
+        */
+
     }
 
     @Override
     public void onChangeTabAntecedentes(Map<String, String> datos_antecedentes) {
         Log.d("INTERFACE CALL","LLame correctamente la funcion desde antecedentes.");
+        /* Descripcion del Hashmap:
+        *  hashmap:                 "antecedentes"
+        *  ant_glucosa:             Ha tenido glucosa en la sangre, 0 si no, 1 si ha tenido.
+        *  ant_familia:             Familiares directos tienen diabetes, 0 si no, 1 si tienen.
+        *  ant_parientes:           Familiares indirectos tienen diabetes, 0 si no, 1 si tienen.
+        *  ant_embarazo:            Tuvo diabetes en el emabarazo, 0 si no, 1 si lo tuvo. (No Requerido)
+        *  ant_pso_hijos:           Tuvo hijos  de mas de 4kg al nacer, 0 si no, 1 si lo tuvo. (No Requerido)
+        *  ant_presion:             Tiene familiares con presion alta, 0 si no, 1 si tienen.
+        *  ant_renal:               Tiene familiares con enfermedades renales, 0 si no, 1 si los tienen.
+        *  det_ant_enf_renal:       Cual enfermedad renal.
+        */
+
     }
 
     @Override
     public void onChangeTabHabitos(Map<String, String> datos_habitos) {
         Log.d("INTERFACE CALL","LLame correctamente la funcion desde habitos.");
+         /* Descripcion del Hashmap:
+        *  hashmap:                 "habitos"
+        *  tabaco:                  Es fumador, 0 si no, 1 si.
+        *  det_frc_tabaco:          Cuantas veces al dia fuma.
+        *  alcohol:                 Es bebedor, 0 si no, 1 si.
+        *  det_frc_alcohol:         Cuantas veces a la semana toma.
+        *  otros:                   Tiene otro vicio, 0 si no, 1 si.
+        *  det_frc_otros:           Que otro vicio.
+        *  ejercicios:              Que ejercicios realiza el encuestado.
+        */
     }
 }
 

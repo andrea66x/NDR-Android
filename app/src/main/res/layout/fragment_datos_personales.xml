@@ -100,7 +100,6 @@
                         android:layout_height="wrap_content"
                         android:text="Masculino"
                         android:id="@+id/datos_sexo_m"
-                        android:checked="false"
                         android:paddingRight="10dp" />
 
                     <RadioButton
@@ -108,7 +107,6 @@
                         android:layout_height="wrap_content"
                         android:text="Femenino"
                         android:id="@+id/datos_sexo_f"
-                        android:checked="false"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>

@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import fiec.ndr.R;
@@ -263,17 +264,21 @@ public class DatosFragment extends Fragment {
 
         //Colectamos los datos de nombres.
         data_nombres = et_nombres.getText().toString();
-        if (data_nombres != null && !data_nombres.isEmpty()&& data_nombres.matches(".*\\w.*"))
+        if (data_nombres.matches(".*\\w.*") && !data_nombres.isEmpty())
             datos_inf_gen.put("nombres", data_nombres);
+        else if (data_nombres.isEmpty())
+            datos_inf_gen.put("nombres", "-1");
         else
-            datos_inf_gen.put("nombres", "");
+            datos_inf_gen.put("nombres", "-1");
 
         //Colectamos los datos de apellidos.
         data_apellidos = et_apellidos.getText().toString();
-        if (data_apellidos != null && !data_apellidos.isEmpty()&& data_apellidos.matches(".*\\w.*"))
+        if (!data_apellidos.isEmpty() && data_apellidos.matches(".*\\w.*"))
             datos_inf_gen.put("apellidos", data_apellidos);
+        else if (data_apellidos.isEmpty())
+            datos_inf_gen.put("apellidos", "-1");
         else
-            datos_inf_gen.put("apellidos", "");
+            datos_inf_gen.put("apellidos", "-1");
 
         //Colectamos los datos del sexo.
         if (data_sexo != null && !data_sexo.isEmpty())
@@ -281,49 +286,57 @@ public class DatosFragment extends Fragment {
                 datos_inf_gen.put("sexo", data_sexo);
             else
                 datos_inf_gen.put("sexo", "-1");
-        else
+        else if (data_sexo == null)
             datos_inf_gen.put("sexo", "-1");
 
         //Colectamos los datos de la fecha de nacimiento.
-        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
-        if(cal != null)
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        if(cal != null){
             data_fecha_nac = format1.format(cal.getTime());
-        else
-            data_fecha_nac= "01-01-1900";
-        if (data_fecha_nac != null && !data_fecha_nac.isEmpty())
             datos_inf_gen.put("fecha_nac", data_fecha_nac);
+        }
         else
-            datos_inf_gen.put("fecha_nac", "");
+            datos_inf_gen.put("fecha_nac", "-1");
 
         //Colectamos los datos de la edad.
-        if (data_edad != null && !data_edad.isEmpty())
-            if(Integer.valueOf(data_edad)>=0)
-                datos_inf_gen.put("edad", data_edad);
-            else
-                datos_inf_gen.put("edad", "-1");
+        if (data_edad != null && !data_edad.isEmpty() && Integer.valueOf(data_edad)>=0)
+            datos_inf_gen.put("edad", data_edad);
+        else if (data_edad == null || Integer.valueOf(data_edad)<=0)
+            datos_inf_gen.put("edad", "-1");
         else
             datos_inf_gen.put("edad", "-1");
 
         //Colectamos los datos del telefono.
         data_telefono = et_telefono.getText().toString();
-        if (data_telefono != null && !data_telefono.isEmpty()&& data_telefono.matches(".*\\w.*"))
+        if (!data_telefono.isEmpty() && data_telefono.matches(".*\\w.*"))
             datos_inf_gen.put("telefono", data_telefono);
+        else if (data_telefono.isEmpty())
+            datos_inf_gen.put("telefono", "-1");
         else
-            datos_inf_gen.put("telefono", "");
+            datos_inf_gen.put("telefono", "-1");
 
         //Colectamos los datos del estado civil.
         data_estado_civil = sp_EstCivil.getSelectedItem().toString();
-        if (data_estado_civil != null && !data_estado_civil.isEmpty())
-            datos_inf_gen.put("estado_civil", data_estado_civil);
+        if (!data_estado_civil.equals("Seleccionar")) {
+            if (data_estado_civil != null && !data_estado_civil.isEmpty())
+                datos_inf_gen.put("estado_civil", data_estado_civil);
+            else
+                datos_inf_gen.put("estado_civil", "-1");
+        }
         else
-            datos_inf_gen.put("estado_civil", "");
+            datos_inf_gen.put("estado_civil", "-1");
 
         //Colectamos los datos de la etnia.
         data_etnia = sp_origen.getSelectedItem().toString();
-        if (data_etnia != null && !data_etnia.isEmpty())
-            datos_inf_gen.put("etnia", data_etnia);
+        if (!data_etnia.equals("Seleccionar")) {
+            if (data_etnia != null && !data_etnia.isEmpty())
+                datos_inf_gen.put("etnia", data_etnia);
+            else
+                datos_inf_gen.put("etnia", "-1");
+        }
         else
-            datos_inf_gen.put("etnia", "");
+            datos_inf_gen.put("etnia", "-1");
+
 
         /*
         Forma de transformar de string a date:
