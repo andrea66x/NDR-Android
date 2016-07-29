@@ -143,7 +143,7 @@ public class ViviendaFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 View radioButton = radioGroup.findViewById(i);
-                // 0 Para NO, 1 para femenino.
+                // 0 Para NO, 1 para SI.
                 data_cloacas = String.valueOf(radioGroup.indexOfChild(radioButton));
             }
         });

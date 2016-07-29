@@ -130,7 +130,6 @@
                         android:layout_height="wrap_content"
                         android:text="NO"
                         android:id="@+id/datos_findeMes_no"
-                        android:checked="false"
                         android:paddingRight="10dp" />
 
                     <RadioButton
@@ -138,7 +137,6 @@
                         android:layout_height="wrap_content"
                         android:text="SI"
                         android:id="@+id/datos_findeMes_si"
-                        android:checked="false"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>

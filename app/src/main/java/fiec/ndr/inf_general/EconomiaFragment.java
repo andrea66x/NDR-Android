@@ -179,52 +179,64 @@ public class EconomiaFragment extends Fragment {
         datos_economia.put("hashmap","economia");
 
         //Colectamos los datos de si es cabeza de familia.
-        if (data_cbzfam != null && !data_cbzfam.isEmpty())
-            if(data_cbzfam.equals("0") || data_cbzfam.equals("1"))
+        if (data_cbzfam != null && !data_cbzfam.isEmpty()) {
+            if (data_cbzfam.equals("0") || data_cbzfam.equals("1"))
                 datos_economia.put("cbzfam", data_cbzfam);
             else
                 datos_economia.put("cbzfam", "-1");
+        }
         else
             datos_economia.put("cbzfam", "-1");
 
         //Colectamos los datos de si tiene ingresos propios.
-        if (data_ingresos != null && !data_ingresos.isEmpty())
-            if(data_ingresos.equals("0") || data_ingresos.equals("1"))
+        if (data_ingresos != null && !data_ingresos.isEmpty()) {
+            if (data_ingresos.equals("0") || data_ingresos.equals("1"))
                 datos_economia.put("ingresos", data_ingresos);
             else
                 datos_economia.put("ingresos", "-1");
+        }
         else
             datos_economia.put("ingresos", "-1");
 
         //Colectamos los datos de si llega a fin de mes.
-        if (data_llegafin != null && !data_llegafin.isEmpty())
-            if(data_llegafin.equals("0") || data_llegafin.equals("1"))
+        if (data_llegafin != null && !data_llegafin.isEmpty()) {
+            if (data_llegafin.equals("0") || data_llegafin.equals("1"))
                 datos_economia.put("llegafin", data_llegafin);
             else
                 datos_economia.put("llegafin", "-1");
+        }
         else
             datos_economia.put("llegafin", "-1");
 
         //Colectamos los datos de la ocupacion.
         data_ocupacion = sp_ocupacion.getSelectedItem().toString();
-        if (data_ocupacion != null && !data_ocupacion.isEmpty())
-            datos_economia.put("ocupacion", data_ocupacion);
+        if (!data_ocupacion.equals("Seleccionar")) {
+            if (data_ocupacion != null && !data_ocupacion.isEmpty())
+                datos_economia.put("ocupacion", data_ocupacion);
+            else
+                datos_economia.put("ocupacion", "-1");
+        }
         else
-            datos_economia.put("ocupacion", "");
+            datos_economia.put("ocupacion", "-1");
+
 
         //Colectamos los datos del trabajo.
         data_trabajo = et_trabajo.getText().toString();
-        if (data_trabajo != null && !data_trabajo.isEmpty()&& data_trabajo.matches(".*\\w.*"))
+        if (!data_trabajo.isEmpty()&& data_trabajo.matches(".*\\w.*"))
             datos_economia.put("trabajo", data_trabajo);
         else
-            datos_economia.put("trabajo", "");
+            datos_economia.put("trabajo", "-1");
 
         //Colectamos los datos de los estudios.
         data_estudios = sp_estudios.getSelectedItem().toString();
-        if (data_estudios != null && !data_estudios.isEmpty())
-            datos_economia.put("estudios", data_estudios);
+        if (!data_estudios.equals("Seleccionar")) {
+            if (data_estudios != null && !data_estudios.isEmpty())
+                datos_economia.put("estudios", data_estudios);
+            else
+                datos_economia.put("estudios", "-1");
+        }
         else
-            datos_economia.put("estudios", "");
+            datos_economia.put("estudios", "-1");
 
     }
 
