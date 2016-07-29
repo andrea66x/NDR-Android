@@ -286,8 +286,8 @@ public class SaludFragment extends Fragment {
         if (data_chequeos != null && !data_chequeos.isEmpty()){
             if(data_chequeos.equals("0")) {
                 datos_salud.put("chequeos", data_chequeos);
-                datos_salud.put("det_mes_chequeo", "0");
-                datos_salud.put("det_vec_chequeo", "0");
+                datos_salud.put("det_mes_chequeo", "");
+                datos_salud.put("det_vec_chequeo", "");
             }
             else if(data_chequeos.equals("1")) {
                 datos_salud.put("chequeos", data_chequeos);
@@ -298,21 +298,21 @@ public class SaludFragment extends Fragment {
             }
             else{
                 datos_salud.put("chequeos", "-1");
-                datos_salud.put("det_mes_chequeo", "0");
-                datos_salud.put("det_vec_chequeo", "0");
+                datos_salud.put("det_mes_chequeo", "");
+                datos_salud.put("det_vec_chequeo", "");
             }
         }
         else {
             datos_salud.put("chequeos", "-1");
-            datos_salud.put("det_mes_chequeo", "0");
-            datos_salud.put("det_vec_chequeo", "0");
+            datos_salud.put("det_mes_chequeo", "");
+            datos_salud.put("det_vec_chequeo", "");
         }
 
         //Colectamos los datos de si tiene diabetes y si tiene hace cuanto.
         if (data_diabetes != null && !data_diabetes.isEmpty()){
             if(data_diabetes.equals("0")) {
                 datos_salud.put("diabetes", data_diabetes);
-                datos_salud.put("det_tmp_diabetes", "0");
+                datos_salud.put("det_tmp_diabetes", "");
             }
             else if(data_diabetes.equals("1")) {
                 datos_salud.put("diabetes", data_diabetes);
@@ -321,21 +321,19 @@ public class SaludFragment extends Fragment {
             }
             else{
                 datos_salud.put("diabetes", "-1");
-                datos_salud.put("det_tmp_diabetes", "0");
+                datos_salud.put("det_tmp_diabetes", "");
             }
         }
         else {
             datos_salud.put("diabetes", "-1");
-            datos_salud.put("det_tmp_diabetes", "0");
+            datos_salud.put("det_tmp_diabetes", "");
         }
 
         //Colectamos los datos de si tiene presión alta.
         if (data_presion != null && !data_presion.isEmpty()) {
-            if (data_presion.equals("0")) {
+            if (data_presion.equals("0") ||data_presion.equals("1"))
                 datos_salud.put("presion", data_presion);
-            } else if (data_presion.equals("1")) {
-                datos_salud.put("presion", data_presion);
-            } else
+            else
                 datos_salud.put("presion", "-1");
         }
         else {
