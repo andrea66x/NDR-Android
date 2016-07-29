@@ -290,8 +290,6 @@ public class MedicamentosFragment extends Fragment {
 
         datos_medicamentos.clear();
 
-        datos_medicamentos.put("hashmap","medicamentos");
-
         //Colectamos los datos de si toma insulina y lo recolectamos.
         if (data_insulina != null && !data_insulina.isEmpty()){
             if(data_insulina.equals("0") || data_insulina.equals("1"))
@@ -311,7 +309,10 @@ public class MedicamentosFragment extends Fragment {
             else if(data_hipoglucemias.equals("1")) {
                 datos_medicamentos.put("hipoglucemias", data_hipoglucemias);
                 det_hipoglucemias = et_hipoglucemias.getText().toString();
-                datos_medicamentos.put("det_hipoglucemias", det_hipoglucemias);
+                if(!det_hipoglucemias.isEmpty())
+                    datos_medicamentos.put("det_hipoglucemias", det_hipoglucemias);
+                else
+                    datos_medicamentos.put("det_hipoglucemias", "-1");
             }
             else{
                 datos_medicamentos.put("hipoglucemias", "-1");
@@ -377,7 +378,10 @@ public class MedicamentosFragment extends Fragment {
             else if(data_medicina_presion.equals("1")) {
                 datos_medicamentos.put("medicina_presion", data_medicina_presion);
                 det_medicina_presion = et_medicina_presion.getText().toString();
-                datos_medicamentos.put("det_medicina_presion", det_medicina_presion);
+                if(!det_medicina_presion.isEmpty())
+                    datos_medicamentos.put("det_medicina_presion", det_medicina_presion);
+                else
+                    datos_medicamentos.put("det_medicina_presion", "-1");
             }
             else{
                 datos_medicamentos.put("medicina_presion", "-1");
@@ -398,7 +402,10 @@ public class MedicamentosFragment extends Fragment {
             else if(data_analgesicos.equals("1")) {
                 datos_medicamentos.put("analgesicos", data_analgesicos);
                 det_analgesicos = et_analgesicos.getText().toString();
-                datos_medicamentos.put("det_analgesicos", det_analgesicos);
+                if(!det_analgesicos.isEmpty())
+                    datos_medicamentos.put("det_analgesicos", det_analgesicos);
+                else
+                    datos_medicamentos.put("det_analgesicos", "-1");
             }
             else{
                 datos_medicamentos.put("analgesicos", "-1");
@@ -419,7 +426,11 @@ public class MedicamentosFragment extends Fragment {
             else if(data_medicinas_otros.equals("1")) {
                 datos_medicamentos.put("medicinas_otros", data_medicinas_otros);
                 det_medicinas_otros = et_medicinas_otros.getText().toString();
-                datos_medicamentos.put("det_medicinas_otros", det_medicinas_otros);
+                if(!det_medicinas_otros.isEmpty())
+                    datos_medicamentos.put("det_medicinas_otros", det_medicinas_otros);
+                else
+                    datos_medicamentos.put("det_medicinas_otros", "-1");
+
             }
             else{
                 datos_medicamentos.put("medicinas_otros", "-1");

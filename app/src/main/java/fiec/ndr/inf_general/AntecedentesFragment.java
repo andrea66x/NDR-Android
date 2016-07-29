@@ -209,8 +209,6 @@ public class AntecedentesFragment extends Fragment {
 
         datos_antecedentes.clear();
 
-        datos_antecedentes.put("hashmap","antecedentes");
-
         //Colectamos los datos de si ha tenido glucosa o no.
         if (data_ant_glucosa != null && !data_ant_glucosa.isEmpty()) {
             if (data_ant_glucosa.equals("0") || data_ant_glucosa.equals("1"))
@@ -280,7 +278,10 @@ public class AntecedentesFragment extends Fragment {
             else if(data_ant_renal.equals("1")) {
                 datos_antecedentes.put("ant_renal", data_ant_renal);
                 det_ant_enf_renal = et_ant_enf_renal.getText().toString();
-                datos_antecedentes.put("det_ant_enf_renal", det_ant_enf_renal);
+                if(!det_ant_enf_renal.isEmpty())
+                    datos_antecedentes.put("det_ant_enf_renal", det_ant_enf_renal);
+                else
+                    datos_antecedentes.put("det_ant_enf_renal", "-1");
             }
             else{
                 datos_antecedentes.put("ant_renal", "-1");

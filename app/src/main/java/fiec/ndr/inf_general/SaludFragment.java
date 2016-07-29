@@ -259,8 +259,6 @@ public class SaludFragment extends Fragment {
 
         datos_salud.clear();
 
-        datos_salud.put("hashmap","salud");
-
         //Colectamos los datos de si tiene seguro y si lo tiene lo recolectamos.
         if (data_seguro != null && !data_seguro.isEmpty()){
             if(data_seguro.equals("0")) {
@@ -270,7 +268,10 @@ public class SaludFragment extends Fragment {
             else if(data_seguro.equals("1")) {
                 datos_salud.put("seguro", data_seguro);
                 det_seguro = et_seguro.getText().toString();
-                datos_salud.put("det_seguro", det_seguro);
+                if(!det_seguro.isEmpty())
+                    datos_salud.put("det_seguro", det_seguro);
+                else
+                    datos_salud.put("det_seguro", "-1");
             }
             else{
                 datos_salud.put("seguro", "-1");
@@ -293,8 +294,14 @@ public class SaludFragment extends Fragment {
                 datos_salud.put("chequeos", data_chequeos);
                 det_vec_chequeo = et_vcs_chequeo.getText().toString();
                 det_mes_chequeo = et_mes_chequeo.getText().toString();
-                datos_salud.put("det_mes_chequeo", det_mes_chequeo);
-                datos_salud.put("det_vec_chequeo", det_vec_chequeo);
+                if(!det_mes_chequeo.isEmpty())
+                    datos_salud.put("det_mes_chequeo", det_mes_chequeo);
+                else
+                    datos_salud.put("det_mes_chequeo", "-1");
+                if(!det_vec_chequeo.isEmpty())
+                    datos_salud.put("det_vec_chequeo", det_vec_chequeo);
+                else
+                    datos_salud.put("det_vec_chequeo", "1");
             }
             else{
                 datos_salud.put("chequeos", "-1");
@@ -317,7 +324,10 @@ public class SaludFragment extends Fragment {
             else if(data_diabetes.equals("1")) {
                 datos_salud.put("diabetes", data_diabetes);
                 det_tmp_diabetes = et_tmp_diabetes.getText().toString();
-                datos_salud.put("det_tmp_diabetes", det_tmp_diabetes);
+                if(!det_tmp_diabetes.isEmpty())
+                    datos_salud.put("det_tmp_diabetes", det_tmp_diabetes);
+                else
+                    datos_salud.put("det_tmp_diabetes", "-1");
             }
             else{
                 datos_salud.put("diabetes", "-1");
@@ -349,7 +359,10 @@ public class SaludFragment extends Fragment {
             else if(data_renal.equals("1")) {
                 datos_salud.put("renal", data_renal);
                 det_renal = et_renal.getText().toString();
-                datos_salud.put("det_renal", det_renal);
+                if(!det_renal.isEmpty())
+                    datos_salud.put("det_renal", det_renal);
+                else
+                    datos_salud.put("det_renal", "-1");
             }
             else{
                 datos_salud.put("renal", "-1");
@@ -370,7 +383,10 @@ public class SaludFragment extends Fragment {
             else if(data_enfermedad.equals("1")) {
                 datos_salud.put("enfermedad", data_enfermedad);
                 det_enfermedad = et_enfermedad.getText().toString();
-                datos_salud.put("det_enfermedad", det_enfermedad);
+                if(!det_enfermedad.isEmpty())
+                    datos_salud.put("det_enfermedad", det_enfermedad);
+                else
+                    datos_salud.put("det_enfermedad", "-1");
             }
             else{
                 datos_salud.put("enfermedad", "-1");

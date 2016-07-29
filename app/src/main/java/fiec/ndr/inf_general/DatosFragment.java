@@ -260,8 +260,6 @@ public class DatosFragment extends Fragment {
 
         datos_inf_gen.clear();
 
-        datos_inf_gen.put("hashmap","personales");
-
         //Colectamos los datos de nombres.
         data_nombres = et_nombres.getText().toString();
         if (data_nombres.matches(".*\\w.*") && !data_nombres.isEmpty())

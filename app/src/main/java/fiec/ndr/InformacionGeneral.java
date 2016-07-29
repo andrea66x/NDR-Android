@@ -1,18 +1,38 @@
 package fiec.ndr;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Environment;
+import android.renderscript.ScriptIntrinsicYuvToRGB;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
-import java.util.Map;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import fiec.ndr.Formularios.Frm_General;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Random;
+import java.util.TimeZone;
+
 import fiec.ndr.inf_general.AntecedentesFragment;
 import fiec.ndr.inf_general.DatosFragment;
 import fiec.ndr.inf_general.EconomiaFragment;
@@ -30,8 +50,11 @@ public class InformacionGeneral extends AppCompatActivity
 
     private SectionsPagerAdapter mSectionsPagerAdapter;//Adapter para las secciones
     private ViewPager mViewPager;   //Variable para el pageviewer
-    private static Frm_General miFormulario; //Objeto para guardar la instancia del formulario
-    private static String codigo;   //Variable para guardar el codigo del formulario
+    private String codigo, UUID, hora_encuesta;   //Variable para guardar el codigo del formulario
+
+    private Map<String, String> hm_datos, hm_vivienda, hm_economia, hm_salud, hm_medicamentos, hm_antecedentes, hm_habitos;
+    private boolean validador_json, faltan_campos;
+
 
 
     @Override
@@ -50,9 +73,6 @@ public class InformacionGeneral extends AppCompatActivity
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        // Instanciamos el formulario.
-        miFormulario = new Frm_General();
-
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
@@ -61,15 +81,273 @@ public class InformacionGeneral extends AppCompatActivity
         }
         setTitle("Información General: " + codigo);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setVisibility(0);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "No has completado aun todos los campos.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        validador_json = false;
+
+    }
+
+    public void constructJSON()
+    {
+        JSONArray jarray_datos, jarray_vivienda, jarray_economia, jarray_salud, jarray_medicamentos, jarray_antecedentes, jarray_habitos;
+        JSONObject temp1, temp2, temp3, temp4, temp5, temp6, temp7;
+        jarray_datos = new JSONArray();
+        jarray_vivienda = new JSONArray();
+        jarray_economia = new JSONArray();
+        jarray_salud = new JSONArray();
+        jarray_medicamentos = new JSONArray();
+        jarray_antecedentes = new JSONArray();
+        jarray_habitos = new JSONArray();
+
+        //Obtenemos el UUID del dispositivo desde que ha sido creado el JSON.
+        TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        UUID = tManager.getDeviceId();
+
+        TimeZone.setDefault(TimeZone.getTimeZone("America/Guayaquil"));
+        Calendar calendar = Calendar.getInstance();
+        hora_encuesta = calendar.getTime().toString();
+
+        JSONObject JSON_Formulario = new JSONObject();
+        if(codigo!=null && !codigo.isEmpty()) {
+            if (UUID != null && !UUID.isEmpty()){
+                if (hora_encuesta != null && !hora_encuesta.isEmpty()) {
+                    if (hm_datos!= null) {
+                        temp1 = new JSONObject(hm_datos);
+                        jarray_datos.put(temp1);
+                        if (hm_vivienda!= null) {
+                            temp2 = new JSONObject(hm_vivienda);
+                            jarray_vivienda.put(temp2);
+                            if (hm_economia!= null) {
+                                temp3 = new JSONObject(hm_economia);
+                                jarray_economia.put(temp3);
+                                if (hm_salud!= null) {
+                                    temp4 = new JSONObject(hm_salud);
+                                    jarray_salud.put(temp4);
+                                    if (hm_medicamentos!= null) {
+                                        temp5 = new JSONObject(hm_medicamentos);
+                                        jarray_medicamentos.put(temp5);
+                                        if (hm_antecedentes!= null) {
+                                            temp6 = new JSONObject(hm_antecedentes);
+                                            jarray_antecedentes.put(temp6);
+                                            if (hm_habitos!= null) {
+                                                temp7 = new JSONObject(hm_habitos);
+                                                jarray_habitos.put(temp7);
+                                                validador_json = true;
+                                            }
+                                            else
+                                                validador_json= false;
+                                        }
+                                        else
+                                            validador_json= false;
+                                    }
+                                    else
+                                        validador_json= false;
+                                }
+                                else
+                                    validador_json= false;
+                            }
+                            else
+                                validador_json= false;
+                        }
+                        else
+                            validador_json= false;
+                    }
+                    else
+                        validador_json= false;
+                }
+                else
+                    validador_json= false;
             }
-        });*/
+            else
+                validador_json= false;
+        }
+        else
+            validador_json= false;
+
+        String campos = revisarCampos();
+        if (faltan_campos){
+            if(validador_json){
+                try {
+                    JSON_Formulario.put("id_formulario", codigo);
+                    JSON_Formulario.put("tipo_formulario", "Información General");
+                    JSON_Formulario.put("uuid_creado", UUID);
+                    JSON_Formulario.put("hora_creacion", hora_encuesta);
+                    JSON_Formulario.put("informacion_general", jarray_datos);
+                    JSON_Formulario.put("vivienda", jarray_vivienda);
+                    JSON_Formulario.put("economia_familiar", jarray_economia);
+                    JSON_Formulario.put("salud", jarray_salud);
+                    JSON_Formulario.put("medicamentos", jarray_medicamentos);
+                    JSON_Formulario.put("antecedentes", jarray_antecedentes);
+                    JSON_Formulario.put("habitos", jarray_habitos);
+                    guardarJSON(JSON_Formulario.toString());
+                    Toast.makeText(getApplicationContext(),
+                            "Hemos guardado exitosamente el JSON", Toast.LENGTH_SHORT).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+                Toast.makeText(getApplicationContext(),
+                        "Aun no estamos listos para guardar, revisa nuevamente", Toast.LENGTH_SHORT).show();
+        }
+        else
+            Toast.makeText(getApplicationContext(),
+                    "Faltan los campos: \n" + campos, Toast.LENGTH_LONG).show();
+
+
+
+    }
+
+    public String revisarCampos(){
+        Iterator it;
+        String campos_faltantes = "";
+        String campos_datos = "Datos: ", campos_vivienda = "Vivienda: ";
+        String campos_economia = "Economia Familiar: ", campos_salud = "Salud: ";
+        String campos_medicamentos = "Medicamentos: ", campos_antecedentes="Antecedentes: ", campos_habitos = "Habitos: ";
+        faltan_campos = false;
+
+        it = hm_datos.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            if (pair.getValue().equals("-1")) {
+                campos_datos = campos_datos + pair.getKey().toString() + " - ";
+                faltan_campos = true;
+            }
+        }
+        if (campos_datos.endsWith("- ")) {
+            campos_datos = campos_datos.substring(0, campos_datos.length() - 2);
+        }
+
+        it = hm_vivienda.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            if(pair.getValue().equals("-1")){
+                campos_vivienda =  campos_vivienda + pair.getKey().toString() + " - ";
+                faltan_campos = true;
+            }
+        }
+        if (campos_vivienda.endsWith("- ")) {
+            campos_vivienda = campos_vivienda.substring(0, campos_vivienda.length() - 2);
+        }
+
+        it = hm_economia.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            if (pair.getValue().equals("-1")) {
+                campos_economia = campos_economia + pair.getKey().toString() + " - ";
+                faltan_campos = true;
+            }
+        }
+        if (campos_economia.endsWith("- ")) {
+            campos_economia = campos_economia.substring(0, campos_economia.length() - 2);
+        }
+
+        it = hm_salud.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            if (pair.getValue().equals("-1")) {
+                campos_salud = campos_salud + pair.getKey().toString() + " - ";
+                faltan_campos = true;
+            }
+        }
+        if (campos_salud.endsWith("- ")) {
+            campos_salud = campos_salud.substring(0, campos_salud.length() - 2);
+        }
+
+        it = hm_medicamentos.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            if (pair.getValue().equals("-1")) {
+                campos_medicamentos = campos_medicamentos + pair.getKey().toString() + " - ";
+                faltan_campos = true;
+            }
+        }
+        if (campos_medicamentos.endsWith("- ")) {
+            campos_medicamentos = campos_medicamentos.substring(0, campos_medicamentos.length() - 2);
+        }
+
+        it = hm_antecedentes.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            if (pair.getValue().equals("-1")) {
+                campos_antecedentes = campos_antecedentes + pair.getKey().toString() + " - ";
+                faltan_campos = true;
+            }
+        }
+        if (campos_antecedentes.endsWith("- ")) {
+            campos_antecedentes = campos_antecedentes.substring(0, campos_antecedentes.length() - 2);
+        }
+
+        it = hm_habitos.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            if (pair.getValue().equals("-1")) {
+                campos_habitos = campos_habitos + pair.getKey().toString() + " - ";
+                faltan_campos = true;
+            }
+        }
+        if (campos_habitos.endsWith("- ")) {
+            campos_habitos = campos_habitos.substring(0, campos_habitos.length() - 2);
+        }
+
+
+        if(faltan_campos){
+            if (!campos_datos.endsWith("Datos: ")) {
+                campos_faltantes = campos_faltantes + campos_datos + "\n\n";
+            }
+            if (!campos_vivienda.endsWith("Vivienda: ")) {
+                campos_faltantes = campos_faltantes + campos_vivienda + "\n\n";
+            }
+            if (!campos_economia.endsWith("Economia Familiar: ")) {
+                campos_faltantes = campos_faltantes + campos_economia + "\n\n";
+            }
+            if (!campos_salud.endsWith("Salud: ")) {
+                campos_faltantes = campos_faltantes + campos_salud + "\n\n";
+            }
+            if (!campos_medicamentos.endsWith("Medicamentos: ")) {
+                campos_faltantes = campos_faltantes + campos_medicamentos + "\n\n";
+            }
+            if (!campos_antecedentes.endsWith("Antecedentes: ")) {
+                campos_faltantes = campos_faltantes + campos_antecedentes + "\n\n";
+            }
+            if (!campos_habitos.endsWith("Habitos: ")) {
+                campos_faltantes = campos_faltantes + campos_habitos;
+            }
+
+        }
+        else
+            campos_faltantes = "";
+        return campos_faltantes;
+    }
+
+    private void guardarJSON(String json) {
+
+        String root = Environment.getExternalStorageDirectory().toString();
+        FileOutputStream fos = null;
+        Writer out = null;
+        File myDir = new File(root + "/NDR-TESTING");
+        myDir.mkdirs();
+        String fname = "Formulario_"+ codigo +".json";
+        File file = new File (myDir, fname);
+        if (file.exists ()) file.delete ();
+        try {
+            fos = new FileOutputStream(file);
+            out = new OutputStreamWriter(fos, "UTF-8");
+            out.write(json);
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if(fos!=null){
+                try {
+                    fos.close();
+                } catch (IOException ignored) {}
+            }
+            if(out!= null){
+                try {
+                    out.close();
+                } catch (IOException ignored) {}
+            }
+        }
     }
 
     /*Metodo para prevenir salir del formulario al presionar el boton atras*/
@@ -100,10 +378,13 @@ public class InformacionGeneral extends AppCompatActivity
         *  estado_civil:    Estado Civil del encuestado.
         *  etnia:           Etnia del encuestado.
         */
+        hm_datos = new HashMap<String, String>();
+        hm_datos = datos_inf_gen;
+
     }
 
     @Override
-    public void onChangeTabVivienda(Map<String, String> datos_habitos) {
+    public void onChangeTabVivienda(Map<String, String> datos_vivienda) {
         Log.d("INTERFACE CALL","LLame correctamente la funcion desde Vivienda.");
         /* Descripcion del Hashmap:
         *  hashmap:         "vivienda"
@@ -115,7 +396,8 @@ public class InformacionGeneral extends AppCompatActivity
         *  agua:            Como llega el agua.
         *  cloacas:         0 si no tiene, 1 si tiene.
         */
-
+        hm_vivienda = new HashMap<String, String>();
+        hm_vivienda = datos_vivienda;
     }
 
     @Override
@@ -130,6 +412,8 @@ public class InformacionGeneral extends AppCompatActivity
         *  trabajo:         Trabajo del encuestado.
         *  estudios:        Nivel de estudios del encuestado.
         */
+        hm_economia = new HashMap<String, String>();
+        hm_economia = datos_economia;
 
     }
 
@@ -151,6 +435,8 @@ public class InformacionGeneral extends AppCompatActivity
         *  enfermedad:          Tiene otra enfermedad, 0 si no, 1 si la tiene.
         *  det_enfermedad:      En caso de seleccionar que si, cual enfermedad tiene. (No Requerido)
         */
+        hm_salud = new HashMap<String, String>();
+        hm_salud = datos_salud;
 
     }
 
@@ -181,6 +467,8 @@ public class InformacionGeneral extends AppCompatActivity
         *  med_2:                   Enalapril, 0 si no toma, 1 si toma.
         *  med_3:                   Captopril, 0 si no toma, 1 si toma.
         */
+        hm_medicamentos = new HashMap<String, String>();
+        hm_medicamentos = datos_medicamentos;
 
     }
 
@@ -198,7 +486,8 @@ public class InformacionGeneral extends AppCompatActivity
         *  ant_renal:               Tiene familiares con enfermedades renales, 0 si no, 1 si los tienen.
         *  det_ant_enf_renal:       Cual enfermedad renal.
         */
-
+        hm_antecedentes = new HashMap<String, String>();
+        hm_antecedentes = datos_antecedentes;
     }
 
     @Override
@@ -214,6 +503,9 @@ public class InformacionGeneral extends AppCompatActivity
         *  det_frc_otros:           Que otro vicio.
         *  ejercicios:              Que ejercicios realiza el encuestado.
         */
+        hm_habitos = new HashMap<String, String>();
+        hm_habitos = datos_habitos;
+        constructJSON();
     }
 }
 

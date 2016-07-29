@@ -262,4 +262,33 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GUARDAR"
+            android:id="@+id/btn_guardar"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            style="@style/btn_cod_style"
+            android:background="@drawable/btn_verde"
+            android:layout_margin="10dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCELAR"
+            android:id="@+id/btn_cancelar"
+            style="@style/btn_cod_style"
+            android:background="@drawable/btn_rojo"
+            android:layout_margin="10dp" />
+    </LinearLayout>
+
 </RelativeLayout>

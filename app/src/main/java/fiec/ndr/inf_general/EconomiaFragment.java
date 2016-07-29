@@ -176,8 +176,6 @@ public class EconomiaFragment extends Fragment {
 
         datos_economia.clear();
 
-        datos_economia.put("hashmap","economia");
-
         //Colectamos los datos de si es cabeza de familia.
         if (data_cbzfam != null && !data_cbzfam.isEmpty()) {
             if (data_cbzfam.equals("0") || data_cbzfam.equals("1"))
@@ -244,3 +242,4 @@ public class EconomiaFragment extends Fragment {
     ////////////////////// FIN - METODOS AUXILIARES /////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
 }
+

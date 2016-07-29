@@ -3,6 +3,7 @@ package fiec.ndr.inf_general;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -194,6 +195,18 @@ public class HabitosFragment extends Fragment {
 
         sp_ejercicios.setAdapter(dataAdapter);
 
+        Button guardar = (Button) rootView.findViewById(R.id.btn_guardar);
+        Button cancelar = (Button) rootView.findViewById(R.id.btn_cancelar);
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Rellenamos el hash con los datos obtenidos de los componentes.
+                setearHash();
+                //Llamamos al interface.
+                interface_Habitos.onChangeTabHabitos(datos_habitos);
+            }
+        });
+
         return rootView;
     }
     /////////////////////////////////////////////////////////////////////////////////////
@@ -204,25 +217,10 @@ public class HabitosFragment extends Fragment {
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////// INICIO - METODOS AUXILIARES /////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        // Nos aseguramos que el tab sea visible.
-        if (this.isVisible())
-            //Comprobamos si el fragment ya no es visible para el usuario.
-            if (!isVisibleToUser) {
-                //Rellenamos el hash con los datos obtenidos de los componentes.
-                setearHash();
-                //Llamamos al interface.
-                interface_Habitos.onChangeTabHabitos(datos_habitos);
-            }
-    }
 
     public void setearHash(){
 
         datos_habitos.clear();
-
-        datos_habitos.put("hashmap","habitos");
 
         //Colectamos los datos de si fuma y su frecuencia.
         if (data_tabaco != null && !data_tabaco.isEmpty()){
@@ -233,7 +231,10 @@ public class HabitosFragment extends Fragment {
             else if(data_tabaco.equals("1")) {
                 datos_habitos.put("tabaco", data_tabaco);
                 det_frc_tabaco = et_frc_tabaco.getText().toString();
-                datos_habitos.put("det_frc_tabaco", det_frc_tabaco);
+                if(!det_frc_tabaco.isEmpty())
+                    datos_habitos.put("det_frc_tabaco", det_frc_tabaco);
+                else
+                    datos_habitos.put("det_frc_tabaco", "-1");
             }
             else{
                 datos_habitos.put("tabaco", "-1");
@@ -254,7 +255,11 @@ public class HabitosFragment extends Fragment {
             else if(data_alcohol.equals("1")) {
                 datos_habitos.put("alcohol", data_tabaco);
                 det_frc_alcohol = et_frc_alcohol.getText().toString();
-                datos_habitos.put("det_frc_alcohol", det_frc_alcohol);
+                if(!det_frc_alcohol.isEmpty())
+                    datos_habitos.put("det_frc_alcohol", det_frc_alcohol);
+                else
+                    datos_habitos.put("det_frc_alcohol", "-1");
+
             }
             else{
                 datos_habitos.put("alcohol", "-1");
@@ -275,7 +280,11 @@ public class HabitosFragment extends Fragment {
             else if(data_otros.equals("1")) {
                 datos_habitos.put("otros", data_tabaco);
                 det_frc_otros = et_frc_otros.getText().toString();
-                datos_habitos.put("det_frc_otros", det_frc_otros);
+                if(!det_frc_otros.isEmpty())
+                    datos_habitos.put("det_frc_otros", det_frc_otros);
+                else
+                    datos_habitos.put("det_frc_otros", "-1");
+
             }
             else{
                 datos_habitos.put("otros", "-1");
@@ -289,10 +298,14 @@ public class HabitosFragment extends Fragment {
 
         //Colectamos los datos de la actividad fisica.
         data_ejercicios = sp_ejercicios.getSelectedItem().toString();
-        if (data_ejercicios != null && !data_ejercicios.isEmpty())
-            datos_habitos.put("ejercicios", data_ejercicios);
+        if (!data_ejercicios.equals("Seleccionar")) {
+            if (data_ejercicios != null && !data_ejercicios.isEmpty())
+                datos_habitos.put("ejercicios", data_ejercicios);
+            else
+                datos_habitos.put("ejercicios", "-1");
+        }
         else
-            datos_habitos.put("ejercicios", "");
+            datos_habitos.put("ejercicios", "-1");
 
     }
 

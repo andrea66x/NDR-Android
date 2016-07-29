@@ -172,8 +172,6 @@ public class ViviendaFragment extends Fragment {
 
         datos_vivienda.clear();
 
-        datos_vivienda.put("hashmap","vivienda");
-
         //Colectamos los datos de la provincia.
         data_provincia = sp_provincia.getSelectedItem().toString();
             if (data_provincia != null && !data_provincia.isEmpty())
