@@ -176,63 +176,65 @@ public class ViviendaFragment extends Fragment {
 
         //Colectamos los datos de la provincia.
         data_provincia = sp_provincia.getSelectedItem().toString();
-        if (data_provincia != null && !data_provincia.isEmpty())
-            datos_vivienda.put("provincia", data_provincia);
-        else
-            datos_vivienda.put("provincia", "");
+            if (data_provincia != null && !data_provincia.isEmpty())
+                datos_vivienda.put("provincia", data_provincia);
+            else
+                datos_vivienda.put("provincia", "-1");
 
         //Colectamos los datos del canton.
         data_canton = sp_canton.getSelectedItem().toString();
         if (data_canton != null && !data_canton.isEmpty())
             datos_vivienda.put("canton", data_canton);
         else
-            datos_vivienda.put("canton", "");
+            datos_vivienda.put("canton", "-1");
 
         //Colectamos los datos de la ubicacion de vivienda.
         data_vivienda = sp_vivienda.getSelectedItem().toString();
-        if (data_vivienda != null && !data_vivienda.isEmpty())
-            datos_vivienda.put("vivienda", data_vivienda);
+        if (!data_vivienda.equals("Seleccionar")) {
+            if (data_vivienda != null && !data_vivienda.isEmpty())
+                datos_vivienda.put("vivienda", data_vivienda);
+            else
+                datos_vivienda.put("vivienda", "-1");
+        }
         else
-            datos_vivienda.put("vivienda", "");
+                datos_vivienda.put("vivienda", "-1");
 
 
         //Colectamos los datos de nombres.
         data_direccion = et_direccion.getText().toString();
-        if (!data_direccion.isEmpty()&& data_direccion.matches(".*\\w.*"))
+        if (!data_direccion.isEmpty() && data_direccion.matches(".*\\w.*"))
             datos_vivienda.put("direccion", data_direccion);
         else
-            datos_vivienda.put("direccion", "");
+            datos_vivienda.put("direccion", "-1");
 
         //Colectamos los datos de las personas con las que vive.
         data_personas = et_personas.getText().toString();
-        if (!data_personas.isEmpty())
-            if(Integer.valueOf(data_personas)>=0)
-                datos_vivienda.put("personas", data_personas);
-            else
-                datos_vivienda.put("personas", "-1");
+        if (!data_personas.isEmpty() && Integer.valueOf(data_personas)>=0)
+            datos_vivienda.put("personas", data_personas);
         else
             datos_vivienda.put("personas", "-1");
 
         //Colectamos los datos de como llega el agua.
         data_agua = sp_agua.getSelectedItem().toString();
-        if (data_agua != null && !data_agua.isEmpty())
-            datos_vivienda.put("agua", data_agua);
+        if (!data_agua.equals("Seleccionar")) {
+            if (data_agua != null && !data_agua.isEmpty())
+                datos_vivienda.put("agua", data_agua);
+            else
+                datos_vivienda.put("agua", "-1");
+        }
         else
-            datos_vivienda.put("agua", "");
+            datos_vivienda.put("agua", "-1");
 
 
         //Colectamos los datos de si posee cloacas.
         if (data_cloacas != null && !data_cloacas.isEmpty()) {
-            if (data_cloacas.equals("0")) {
-                datos_vivienda.put("cloacas", data_cloacas);
-            } else if (data_cloacas.equals("1")) {
+            if (data_cloacas.equals("0") ||data_cloacas.equals("1")) {
                 datos_vivienda.put("cloacas", data_cloacas);
             } else
                 datos_vivienda.put("cloacas", "-1");
         }
-        else {
+        else
             datos_vivienda.put("cloacas", "-1");
-        }
 
     }
 }

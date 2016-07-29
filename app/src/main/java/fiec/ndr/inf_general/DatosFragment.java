@@ -266,8 +266,6 @@ public class DatosFragment extends Fragment {
         data_nombres = et_nombres.getText().toString();
         if (data_nombres.matches(".*\\w.*") && !data_nombres.isEmpty())
             datos_inf_gen.put("nombres", data_nombres);
-        else if (data_nombres.isEmpty())
-            datos_inf_gen.put("nombres", "-1");
         else
             datos_inf_gen.put("nombres", "-1");
 
@@ -275,8 +273,6 @@ public class DatosFragment extends Fragment {
         data_apellidos = et_apellidos.getText().toString();
         if (!data_apellidos.isEmpty() && data_apellidos.matches(".*\\w.*"))
             datos_inf_gen.put("apellidos", data_apellidos);
-        else if (data_apellidos.isEmpty())
-            datos_inf_gen.put("apellidos", "-1");
         else
             datos_inf_gen.put("apellidos", "-1");
 
@@ -286,7 +282,7 @@ public class DatosFragment extends Fragment {
                 datos_inf_gen.put("sexo", data_sexo);
             else
                 datos_inf_gen.put("sexo", "-1");
-        else if (data_sexo == null)
+        else
             datos_inf_gen.put("sexo", "-1");
 
         //Colectamos los datos de la fecha de nacimiento.
@@ -310,8 +306,6 @@ public class DatosFragment extends Fragment {
         data_telefono = et_telefono.getText().toString();
         if (!data_telefono.isEmpty() && data_telefono.matches(".*\\w.*"))
             datos_inf_gen.put("telefono", data_telefono);
-        else if (data_telefono.isEmpty())
-            datos_inf_gen.put("telefono", "-1");
         else
             datos_inf_gen.put("telefono", "-1");
 
@@ -336,15 +330,6 @@ public class DatosFragment extends Fragment {
         }
         else
             datos_inf_gen.put("etnia", "-1");
-
-
-        /*
-        Forma de transformar de string a date:
-        String string = "January 2, 2010";
-        DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
-        Date date = format.parse(string);
-        System.out.println(date); // Sat Jan 02 00:00:00 GMT 2010
-         */
 
     }
 
