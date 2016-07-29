@@ -22,13 +22,55 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //aquí creamos las tablas
-        db.execSQL("create table responsable(id_responsable integer primary key, user text, password text, rol text)");
-        db.execSQL("create table localidad(id_localidad integer primary key, nombre text, padre_id integer NULL, FOREIGN KEY (padre_id) REFERENCES localidad (id_localidad))");
-        db.execSQL("create table preparacion(id_preparacion integer primary key, ruta_json text, ruta_img text, fecha text, lugar text, ayunas text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
-        db.execSQL("create table inf_general(id_inf_general integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
-        db.execSQL("create table medidas(id_medidas integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
-        db.execSQL("create table presion_arterial(id_presion integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
-        db.execSQL("create table laboratorio(id_laboratorio integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+
+        db.execSQL("create table responsable(" +
+                "id_responsable integer primary key, " +
+                "user text, " +
+                "password text, " +
+                "rol integer)");
+
+        db.execSQL("create table localidad(" +
+                "id_localidad integer primary key, " +
+                "nombre text, padre_id integer NULL, " +
+                "FOREIGN KEY (padre_id) REFERENCES localidad (id_localidad))");
+
+        db.execSQL("create table preparacion(" +
+                "id_preparacion integer primary key, " +
+                "ruta_json text, " +
+                "ruta_img text, " +
+                "fecha text, " +
+                "lugar text, " +
+                "ayunas text, " +
+                "id_responsable integer, " +
+                "FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+
+        db.execSQL("create table inf_general(" +
+                "id_inf_general integer primary key, " +
+                "ruta_json text, " +
+                "fecha text, " +
+                "id_responsable integer, " +
+                "FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+
+        db.execSQL("create table medidas(" +
+                "id_medidas integer primary key, " +
+                "ruta_json text, " +
+                "fecha text, " +
+                "id_responsable integer, " +
+                "FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+
+        db.execSQL("create table presion_arterial(" +
+                "id_presion integer primary key, " +
+                "ruta_json text, " +
+                "fecha text, " +
+                "id_responsable integer, " +
+                "FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+
+        db.execSQL("create table laboratorio(" +
+                "id_laboratorio integer primary key, " +
+                "ruta_json text, " +
+                "fecha text, " +
+                "id_responsable integer, " +
+                "FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
 
         db.execSQL("create table formulario(" +
                 "id_formulario integer primary key, " +
@@ -45,6 +87,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(id_laboratorio) REFERENCES laboratorio (id_laboratorio))");
 
         insertarLocalidades(db);
+        insertarUsuarios(db);
     }
 
     @Override
@@ -544,7 +587,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Retorina una lista con las localidades
+     * Retorna una lista con las localidades
      * */
 
     public List<String> getProvincias(){
@@ -564,7 +607,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Retorina una lista con los cantones
+     * Retorna una lista con los cantones
      * */
 
     public List<String> getCantones(int padre_id){
@@ -581,5 +624,39 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         bd.close();
 
         return cantones;
+    }
+
+    public void insertarUsuarios(SQLiteDatabase db){
+        ContentValues registro = new ContentValues();
+
+        registro.put("id_responsable",0);
+        registro.put("user","admin");
+        registro.put("password","admin123");
+        registro.put("rol",1);
+        db.insert("responsable", null, registro);
+
+        registro.put("id_responsable",1);
+        registro.put("user","user01");
+        registro.put("password","12345");
+        registro.put("rol",2);
+        db.insert("responsable", null, registro);
+
+        registro.put("id_responsable",2);
+        registro.put("user","user02");
+        registro.put("password","12345");
+        registro.put("rol",3);
+        db.insert("responsable", null, registro);
+
+        registro.put("id_responsable",3);
+        registro.put("user","user03");
+        registro.put("password","12345");
+        registro.put("rol",3);
+        db.insert("responsable", null, registro);
+
+        registro.put("id_responsable",4);
+        registro.put("user","user04");
+        registro.put("password","12345");
+        registro.put("rol",3);
+        db.insert("responsable", null, registro);
     }
 }

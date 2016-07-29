@@ -26,11 +26,11 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/correo"
+            android:id="@+id/usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_correo"
-            android:inputType="textEmailAddress"
+            android:hint="@string/hint_usuario"
+            android:inputType="text"
             android:maxLines="1"
             android:singleLine="true" />
 
