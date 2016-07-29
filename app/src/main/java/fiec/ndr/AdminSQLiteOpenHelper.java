@@ -29,7 +29,20 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("create table medidas(id_medidas integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
         db.execSQL("create table presion_arterial(id_presion integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
         db.execSQL("create table laboratorio(id_laboratorio integer primary key, ruta_json text, fecha text, id_responsable integer, FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
-        //db.execSQL("create table formulario(id_formulario integer primary key, codigo text, id_preparacion integer NULL, id_inf_general integer NULL, id_medidas integer NULL, id_presion integer NULL, id_laboratorio integer NULL, FOREIGN KEY(id_preparacion) REFERENCES(preparacion),FOREIGN KEY(id_inf_general) REFERENCES(inf_general),FOREIGN KEY(id_medidas) REFERENCES(medidas),FOREIGN KEY(id_presion) REFERENCES(presion_arterial),FOREIGN KEY(id_laboratorio) REFERENCES(laboratorio))");
+
+        db.execSQL("create table formulario(" +
+                "id_formulario integer primary key, " +
+                "codigo text, " +
+                "id_preparacion integer NULL, " +
+                "id_inf_general integer NULL, " +
+                "id_medidas integer NULL, " +
+                "id_presion integer NULL, " +
+                "id_laboratorio integer NULL, " +
+                "FOREIGN KEY(id_preparacion) REFERENCES preparacion (id_preparacion)," +
+                "FOREIGN KEY(id_inf_general) REFERENCES inf_general (id_inf_general)," +
+                "FOREIGN KEY(id_medidas) REFERENCES medidas (id_medidas)," +
+                "FOREIGN KEY(id_presion) REFERENCES presion_arterial (id_presion)," +
+                "FOREIGN KEY(id_laboratorio) REFERENCES laboratorio (id_laboratorio))");
 
         insertarLocalidades(db);
     }
