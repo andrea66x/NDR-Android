@@ -34,6 +34,7 @@
 
     <!-- *** Login Activity  *** -->
     <string name="hint_correo">Correo</string>
+    <string name="hint_usuario">Usuario</string>
     <string name="hint_contrasena">Contraseña</string>
     <string name="btn_entrar">Ingresar</string>
     <string name="acc_entrar">Ingresar</string>
