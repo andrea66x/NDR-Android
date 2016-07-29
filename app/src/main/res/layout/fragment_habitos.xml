@@ -38,17 +38,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_tabaco_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_tabaco_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_tabaco_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_tabaco_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -108,17 +106,15 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_alcohol_si"
-                        android:checked="false"
+                        android:text="NO"
+                        android:id="@+id/datos_alcohol_no"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_alcohol_no"
-                        android:checked="false"
+                        android:text="SI"
+                        android:id="@+id/datos_alcohol_si"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
                 </RadioGroup>
@@ -178,16 +174,16 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SI"
-                        android:id="@+id/datos_otros_si"
+                        android:text="NO"
+                        android:id="@+id/datos_otros_no"
                         android:checked="false"
                         android:paddingRight="10dp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NO"
-                        android:id="@+id/datos_otros_no"
+                        android:text="SI"
+                        android:id="@+id/datos_otros_si"
                         android:checked="false"
                         android:paddingRight="10dp"
                         android:layout_marginLeft="30dp" />
@@ -263,16 +259,6 @@
                 </RelativeLayout>
 
             </LinearLayout>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_GuardarHb"
-                android:text="Guardar"
-                android:background="#f955e3"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
 
         </LinearLayout>
     </ScrollView>
