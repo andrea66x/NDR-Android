@@ -212,56 +212,62 @@ public class AntecedentesFragment extends Fragment {
         datos_antecedentes.put("hashmap","antecedentes");
 
         //Colectamos los datos de si ha tenido glucosa o no.
-        if (data_ant_glucosa != null && !data_ant_glucosa.isEmpty())
-            if(data_ant_glucosa.equals("0") || data_ant_glucosa.equals("1"))
+        if (data_ant_glucosa != null && !data_ant_glucosa.isEmpty()) {
+            if (data_ant_glucosa.equals("0") || data_ant_glucosa.equals("1"))
                 datos_antecedentes.put("ant_glucosa", data_ant_glucosa);
             else
                 datos_antecedentes.put("ant_glucosa", "-1");
+        }
         else
             datos_antecedentes.put("ant_glucosa", "-1");
 
         //Colectamos los datos de si sus familiares tienen diabetes o no.
-        if (data_ant_familia != null && !data_ant_familia.isEmpty())
-            if(data_ant_familia.equals("0") || data_ant_familia.equals("1"))
+        if (data_ant_familia != null && !data_ant_familia.isEmpty()) {
+            if (data_ant_familia.equals("0") || data_ant_familia.equals("1"))
                 datos_antecedentes.put("ant_familia", data_ant_familia);
             else
                 datos_antecedentes.put("ant_familia", "-1");
+        }
         else
             datos_antecedentes.put("ant_familia", "-1");
 
         //Colectamos los datos si sus parientes tienen diabetes o no.
-        if (data_ant_parientes != null && !data_ant_parientes.isEmpty())
-            if(data_ant_parientes.equals("0") || data_ant_parientes.equals("1"))
+        if (data_ant_parientes != null && !data_ant_parientes.isEmpty()) {
+            if (data_ant_parientes.equals("0") || data_ant_parientes.equals("1"))
                 datos_antecedentes.put("ant_parientes", data_ant_parientes);
             else
                 datos_antecedentes.put("ant_parientes", "-1");
+        }
         else
             datos_antecedentes.put("ant_parientes", "-1");
 
         //Colectamos los datos si tuvo diabetes en el embarazo.
-        if (data_ant_embarazo != null && !data_ant_embarazo.isEmpty())
-            if(data_ant_embarazo.equals("0") || data_ant_embarazo.equals("1"))
+        if (data_ant_embarazo != null && !data_ant_embarazo.isEmpty()) {
+            if (data_ant_embarazo.equals("0") || data_ant_embarazo.equals("1"))
                 datos_antecedentes.put("ant_embarazo", data_ant_embarazo);
             else
                 datos_antecedentes.put("ant_embarazo", "-1");
+        }
         else
             datos_antecedentes.put("ant_embarazo", "-1");
 
         //Colectamos los datos de si ha tenido glucosa o no.
-        if (data_ant_pso_hijos != null && !data_ant_pso_hijos.isEmpty())
-            if(data_ant_pso_hijos.equals("0") || data_ant_pso_hijos.equals("1"))
+        if (data_ant_pso_hijos != null && !data_ant_pso_hijos.isEmpty()) {
+            if (data_ant_pso_hijos.equals("0") || data_ant_pso_hijos.equals("1"))
                 datos_antecedentes.put("ant_pso_hijos", data_ant_pso_hijos);
             else
                 datos_antecedentes.put("ant_pso_hijos", "-1");
+        }
         else
             datos_antecedentes.put("ant_pso_hijos", "-1");
 
         //Colectamos los datos de si ha tenido glucosa o no.
-        if (data_ant_presion != null && !data_ant_presion.isEmpty())
-            if(data_ant_presion.equals("0") || data_ant_presion.equals("1"))
+        if (data_ant_presion != null && !data_ant_presion.isEmpty()) {
+            if (data_ant_presion.equals("0") || data_ant_presion.equals("1"))
                 datos_antecedentes.put("ant_presion", data_ant_presion);
             else
                 datos_antecedentes.put("ant_presion", "-1");
+        }
         else
             datos_antecedentes.put("ant_presion", "-1");
 

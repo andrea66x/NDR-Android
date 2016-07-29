@@ -277,11 +277,12 @@ public class DatosFragment extends Fragment {
             datos_inf_gen.put("apellidos", "-1");
 
         //Colectamos los datos del sexo.
-        if (data_sexo != null && !data_sexo.isEmpty())
-            if(data_sexo.equals("0") || data_sexo.equals("1"))
+        if (data_sexo != null && !data_sexo.isEmpty()) {
+            if (data_sexo.equals("0") || data_sexo.equals("1"))
                 datos_inf_gen.put("sexo", data_sexo);
             else
                 datos_inf_gen.put("sexo", "-1");
+        }
         else
             datos_inf_gen.put("sexo", "-1");
 
