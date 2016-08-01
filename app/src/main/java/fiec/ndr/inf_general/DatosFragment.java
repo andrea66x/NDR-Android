@@ -229,7 +229,7 @@ public class DatosFragment extends Fragment {
     public void setearFecha(int dia, int mes, int anio){
 
         et_dia.setText(String.valueOf(dia));
-        et_mes.setText(String.valueOf(mes));
+        et_mes.setText(String.valueOf(mes)+1);
         et_anio.setText(String.valueOf(anio));
 
     }
@@ -239,7 +239,7 @@ public class DatosFragment extends Fragment {
         int y, m, d, a;
 
         y = cal.get(Calendar.YEAR);
-        m = cal.get(Calendar.MONTH);
+        m = cal.get(Calendar.MONTH)+1;
         d = cal.get(Calendar.DAY_OF_MONTH);
         cal.set(anio, mes, dia);
         a = y - cal.get(Calendar.YEAR);

@@ -24,7 +24,7 @@
         android:background="@drawable/txtbox"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
         android:maxLength="7"
         android:inputType="textCapCharacters"
         android:gravity="center"

@@ -44,21 +44,20 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/datos_ayunas_si"
+                        android:id="@+id/datos_ayunas_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
                         android:paddingRight="10dp"
-                        android:text="SI" />
+                        android:text="NO" />
 
                     <RadioButton
-                        android:id="@+id/datos_ayunas_no"
+                        android:id="@+id/datos_ayunas_si"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:checked="false"
                         android:paddingRight="10dp"
-                        android:text="NO" />
+                        android:text="SI" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -121,11 +120,12 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapCharacters"
                     android:id="@+id/lugar_encuesta"
-                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ "
                     android:gravity="bottom|start"
-                    android:background="@drawable/txtbox"/>
+                    android:background="@drawable/txtbox"
+                    android:layout_gravity="center" />
             </LinearLayout>
 
             <View

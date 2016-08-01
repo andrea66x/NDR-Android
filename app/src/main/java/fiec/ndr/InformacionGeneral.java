@@ -163,7 +163,7 @@ public class InformacionGeneral extends AppCompatActivity
             validador_json= false;
 
         String campos = revisarCampos();
-        if (!faltan_campos){
+        if (faltan_campos){
             if(validador_json){
                 try {
                     JSON_Formulario.put("id_formulario", codigo);
@@ -177,9 +177,9 @@ public class InformacionGeneral extends AppCompatActivity
                     JSON_Formulario.put("medicamentos", jarray_medicamentos);
                     JSON_Formulario.put("antecedentes", jarray_antecedentes);
                     JSON_Formulario.put("habitos", jarray_habitos);
-                    guardarJSON(JSON_Formulario.toString());
-                    Toast.makeText(getApplicationContext(),
-                            "Hemos guardado exitosamente el JSON", Toast.LENGTH_SHORT).show();
+                    Directorios dir = new Directorios(false);
+                    String retro = dir.guardarAchivo(JSON_Formulario.toString(),codigo,2);
+                    Toast.makeText(getApplicationContext(), retro, Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -317,37 +317,6 @@ public class InformacionGeneral extends AppCompatActivity
         else
             campos_faltantes = "";
         return campos_faltantes;
-    }
-
-    private void guardarJSON(String json) {
-
-        String root = Environment.getExternalStorageDirectory().toString();
-        FileOutputStream fos = null;
-        Writer out = null;
-        File myDir = new File(root + "/NDR-TESTING");
-        myDir.mkdirs();
-        String fname = "Formulario_"+ codigo +".json";
-        File file = new File (myDir, fname);
-        if (file.exists ()) file.delete ();
-        try {
-            fos = new FileOutputStream(file);
-            out = new OutputStreamWriter(fos, "UTF-8");
-            out.write(json);
-            out.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            if(fos!=null){
-                try {
-                    fos.close();
-                } catch (IOException ignored) {}
-            }
-            if(out!= null){
-                try {
-                    out.close();
-                } catch (IOException ignored) {}
-            }
-        }
     }
 
     /*Metodo para prevenir salir del formulario al presionar el boton atras*/
