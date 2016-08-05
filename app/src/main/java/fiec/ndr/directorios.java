@@ -47,6 +47,7 @@ public class Directorios {
         boolean success = true;
         if (!folder.exists()) {
             success = folder.mkdir();
+            Log.d("DIRECTORIOS", "Intentando crear directorio: "+Environment.getExternalStorageDirectory().toString());
         }
         if (success) {
             Log.d("DIRECTORIOS", "El directorio esta listo para usarse.");
