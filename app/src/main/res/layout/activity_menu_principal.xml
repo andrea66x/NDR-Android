@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menú Principal"
+        android:text="MENÚ PRINCIPAL"
         android:id="@+id/txt_opciones"
         android:textStyle="bold"
         android:textSize="40sp"
@@ -23,15 +23,15 @@
         android:paddingBottom="10dp" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="25dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:scrollbars="none">
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -100,38 +100,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/textView2"
-                    android:layout_weight="1"
-                    android:layout_gravity="start|center"
-                    android:text="@string/lbl_formularios" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btn_formularios"
-                    android:src="@mipmap/formularios"
-                    android:background="@drawable/rounded_corners"
-                    android:onClick="formularios"
-                    android:layout_gravity="center|end"
-                    android:minWidth="50dp"
-                    android:maxWidth="50dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp" >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/textView3"
                     android:layout_weight="1"
                     android:layout_gravity="start|center"
-                    android:text="@string/lbl_sincronizar" />
+                    android:text="@string/lbl_sincronizar"
+                    android:layout_marginRight="20dp" />
 
                 <ImageButton
                     android:layout_width="wrap_content"

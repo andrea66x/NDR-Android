@@ -163,7 +163,7 @@ public class InformacionGeneral extends AppCompatActivity
             validador_json= false;
 
         String campos = revisarCampos();
-        if (faltan_campos){
+        if (!faltan_campos){
             if(validador_json){
                 try {
                     JSON_Formulario.put("id_formulario", codigo);

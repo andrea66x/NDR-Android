@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,6 +23,8 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -31,6 +34,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 public class Preparacion extends AppCompatActivity {
@@ -38,13 +42,13 @@ public class Preparacion extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     Bitmap bitmap_foto;
     String ruta_foto, codigo, dia, mes, anio, ayunas, lugar, strDt;
+    String UUID, hora_encuesta;
 
 
     EditText et_dia, et_mes, et_anio, et_cod_encuesta, et_lugar;
     RadioGroup rg_ayunas;
     ImageView img_consent;
     private Map<String, String> hm_preparacion = new HashMap<String, String>();
-    JSONObject json_preparacion;
 
 
     @Override
@@ -55,6 +59,7 @@ public class Preparacion extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,6 +170,17 @@ public class Preparacion extends AppCompatActivity {
 
     private String guardarJson(){
 
+        JSONArray jarray_datos;
+        JSONObject temp1;
+
+        //Obtenemos el UUID del dispositivo desde que ha sido creado el JSON.
+        TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        UUID = tManager.getDeviceId();
+
+        TimeZone.setDefault(TimeZone.getTimeZone("America/Guayaquil"));
+        Calendar calendar = Calendar.getInstance();
+        hora_encuesta = calendar.getTime().toString();
+
         hm_preparacion.clear();
 
         if (ayunas != null && !ayunas.isEmpty()) {
@@ -204,12 +220,25 @@ public class Preparacion extends AppCompatActivity {
         else
             return "Algo salió mal con la imagen o no la has tomado aun, intentalo de nuevo.";
 
+        JSONObject json_preparacion = new JSONObject();
+        jarray_datos = new JSONArray();
+        temp1 = new JSONObject(hm_preparacion);
+        jarray_datos.put(temp1);
 
-        json_preparacion = new JSONObject(hm_preparacion);
-        Directorios dir = new Directorios(false);
-        String retro = dir.guardarAchivo(json_preparacion.toString(),codigo,1);
+        try {
+            json_preparacion.put("id_formulario", codigo);
+            json_preparacion.put("tipo_formulario", "Preparacion");
+            json_preparacion.put("uuid_creado", UUID);
+            json_preparacion.put("hora_creacion", hora_encuesta);
+            json_preparacion.put("preparacion", jarray_datos);
+            Directorios dir = new Directorios(false);
+            String retro = dir.guardarAchivo(json_preparacion.toString(),codigo,1);
+            return retro;
 
-        return retro;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return "Excepcion del sistema, construyendo del json preparacion.";
+        }
     }
 
 

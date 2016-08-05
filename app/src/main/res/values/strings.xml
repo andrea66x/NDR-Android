@@ -10,8 +10,6 @@
     <string name="pres_art">Presión Arterial</string>
     <string name="laboratorio">Laboratorio</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- *** Activity Información General  *** -->
     <string name="vivienda">Vivienda</string>
@@ -48,7 +46,7 @@
     <string name="lbl_buscar">Buscar Encuesta:</string>
     <string name="lbl_informacion">Información:</string>
     <string name="lbl_salir">Salir del Sistema:</string>
-    <string name="lbl_sincronizar">Sincronizar Base de Datos:</string>
+    <string name="lbl_sincronizar">Sincronizar Encuestas:</string>
     <string name="lbl_formularios">Formularios:</string>
 
     <!-- *** Botones Secciones Nuevo Formulario  *** -->
