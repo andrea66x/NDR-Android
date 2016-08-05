@@ -11,5 +11,221 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="fiec.ndr.Laboratorio"
     tools:showIn="@layout/activity_laboratorio">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_presion1"
+                    style="@style/lblTextStyle"
+                    android:text="Glucemia:"
+                    android:gravity="top|center" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/lblTextStyle"
+                        android:text="Min:"
+                        android:gravity="top|center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="4"
+                        android:maxLength="4"
+                        android:id="@+id/data_glucosa_min"
+                        android:layout_gravity="center"
+                        android:background="@drawable/txtbox"
+                        android:textStyle="bold"
+                        android:hint="mg/dl"
+                        android:gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp" />
+
+                    <TextView
+                        style="@style/lblTextStyle"
+                        android:text="Max:"
+                        android:gravity="top|center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="4"
+                        android:maxLength="4"
+                        android:id="@+id/data_glucosa_max"
+                        android:layout_gravity="center"
+                        android:background="@drawable/txtbox"
+                        android:textStyle="bold"
+                        android:hint="mg/dl"
+                        android:gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    style="@style/lblTextStyle"
+                    android:text="Hemoglobina Glicosilada:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="4"
+                    android:maxLength="4"
+                    android:id="@+id/data_hba1c"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:hint="%"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    style="@style/lblTextStyle"
+                    android:text="Microalbuminuria:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="5"
+                    android:maxLength="4"
+                    android:id="@+id/data_ualbum"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:hint="mg/gr-cr"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    style="@style/lblTextStyle"
+                    android:text="Creatinina:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="4"
+                    android:maxLength="4"
+                    android:id="@+id/data_creatinina"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:hint="mg/dl"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    style="@style/lblTextStyle"
+                    android:text="Filtrado Glomerular:"
+                    android:gravity="top|center" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="5"
+                    android:maxLength="4"
+                    android:id="@+id/data_filtrado"
+                    android:background="@drawable/txtbox"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 </RelativeLayout>
