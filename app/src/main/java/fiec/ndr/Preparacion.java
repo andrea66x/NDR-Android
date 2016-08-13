@@ -1,6 +1,7 @@
 package fiec.ndr;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,12 +10,15 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -41,12 +45,12 @@ public class Preparacion extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     Bitmap bitmap_foto;
-    String ruta_foto, codigo, dia, mes, anio, ayunas, lugar, strDt;
+    String ruta_foto, codigo, dia, mes, anio, ayunas, lugar, strDt, data_nombres;
     String UUID, hora_encuesta;
-    int result = 2;
+    int result;
 
 
-    EditText et_dia, et_mes, et_anio, et_cod_encuesta, et_lugar;
+    EditText et_cod_encuesta, et_lugar, et_nombres;
     RadioGroup rg_ayunas;
     ImageView img_consent;
     private Map<String, String> hm_preparacion = new HashMap<String, String>();
@@ -64,15 +68,24 @@ public class Preparacion extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, guardarJson(), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, guardarJson(), Snackbar.LENGTH_LONG).setCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        if ((event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT || event == Snackbar.Callback.DISMISS_EVENT_SWIPE) && result == 1)
+                            finish();
+                    }
+
+                    @Override
+                    public void onShown(Snackbar snackbar) {
+
+                    }
+                }).show();
             }
         });
 
         et_cod_encuesta = (EditText) findViewById(R.id.codigo_encuesta);
-        et_dia = (EditText)findViewById(R.id.form_fecha_dia);
-        et_mes = (EditText)findViewById(R.id.form_fecha_mes);
-        et_anio = (EditText)findViewById(R.id.form_fecha_anio);
         et_lugar = (EditText)findViewById(R.id.lugar_encuesta);
+        et_nombres = (EditText)findViewById(R.id.data_nombres);
         img_consent = (ImageView)findViewById(R.id.fotoConsentimiento);
         rg_ayunas = (RadioGroup) findViewById(R.id.rg_ayunas);
 
@@ -80,11 +93,6 @@ public class Preparacion extends AppCompatActivity {
         anio = Integer.toString(c.get(Calendar.YEAR));
         mes = Integer.toString(c.get(Calendar.MONTH)+1);
         dia = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
-
-        et_dia.setText(dia);
-        et_mes.setText(mes);
-        et_anio.setText(anio);
-
 
 
         et_cod_encuesta.addTextChangedListener(new TextWatcher() {
@@ -147,6 +155,46 @@ public class Preparacion extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.ayuda, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_ayuda:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Preparacion.this);
+
+                alertDialog.setTitle("Ayuda Laboratorio:");
+
+                alertDialog.setMessage("" +
+                        "- Recuerda ingresar los nombres y apellidos completos del encuestado. \n\n" +
+                        "- La glucemia indica los niveles de glucosa en la sangre, esta dada en mg/dl. \n\n" +
+                        "- Hemoglobina glicosilada es tambien conocida como promedio de glucosa o HbA1c. \n\n" +
+                        "- La microalbuminuria debe ser ingresada en unidades mg/gr. \n\n" +
+                        "- La creatinina debe estar en unidades mg/dl. \n\n");
+
+                // Setting Icon to Dialog
+                alertDialog.setIcon(R.mipmap.ayuda_b);
+
+                // Setting Netural "Cancel" Button
+                alertDialog.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDialog.show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             try {
@@ -172,6 +220,7 @@ public class Preparacion extends AppCompatActivity {
 
         JSONArray jarray_datos;
         JSONObject temp1;
+        result = 2;
 
         //Obtenemos el UUID del dispositivo desde que ha sido creado el JSON.
         TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -182,6 +231,12 @@ public class Preparacion extends AppCompatActivity {
         hora_encuesta = calendar.getTime().toString();
 
         hm_preparacion.clear();
+
+        data_nombres = et_nombres.getText().toString();
+        if (data_nombres.matches(".*\\w.*") && !data_nombres.isEmpty())
+            hm_preparacion.put("nombres", data_nombres);
+        else
+            return "No has ingresado los nombres del encuestado.";
 
         if (ayunas != null && !ayunas.isEmpty()) {
             if (ayunas.equals("0") ||ayunas.equals("1"))
@@ -247,6 +302,5 @@ public class Preparacion extends AppCompatActivity {
             return "Excepcion del sistema, construyendo del json preparacion.";
         }
     }
-
 
 }

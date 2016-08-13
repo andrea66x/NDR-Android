@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -137,7 +136,7 @@ public class Laboratorio extends AppCompatActivity {
         if (data_nombres.matches(".*\\w.*") && !data_nombres.isEmpty())
             hm_laboratorio.put("nombres", data_nombres);
         else
-            return "No has ingresado los nombres del paciente.";
+            return "No has ingresado los nombres del encuestado.";
 
         data_glucosa_min = et_glucosa_min.getText().toString();
         if (!data_glucosa_min.isEmpty())

@@ -40,7 +40,7 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapCharacters|textMultiLine"
+                    android:inputType="textCapCharacters"
                     android:id="@+id/data_nombres"
                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ ÁÉÍÓÚ"
                     android:gravity="bottom|start"
