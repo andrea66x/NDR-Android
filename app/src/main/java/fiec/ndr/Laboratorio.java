@@ -1,15 +1,20 @@
 package fiec.ndr;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,8 +28,9 @@ import java.util.TimeZone;
 public class Laboratorio extends AppCompatActivity {
 
     private static String codigo, UUID, hora_encuesta;
-    String data_glucosa_min, data_glucosa_max, data_hba1c, data_ualbum, data_creatinina, data_filtrado;
-    EditText et_glucosa_min, et_glucosa_max, et_hba1c, et_ualbum, et_creatinina, et_filtrado;
+    String data_glucosa_min, data_glucosa_max, data_hba1c, data_ualbum, data_creatinina, data_nombres;
+    EditText et_glucosa_min, et_glucosa_max, et_hba1c, et_ualbum, et_creatinina, et_nombres;
+    int result;
 
     private Map<String, String> hm_laboratorio = new HashMap<String, String>();
 
@@ -36,14 +42,23 @@ public class Laboratorio extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, guardarJson(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, guardarJson(), Snackbar.LENGTH_LONG).setCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        if ((event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT || event == Snackbar.Callback.DISMISS_EVENT_SWIPE) && result == 1)
+                            finish();
+                    }
+
+                    @Override
+                    public void onShown(Snackbar snackbar) {
+
+                    }
+                }).show();
             }
         });
 
@@ -59,13 +74,54 @@ public class Laboratorio extends AppCompatActivity {
         et_creatinina = (EditText) findViewById(R.id.data_creatinina);
         et_hba1c = (EditText) findViewById(R.id.data_hba1c);
         et_ualbum = (EditText) findViewById(R.id.data_ualbum);
-        et_filtrado = (EditText) findViewById(R.id.data_filtrado);
+        et_nombres = (EditText) findViewById(R.id.data_nombres);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.ayuda, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_ayuda:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Laboratorio.this);
+
+                alertDialog.setTitle("Ayuda Laboratorio:");
+
+                alertDialog.setMessage("" +
+                        "- Recuerda ingresar los nombres y apellidos completos del encuestado. \n\n" +
+                        "- La glucemia indica los niveles de glucosa en la sangre, esta dada en mg/dl. \n\n" +
+                        "- Hemoglobina glicosilada es tambien conocida como promedio de glucosa o HbA1c. \n\n" +
+                        "- La microalbuminuria debe ser ingresada en unidades mg/gr. \n\n" +
+                        "- La creatinina debe estar en unidades mg/dl. \n\n");
+
+                // Setting Icon to Dialog
+                alertDialog.setIcon(R.mipmap.ayuda_b);
+
+                // Setting Netural "Cancel" Button
+                alertDialog.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDialog.show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     private String guardarJson(){
 
         JSONArray jarray_datos;
         JSONObject temp1;
+        result = 2;
 
         //Obtenemos el UUID del dispositivo desde que ha sido creado el JSON.
         TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -76,6 +132,12 @@ public class Laboratorio extends AppCompatActivity {
         hora_encuesta = calendar.getTime().toString();
 
         hm_laboratorio.clear();
+
+        data_nombres = et_nombres.getText().toString();
+        if (data_nombres.matches(".*\\w.*") && !data_nombres.isEmpty())
+            hm_laboratorio.put("nombres", data_nombres);
+        else
+            return "No has ingresado los nombres del paciente.";
 
         data_glucosa_min = et_glucosa_min.getText().toString();
         if (!data_glucosa_min.isEmpty())
@@ -107,12 +169,6 @@ public class Laboratorio extends AppCompatActivity {
         else
             return "No has ingresado la creatinina.";
 
-        data_filtrado = et_filtrado.getText().toString();
-        if (!data_filtrado.isEmpty())
-            hm_laboratorio.put("filtrado", data_filtrado);
-        else
-            return "No has ingresado el filtrado glomerular.";
-
 
         JSONObject json_laboratorio = new JSONObject();
         jarray_datos = new JSONArray();
@@ -126,8 +182,16 @@ public class Laboratorio extends AppCompatActivity {
             json_laboratorio.put("hora_creacion", hora_encuesta);
             json_laboratorio.put("Resultados", jarray_datos);
             Directorios dir = new Directorios(false);
-            String retro = dir.guardarAchivo(json_laboratorio.toString(),codigo,5);
-            return retro;
+
+            result= dir.guardarAchivo(json_laboratorio.toString(),codigo,5);
+            if (result == 1)
+                return "El formulario "+ codigo + " ha sido guardado exitosamente.";
+            else if (result == 0)
+                return "El formulario asociado a este codigo: " + codigo +" ya existe";
+            else if (result == -1)
+                return "Existe un problema con tu sistemas de archivos, llama a sistemas ahora.";
+            else
+                return "Algo raro ha pasado, intenta de nuevo por favor.";
 
         } catch (JSONException e) {
             e.printStackTrace();

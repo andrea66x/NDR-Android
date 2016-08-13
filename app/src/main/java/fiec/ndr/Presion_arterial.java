@@ -24,6 +24,7 @@ public class Presion_arterial extends AppCompatActivity {
 
     String codigo, UUID, hora_encuesta;
     String data_min_1, data_min_2, data_min_3, data_max_1, data_max_2, data_max_3;
+    int result=2;
 
     private EditText et_min_1, et_min_2, et_min_3, et_max_1, et_max_2, et_max_3;
 
@@ -125,8 +126,15 @@ public class Presion_arterial extends AppCompatActivity {
             json_presion.put("hora_creacion", hora_encuesta);
             json_presion.put("presion", jarray_datos);
             Directorios dir = new Directorios(false);
-            String retro = dir.guardarAchivo(json_presion.toString(),codigo,4);
-            return retro;
+            result= dir.guardarAchivo(json_presion.toString(),codigo,4);
+            if (result == 1)
+                return "El formulario "+ codigo + " ha sido guardado exitosamente.";
+            else if (result == 0)
+                return "El formulario asociado a este codigo: " + codigo +" ya existe";
+            else if (result == -1)
+                return "Existe un problema con tu sistemas de archivos, llama a sistemas ahora.";
+            else
+                return "Algo raro ha pasado, intenta de nuevo por favor.";
 
         } catch (JSONException e) {
             e.printStackTrace();

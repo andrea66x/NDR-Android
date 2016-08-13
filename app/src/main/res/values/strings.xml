@@ -2,6 +2,8 @@
     <string name="app_name">NDR</string>
     <string name="menu">Home</string>
 
+    <string name="ayuda">Ayuda</string>
+
     <!-- *** Activity Secciones  *** -->
     <string name="secciones">Secciones</string>
     <string name="info_general">Información General</string>
@@ -44,7 +46,7 @@
     <!-- *** Labels Menú Principal  *** -->
     <string name="lbl_nuevo">Nueva Encuesta:</string>
     <string name="lbl_buscar">Buscar Encuesta:</string>
-    <string name="lbl_informacion">Información:</string>
+    <string name="lbl_informacion">Información y Contacto:</string>
     <string name="lbl_salir">Salir del Sistema:</string>
     <string name="lbl_sincronizar">Sincronizar Encuestas:</string>
     <string name="lbl_formularios">Formularios:</string>

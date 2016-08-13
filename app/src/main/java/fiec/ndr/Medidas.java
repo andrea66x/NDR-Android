@@ -30,6 +30,7 @@ public class Medidas extends AppCompatActivity {
 
     String codigo, UUID, hora_encuesta;
     String peso, estatura, med_cintura, med_cadera;
+    int result = 2;
 
     private EditText et_peso, et_estatura, et_cintura, et_cadera;
     private Map<String, String> hm_medidas = new HashMap<String, String>();
@@ -120,8 +121,15 @@ public class Medidas extends AppCompatActivity {
             json_medidas.put("hora_creacion", hora_encuesta);
             json_medidas.put("medidas", jarray_datos);
             Directorios dir = new Directorios(false);
-            String retro = dir.guardarAchivo(json_medidas.toString(),codigo,3);
-            return retro;
+            result= dir.guardarAchivo(json_medidas.toString(),codigo,3);
+            if (result == 1)
+                return "El formulario "+ codigo + " ha sido guardado exitosamente.";
+            else if (result == 0)
+                return "El formulario asociado a este codigo: " + codigo +" ya existe";
+            else if (result == -1)
+                return "Existe un problema con tu sistemas de archivos, llama a sistemas ahora.";
+            else
+                return "Algo raro ha pasado, intenta de nuevo por favor.";
 
         } catch (JSONException e) {
             e.printStackTrace();

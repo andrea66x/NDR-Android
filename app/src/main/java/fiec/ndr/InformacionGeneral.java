@@ -48,12 +48,14 @@ public class InformacionGeneral extends AppCompatActivity
         MedicamentosFragment.changeTabMedicamentos, AntecedentesFragment.changeTabAntecedentes,
         HabitosFragment.changeTabHabitos, ViviendaFragment.changeTabVivienda{
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;//Adapter para las secciones
-    private ViewPager mViewPager;   //Variable para el pageviewer
+    SectionsPagerAdapter mSectionsPagerAdapter;//Adapter para las secciones
+    ViewPager mViewPager;   //Variable para el pageviewer
     private String codigo, UUID, hora_encuesta;   //Variable para guardar el codigo del formulario
 
     private Map<String, String> hm_datos, hm_vivienda, hm_economia, hm_salud, hm_medicamentos, hm_antecedentes, hm_habitos;
     private boolean validador_json, faltan_campos;
+
+    int result=2;
 
 
 
@@ -178,8 +180,15 @@ public class InformacionGeneral extends AppCompatActivity
                     JSON_Formulario.put("antecedentes", jarray_antecedentes);
                     JSON_Formulario.put("habitos", jarray_habitos);
                     Directorios dir = new Directorios(false);
-                    String retro = dir.guardarAchivo(JSON_Formulario.toString(),codigo,2);
-                    Toast.makeText(getApplicationContext(), retro, Toast.LENGTH_SHORT).show();
+                    result= dir.guardarAchivo(JSON_Formulario.toString(),codigo,2);
+                    if (result == 1)
+                        Toast.makeText(getApplicationContext(), "El formulario "+ codigo + " ha sido guardado exitosamente.", Toast.LENGTH_SHORT).show();
+                    else if (result == 0)
+                        Toast.makeText(getApplicationContext(), "El formulario asociado a este codigo: " + codigo +" ya existe", Toast.LENGTH_SHORT).show();
+                    else if (result == -1)
+                        Toast.makeText(getApplicationContext(), "Existe un problema con tu sistemas de archivos, llama a sistemas ahora.", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "Algo raro ha pasado, intenta de nuevo por favor.", Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

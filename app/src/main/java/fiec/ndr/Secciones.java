@@ -27,6 +27,7 @@ public class Secciones extends AppCompatActivity {
     public void nuevoFormulario(View view) {
 
         final Dialog codigoDialog = new Dialog(this);
+        Directorios dir = new Directorios(true);
         btnGeneral = (Button) view;
         codigoDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         codigoDialog.setCancelable(false);

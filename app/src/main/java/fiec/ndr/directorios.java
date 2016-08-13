@@ -57,7 +57,7 @@ public class Directorios {
         return folder;
     }
 
-    public String guardarAchivo(String JSON, String codigo, int tipo){
+    public int guardarAchivo(String JSON, String codigo, int tipo){
 
         String root = Environment.getExternalStorageDirectory().toString();
         FileOutputStream fos = null;
@@ -95,7 +95,7 @@ public class Directorios {
 
             //Medidas: Ruta /NDR/Laboratorio
             case 5:
-                carpeta = existeDir(forms_medidas);
+                carpeta = existeDir(forms_laboratorio);
                 fname = "lab_"+ codigo +".json";
                 break;
 
@@ -108,7 +108,7 @@ public class Directorios {
 
         archivo = new File (carpeta, fname);
         if (archivo.exists())
-            return "Ya existe un formulario asociado a este encuestado.";
+            return 0;
 
         try {
             fos = new FileOutputStream(archivo);
@@ -117,26 +117,26 @@ public class Directorios {
             out.flush();
         } catch (Exception e) {
             e.printStackTrace();
-            return "Algo salio mal, ya lo arreglamos.";
+            return -1;
         }finally {
 
             if (fos != null) {
                 try {
                     fos.close();
                 } catch (IOException ignored) {
-                    return "Algo salio mal, ya lo arreglamos.";
+                    return -1;
                 }
             }
             if (out != null) {
                 try {
                     out.close();
                 } catch (IOException ignored) {
-                    return "Algo salio mal, ya lo arreglamos.";
+                    return -1;
                 }
             }
         }
 
-        return "El formulario del encuestado: " + codigo + " ha sido guardado exitosamente.";
+        return 1;
 
     }
 

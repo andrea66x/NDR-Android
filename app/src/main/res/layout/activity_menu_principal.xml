@@ -38,7 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="5dp">
+                android:padding="5dp"
+                android:onClick="nuevoFormulario">
 
                 <TextView
                     android:layout_width="0dp"
@@ -54,10 +55,10 @@
                     android:id="@+id/btn_nueva"
                     android:src="@mipmap/nuevo_item"
                     android:background="@drawable/rounded_corners"
-                    android:onClick="nuevoFormulario"
                     android:layout_gravity="center|end"
                     android:minWidth="50dp"
-                    android:maxWidth="50dp" />
+                    android:maxWidth="50dp"
+                    android:onClick="nuevoFormulario" />
 
             </LinearLayout>
 
@@ -66,7 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="5dp" >
+                android:padding="5dp"
+                android:onClick="buscarEncuesta">
 
                 <TextView
                     android:layout_width="0dp"
@@ -83,10 +85,10 @@
                     android:id="@+id/btn_buscar"
                     android:src="@mipmap/buscar"
                     android:background="@drawable/rounded_corners"
-                    android:onClick="buscarEncuesta"
                     android:layout_gravity="center|end"
                     android:minWidth="50dp"
-                    android:maxWidth="50dp" />
+                    android:maxWidth="50dp"
+                    android:onClick="buscarEncuesta" />
             </LinearLayout>
 
             <LinearLayout
@@ -94,7 +96,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="5dp" >
+                android:padding="5dp"
+                android:onClick="sincronizarBase">
 
                 <TextView
                     android:layout_width="0dp"
@@ -112,10 +115,10 @@
                     android:id="@+id/btn_sincronizar"
                     android:src="@mipmap/sincronizar"
                     android:background="@drawable/rounded_corners"
-                    android:onClick="sincronizarBase"
                     android:layout_gravity="center|end"
                     android:minWidth="50dp"
-                    android:maxWidth="50dp" />
+                    android:maxWidth="50dp"
+                    android:onClick="sincronizarBase" />
             </LinearLayout>
 
             <LinearLayout
@@ -123,7 +126,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="5dp" >
+                android:padding="5dp"
+                android:onClick="informacion">
 
                 <TextView
                     android:layout_width="0dp"
@@ -140,10 +144,10 @@
                     android:id="@+id/btn_informacion"
                     android:src="@mipmap/informacion"
                     android:background="@drawable/rounded_corners"
-                    android:onClick="informacion"
                     android:layout_gravity="center|end"
                     android:minWidth="50dp"
-                    android:maxWidth="50dp" />
+                    android:maxWidth="50dp"
+                    android:onClick="informacion" />
             </LinearLayout>
 
             <LinearLayout
@@ -151,7 +155,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="5dp" >
+                android:padding="5dp"
+                android:onClick="salirSistema">
 
                 <TextView
                     android:layout_width="0dp"
@@ -168,11 +173,11 @@
                     android:id="@+id/btn_salir"
                     android:src="@mipmap/salir"
                     android:background="@drawable/rounded_corners"
-                    android:onClick="salirSistema"
                     android:layout_gravity="center|end"
                     android:minWidth="50dp"
                     android:maxWidth="50dp"
-                    android:nestedScrollingEnabled="false" />
+                    android:nestedScrollingEnabled="false"
+                    android:onClick="salirSistema" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

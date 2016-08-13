@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity{
         } else if(ingresoExitoso(email,password)){
             Intent int_ingreso = new Intent(this,MenuPrincipal.class);
             startActivity(int_ingreso);
+            finish();
         }
         else{
             Toast.makeText(this, "Usuario o contraseña inválida!", Toast.LENGTH_LONG).show();
@@ -87,12 +88,10 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
