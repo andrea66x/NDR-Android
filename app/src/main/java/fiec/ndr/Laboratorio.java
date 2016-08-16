@@ -90,7 +90,7 @@ public class Laboratorio extends AppCompatActivity {
 
                 alertDialog.setTitle("Ayuda Laboratorio:");
 
-                alertDialog.setMessage("" +
+                alertDialog.setMessage(
                         "- Recuerda ingresar los nombres y apellidos completos del encuestado. \n\n" +
                         "- La glucemia indica los niveles de glucosa en la sangre, esta dada en mg/dl. \n\n" +
                         "- Hemoglobina glicosilada es tambien conocida como promedio de glucosa o HbA1c. \n\n" +

@@ -1,13 +1,17 @@
 package fiec.ndr;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -23,10 +27,10 @@ import java.util.TimeZone;
 public class Presion_arterial extends AppCompatActivity {
 
     String codigo, UUID, hora_encuesta;
-    String data_min_1, data_min_2, data_min_3, data_max_1, data_max_2, data_max_3;
-    int result=2;
+    String data_min_1, data_min_2, data_min_3, data_max_1, data_max_2, data_max_3, data_nombres;
+    int result;
 
-    private EditText et_min_1, et_min_2, et_min_3, et_max_1, et_max_2, et_max_3;
+    private EditText et_min_1, et_min_2, et_min_3, et_max_1, et_max_2, et_max_3, et_nombres;
 
     private Map<String, String> hm_presion = new HashMap<String, String>();
 
@@ -42,8 +46,18 @@ public class Presion_arterial extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, guardarJson(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, guardarJson(), Snackbar.LENGTH_LONG).setCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        if ((event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT || event == Snackbar.Callback.DISMISS_EVENT_SWIPE) && result == 1)
+                            finish();
+                    }
+
+                    @Override
+                    public void onShown(Snackbar snackbar) {
+
+                    }
+                }).show();
             }
         });
 
@@ -60,12 +74,55 @@ public class Presion_arterial extends AppCompatActivity {
         et_max_1 = (EditText) findViewById(R.id.data_prs_max_1);
         et_max_2 = (EditText) findViewById(R.id.data_prs_max_2);
         et_max_3 = (EditText) findViewById(R.id.data_prs_max_3);
+        et_nombres = (EditText) findViewById(R.id.data_nombres);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.ayuda, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_ayuda:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Presion_arterial.this);
+
+                alertDialog.setTitle("Ayuda Presión Arterial:");
+
+                alertDialog.setMessage(
+                        "- Recuerda ingresar los nombres y apellidos completos del encuestado. \n\n" +
+                        "- Recuerda realizar las 3 tomas de la presión, una máxima y una miníma por cada intento. \n\n" +
+                        "- Las unidades de los datos de la presión esta dada den mm/Hg. \n\n" +
+                        "- Por cada toma se debe esperar 60 segundos. \n\n" +
+                        "- Trata de ser amigable con el paciente, si se siente nervioso sesgarás la toma. \n\n");
+
+                // Setting Icon to Dialog
+                alertDialog.setIcon(R.mipmap.ayuda_b);
+
+                // Setting Netural "Cancel" Button
+                alertDialog.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDialog.show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
 
     private String guardarJson(){
 
         JSONArray jarray_datos;
         JSONObject temp1;
+        result=2;
 
         //Obtenemos el UUID del dispositivo desde que ha sido creado el JSON.
         TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -77,41 +134,47 @@ public class Presion_arterial extends AppCompatActivity {
 
         hm_presion.clear();
 
+        data_nombres = et_nombres.getText().toString();
+        if (data_nombres.matches(".*\\w.*") && !data_nombres.isEmpty())
+            hm_presion.put("nombres", data_nombres);
+        else
+            return "No has ingresado los nombres del encuestado.";
+
         data_min_1 = et_min_1.getText().toString();
         if (!data_min_1.isEmpty())
             hm_presion.put("presion_min_1", data_min_1);
         else
-            return "No has ingresado todas las medidas de presión.";
+            return "No has ingresado la primera toma mínima.";
 
         data_min_2 = et_min_2.getText().toString();
         if (!data_min_2.isEmpty())
             hm_presion.put("presion_min_2", data_min_2);
         else
-            return "No has ingresado todas las medidas de presión.";
+            return "No has ingresado la segunda toma mínima.";
 
         data_min_3 = et_min_3.getText().toString();
         if (!data_min_3.isEmpty())
             hm_presion.put("presion_min_3", data_min_3);
         else
-            return "No has ingresado todas las medidas de presión.";
+            return "No has ingresado la tercera toma mínima.";
 
         data_max_1 = et_max_1.getText().toString();
         if (!data_max_1.isEmpty())
             hm_presion.put("presion_max_1", data_max_1);
         else
-            return "No has ingresado todas las medidas de presión.";
+            return "No has ingresado la primera toma máxima.";
 
         data_max_2 = et_max_2.getText().toString();
         if (!data_max_2.isEmpty())
             hm_presion.put("presion_max_2", data_max_2);
         else
-            return "No has ingresado todas las medidas de presión.";
+            return "No has ingresado la segunda toma máxima.";
 
         data_max_3 = et_max_3.getText().toString();
         if (!data_max_3.isEmpty())
             hm_presion.put("presion_max_3", data_max_3);
         else
-            return "No has ingresado todas las medidas de presión.";
+            return "No has ingresado la tercera toma máxima.";
 
 
         JSONObject json_presion = new JSONObject();

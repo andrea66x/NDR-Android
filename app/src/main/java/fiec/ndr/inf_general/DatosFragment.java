@@ -75,22 +75,6 @@ public class DatosFragment extends Fragment {
     ////////////////////////////////////////////////////////////////////////
 
 
-    /*
-        //Este metodo de instanciar el fragment, sirve para mantener variables
-        //cuando se recree, evitando que se llame al constructor vacio.
-        public static DatosFragment newInstance(int sectionNumber) {
-            DatosFragment fragment = new DatosFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-    */
-
-    ////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////// INICIO - INICIALIZAR COMPONENTES ///////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

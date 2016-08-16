@@ -9,23 +9,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import fiec.ndr.InformacionGeneral;
 import fiec.ndr.R;
 
 public class AntecedentesFragment extends Fragment {
 
     static RadioGroup rg_ant_glucosa, rg_ant_familia, rg_ant_parientes, rg_ant_embarazo, rg_ant_pso_hijos, rg_ant_presion, rg_ant_renal;
     static EditText et_ant_enf_renal;
-    static LinearLayout lyt_ant_enf_renal;
+    static LinearLayout lyt_ant_enf_renal, lyt_embarazo, lyt_hijos;
 
     private String data_ant_glucosa, data_ant_familia, data_ant_parientes, data_ant_embarazo, data_ant_pso_hijos, data_ant_presion, data_ant_renal;
     private String det_ant_enf_renal;
 
-
+    int sexo_encuestado=0;
 
     private Map<String, String> datos_antecedentes = new HashMap<String, String>();
 
@@ -65,17 +68,6 @@ public class AntecedentesFragment extends Fragment {
     ///////////////////FIN -- INTERFACES ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////
 
-    /*
-        //Este metodo de instanciar el fragment, sirve para mantener variables
-        //cuando se recree, evitando que se llame al constructor vacio.
-        public static AntecedentesFragment newInstance(int sectionNumber) {
-            AntecedentesFragment fragment = new AntecedentesFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-    */
 
     ////////////////////////////////////////////////////////////////////////////////////////
     /////////////////// INICIO - INICIALIZAR COMPONENTES ///////////////////////////////////
@@ -97,6 +89,8 @@ public class AntecedentesFragment extends Fragment {
         et_ant_enf_renal = (EditText) rootView.findViewById(R.id.datos_ant_enf_renal);
 
         lyt_ant_enf_renal = (LinearLayout) rootView.findViewById(R.id.lyt_ant_fam_renal);
+        lyt_embarazo = (LinearLayout) rootView.findViewById(R.id.lyt_embarazo);
+        lyt_hijos = (LinearLayout) rootView.findViewById(R.id.lyt_hijos);
 
         rg_ant_glucosa.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -180,6 +174,23 @@ public class AntecedentesFragment extends Fragment {
                 }
             }
         });
+
+        InformacionGeneral act_inf_gen = (InformacionGeneral)getActivity();
+        sexo_encuestado = act_inf_gen.sexo;
+        if(sexo_encuestado==0){
+            lyt_embarazo.setVisibility(View.GONE);
+            lyt_hijos.setVisibility(View.GONE);
+        }
+        else if(sexo_encuestado==1){
+            lyt_embarazo.setVisibility(View.VISIBLE);
+            lyt_hijos.setVisibility(View.VISIBLE);
+        }
+        else{
+            lyt_embarazo.setVisibility(View.VISIBLE);
+            lyt_hijos.setVisibility(View.VISIBLE);
+        }
+
+
         return rootView;
     }
 
@@ -241,20 +252,29 @@ public class AntecedentesFragment extends Fragment {
 
         //Colectamos los datos si tuvo diabetes en el embarazo.
         if (data_ant_embarazo != null && !data_ant_embarazo.isEmpty()) {
-            if (data_ant_embarazo.equals("0") || data_ant_embarazo.equals("1"))
-                datos_antecedentes.put("ant_embarazo", data_ant_embarazo);
+            if(sexo_encuestado==1){
+                if (data_ant_embarazo.equals("0") || data_ant_embarazo.equals("1"))
+                    datos_antecedentes.put("ant_embarazo", data_ant_embarazo);
+                else
+                    datos_antecedentes.put("ant_embarazo", "-1");
+            }
             else
-                datos_antecedentes.put("ant_embarazo", "-1");
+                datos_antecedentes.put("ant_embarazo", "0");
         }
         else
             datos_antecedentes.put("ant_embarazo", "-1");
 
         //Colectamos los datos de si ha tenido glucosa o no.
         if (data_ant_pso_hijos != null && !data_ant_pso_hijos.isEmpty()) {
-            if (data_ant_pso_hijos.equals("0") || data_ant_pso_hijos.equals("1"))
-                datos_antecedentes.put("ant_pso_hijos", data_ant_pso_hijos);
+
+            if(sexo_encuestado==1){
+                if (data_ant_pso_hijos.equals("0") || data_ant_pso_hijos.equals("1"))
+                    datos_antecedentes.put("ant_pso_hijos", data_ant_pso_hijos);
+                else
+                    datos_antecedentes.put("ant_pso_hijos", "-1");
+            }
             else
-                datos_antecedentes.put("ant_pso_hijos", "-1");
+                datos_antecedentes.put("ant_pso_hijos", "0");
         }
         else
             datos_antecedentes.put("ant_pso_hijos", "-1");

@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fiec.ndr.InformacionGeneral;
 import fiec.ndr.R;
 
 /* Fragmento Salud*/
@@ -33,6 +34,7 @@ public class MedicamentosFragment extends Fragment {
     private String det_hipoglucemias, det_medicina_presion, det_analgesicos, det_medicinas_otros;
     private String data_razon_1, data_razon_2, data_razon_3, data_razon_4, data_med_1, data_med_2, data_med_3;
     private boolean check1, check2;
+    int diabetes;
 
     private Map<String, String> datos_medicamentos = new HashMap<String, String>();
 
@@ -128,28 +130,19 @@ public class MedicamentosFragment extends Fragment {
                 {
                     case R.id.datos_insulina_si:
                         data_insulina = "1";
-                        check1 = true;
+                        check1 = false;
                         break;
                     case R.id.datos_insulina_no:
                         data_insulina = "0";
-                        check1 = false;
+                        check1 = true;
                         break;
                     default:
                         break;
                 }
-                if(!(check1||check2))
+                if(check1&&check2&&(diabetes==1))
                     lyt_razones_med.setVisibility(View.VISIBLE);
-                else {
-                    lyt_razones_med.setVisibility(View.GONE);
-                    chk_razon_1.setChecked(false);
-                    chk_razon_2.setChecked(false);
-                    chk_razon_3.setChecked(false);
-                    chk_razon_4.setChecked(false);
-                    data_razon_1="0";
-                    data_razon_2="0";
-                    data_razon_3="0";
-                    data_razon_4="0";
-                }
+                else
+                    limpiar_razones();
             }
         });
 
@@ -163,12 +156,12 @@ public class MedicamentosFragment extends Fragment {
                     case R.id.datos_hipoglucemias_si:
                         lyt_hipogluc.setVisibility(View.VISIBLE);
                         data_hipoglucemias = "1";
-                        check2 = true;
+                        check2 = false;
                         break;
                     case R.id.datos_hipoglucemias_no:
                         lyt_hipogluc.setVisibility(View.GONE);
                         data_hipoglucemias = "0";
-                        check2 = false;
+                        check2 = true;
                         et_hipoglucemias.setText("");
                         det_hipoglucemias = "";
                         break;
@@ -176,19 +169,11 @@ public class MedicamentosFragment extends Fragment {
                         break;
                 }
 
-                if(!(check1||check2))
+                if(check1&&check2&&(diabetes==1))
                     lyt_razones_med.setVisibility(View.VISIBLE);
-                else {
-                    lyt_razones_med.setVisibility(View.GONE);
-                    chk_razon_1.setChecked(false);
-                    chk_razon_2.setChecked(false);
-                    chk_razon_3.setChecked(false);
-                    chk_razon_4.setChecked(false);
-                    data_razon_1="0";
-                    data_razon_2="0";
-                    data_razon_3="0";
-                    data_razon_4="0";
-                }
+                else
+                    limpiar_razones();
+
             }
         });
 
@@ -276,7 +261,14 @@ public class MedicamentosFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         // Nos aseguramos que el tab sea visible.
-        if (this.isVisible())
+        if (this.isVisible()) {
+            InformacionGeneral act_inf_gen = (InformacionGeneral) getActivity();
+            diabetes = 0;
+            diabetes = act_inf_gen.tiene_diabetes;
+            if(diabetes==0)
+                limpiar_razones();
+            else if(check1&&check2&&(diabetes==1))
+                lyt_razones_med.setVisibility(View.VISIBLE);
             //Comprobamos si el fragment ya no es visible para el usuario.
             if (!isVisibleToUser) {
                 //Rellenamos el hash con los datos obtenidos de los componentes.
@@ -284,6 +276,19 @@ public class MedicamentosFragment extends Fragment {
                 //Llamamos al interface.
                 interface_Medicamentos.onChangeTabMedicamentos(datos_medicamentos);
             }
+        }
+    }
+
+    public void limpiar_razones(){
+        lyt_razones_med.setVisibility(View.GONE);
+        chk_razon_1.setChecked(false);
+        chk_razon_2.setChecked(false);
+        chk_razon_3.setChecked(false);
+        chk_razon_4.setChecked(false);
+        data_razon_1="0";
+        data_razon_2="0";
+        data_razon_3="0";
+        data_razon_4="0";
     }
 
     public void setearHash(){

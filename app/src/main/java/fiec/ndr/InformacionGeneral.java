@@ -55,7 +55,9 @@ public class InformacionGeneral extends AppCompatActivity
     private Map<String, String> hm_datos, hm_vivienda, hm_economia, hm_salud, hm_medicamentos, hm_antecedentes, hm_habitos;
     private boolean validador_json, faltan_campos;
 
-    int result=2;
+    int result;
+
+    public int sexo=-1, tiene_diabetes;
 
 
 
@@ -69,10 +71,12 @@ public class InformacionGeneral extends AppCompatActivity
 
         // Configuramos el ViewPager con las secciones del adapter.
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        assert mViewPager != null;
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         // Configuramos el TabLayout con el ViewPager.
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        assert tabLayout != null;
         tabLayout.setupWithViewPager(mViewPager);
 
         Intent intent = getIntent();
@@ -213,6 +217,7 @@ public class InformacionGeneral extends AppCompatActivity
         String campos_economia = "Economia Familiar: ", campos_salud = "Salud: ";
         String campos_medicamentos = "Medicamentos: ", campos_antecedentes="Antecedentes: ", campos_habitos = "Habitos: ";
         faltan_campos = false;
+        result = 2;
 
         it = hm_datos.entrySet().iterator();
         while (it.hasNext()) {
@@ -358,7 +363,7 @@ public class InformacionGeneral extends AppCompatActivity
         */
         hm_datos = new HashMap<String, String>();
         hm_datos = datos_inf_gen;
-
+        sexo = Integer.valueOf(hm_datos.get("sexo"));
     }
 
     @Override
@@ -415,6 +420,7 @@ public class InformacionGeneral extends AppCompatActivity
         */
         hm_salud = new HashMap<String, String>();
         hm_salud = datos_salud;
+        tiene_diabetes = Integer.valueOf(hm_salud.get("diabetes"));
 
     }
 

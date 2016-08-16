@@ -332,6 +332,53 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv">
+
+                <TextView
+                    android:id="@+id/txtV_medicinas_presion_otros"
+                    style="@style/lblTextStyle"
+                    android:text="Seleccione si toma uno de los siguientes medicamentos:"
+                    android:gravity="top|start" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="10dp">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IBERSATAN"
+                        android:id="@+id/chk_med_1"/>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ENALAPRIL"
+                        android:id="@+id/chk_med_2"/>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CAPTOPRIL"
+                        android:id="@+id/chk_med_3"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:paddingTop="@dimen/dato_marginv">
 
                 <TextView
@@ -374,7 +421,7 @@
                 <TextView
                     android:id="@+id/txtV_medicamentos_otros2"
                     style="@style/lblTextStyle"
-                    android:text="¿Cuáles?:"
+                    android:text="¿Cuál?:"
                     android:gravity="top|start" />
 
                 <EditText
@@ -385,52 +432,6 @@
                     android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:gravity="bottom|start"
                     android:background="@drawable/txtbox"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="@dimen/dato_marginv"
-                android:paddingBottom="@dimen/dato_marginv">
-
-                <TextView
-                    android:id="@+id/txtV_medicinas_presion_otros"
-                    style="@style/lblTextStyle"
-                    android:text="Seleccione si toma uno de los siguientes medicamentos:"
-                    android:gravity="top|start" />
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:padding="10dp">
-
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="IBERSATAN"
-                        android:id="@+id/chk_med_1"/>
-
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ENALAPRIL"
-                        android:id="@+id/chk_med_2"/>
-
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CAPTOPRIL"
-                        android:id="@+id/chk_med_3"/>
-                </LinearLayout>
-
             </LinearLayout>
 
             <View

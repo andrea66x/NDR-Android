@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fiec.ndr.InformacionGeneral$ViviendaFragment">
+    tools:context="fiec.ndr.inf_general.ViviendaFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -175,11 +175,12 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
                     android:id="@+id/datos_direccion"
-                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
                     android:gravity="bottom|start"
-                    android:background="@drawable/txtbox"/>
+                    android:digits="ABCDEFGHIJKLMNÑOPQRSTUVWXYZÁÉÍÓÚ ,.-°1234567890"
+                    android:background="@drawable/txtbox"
+                    android:singleLine="true"
+                    android:inputType="textCapCharacters" />
             </LinearLayout>
 
             <View

@@ -153,7 +153,8 @@
                 android:layout_marginBottom="@dimen/dato_marginv"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/dato_marginv"
-                android:paddingTop="@dimen/dato_marginv">
+                android:paddingTop="@dimen/dato_marginv"
+                android:id="@+id/lyt_embarazo">
 
                 <TextView
                     android:id="@+id/txtV_ant_embarazo"
@@ -173,7 +174,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="10dp"
-                        android:text="NO" />
+                        android:text="NO"
+                        android:checked="false" />
 
                     <RadioButton
                         android:id="@+id/datos_ant_embarazo_si"
@@ -196,7 +198,8 @@
                 android:layout_marginBottom="@dimen/dato_marginv"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/dato_marginv"
-                android:paddingTop="@dimen/dato_marginv">
+                android:paddingTop="@dimen/dato_marginv"
+                android:id="@+id/lyt_hijos">
 
                 <TextView
                     android:id="@+id/txtV_ant_pso_hijos"
@@ -224,7 +227,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:paddingRight="10dp"
-                        android:text="SI" />
+                        android:text="SI"
+                        android:checked="false" />
                 </RadioGroup>
             </LinearLayout>
 

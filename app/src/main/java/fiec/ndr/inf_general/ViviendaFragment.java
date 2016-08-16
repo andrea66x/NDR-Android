@@ -70,18 +70,6 @@ public class ViviendaFragment extends Fragment {
     ////////////////////////////////////////////////////////////////////////
 
 
-    /*
-        //Este metodo de instanciar el fragment, sirve para mantener variables
-        //cuando se recree, evitando que se llame al constructor vacio.
-        public static ViviendaFragment newInstance(int sectionNumber) {
-            ViviendaFragment fragment = new ViviendaFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-    */
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

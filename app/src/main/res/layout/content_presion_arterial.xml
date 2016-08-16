@@ -27,6 +27,38 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/dato_marginv"
                 android:paddingTop="@dimen/dato_marginv"
+                android:paddingBottom="@dimen/dato_marginv" >
+
+                <TextView
+                    style="@style/lblTextStyle"
+                    android:id="@+id/textView12"
+                    android:text="Nombres y Apellidos:"
+                    android:gravity="top|start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:id="@+id/data_nombres"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ ÁÉÍÓÚ"
+                    android:gravity="bottom|start"
+                    android:background="@drawable/txtbox"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dato_marginv"
+                android:paddingTop="@dimen/dato_marginv"
                 android:paddingBottom="@dimen/dato_marginv">
 
                 <TextView

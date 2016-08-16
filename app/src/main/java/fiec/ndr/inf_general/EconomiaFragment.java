@@ -67,17 +67,6 @@ public class EconomiaFragment extends Fragment {
     ///////////////////FIN -- INTERFACES ///////////////////////////////////
     ////////////////////////////////////////////////////////////////////////
 
-    /*
-        //Este metodo de instanciar el fragment, sirve para mantener variables
-        //cuando se recree, evitando que se llame al constructor vacio.
-        public static EconomiaFragment newInstance(int sectionNumber) {
-            EconomiaFragment fragment = new EconomiaFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-    */
 
 
     ////////////////////////////////////////////////////////////////////////////////////////
