@@ -167,14 +167,14 @@ public class Preparacion extends AppCompatActivity {
             case R.id.menu_ayuda:
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(Preparacion.this);
 
-                alertDialog.setTitle("Ayuda Laboratorio:");
+                alertDialog.setTitle("Ayuda Preparación:");
 
                 alertDialog.setMessage("" +
                         "- Recuerda ingresar los nombres y apellidos completos del encuestado. \n\n" +
-                        "- La glucemia indica los niveles de glucosa en la sangre, esta dada en mg/dl. \n\n" +
-                        "- Hemoglobina glicosilada es tambien conocida como promedio de glucosa o HbA1c. \n\n" +
-                        "- La microalbuminuria debe ser ingresada en unidades mg/gr. \n\n" +
-                        "- La creatinina debe estar en unidades mg/dl. \n\n");
+                        "- Debes tratar de que el encuestado conteste si realmente esta en ayunas. \n\n" +
+                        "- El codigo asignado al paciente consta de 2 letras seguidas de 5 números. \n\n" +
+                        "- El lugar de la encuesta, sera determinado en la charla de preparación. \n\n" +
+                        "- La foto es un requerimiento vital en la encuesta, por favor asegurate que sea de calidad. \n\n");
 
                 // Setting Icon to Dialog
                 alertDialog.setIcon(R.mipmap.ayuda_b);

@@ -2,9 +2,11 @@ package fiec.ndr.inf_general;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -204,6 +206,21 @@ public class HabitosFragment extends Fragment {
                 setearHash();
                 //Llamamos al interface.
                 interface_Habitos.onChangeTabHabitos(datos_habitos);
+            }
+        });
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Salir")
+                        .setMessage("¿Estás seguro de querer salir?")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                getActivity().finish();
+                            }
+                        }).create().show();
             }
         });
 

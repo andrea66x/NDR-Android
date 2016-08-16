@@ -1,14 +1,18 @@
 package fiec.ndr;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,10 +33,10 @@ import java.util.TimeZone;
 public class Medidas extends AppCompatActivity {
 
     String codigo, UUID, hora_encuesta;
-    String peso, estatura, med_cintura, med_cadera;
-    int result = 2;
+    String peso, estatura, med_cintura, med_cadera, data_nombres;
+    int result;
 
-    private EditText et_peso, et_estatura, et_cintura, et_cadera;
+    private EditText et_peso, et_estatura, et_cintura, et_cadera, et_nombres;
     private Map<String, String> hm_medidas = new HashMap<String, String>();
 
 
@@ -48,8 +52,18 @@ public class Medidas extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, guardarJson(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, guardarJson(), Snackbar.LENGTH_LONG).setCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        if ((event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT || event == Snackbar.Callback.DISMISS_EVENT_SWIPE) && result == 1)
+                            finish();
+                    }
+
+                    @Override
+                    public void onShown(Snackbar snackbar) {
+
+                    }
+                }).show();
             }
         });
 
@@ -60,17 +74,60 @@ public class Medidas extends AppCompatActivity {
         }
         setTitle("Medidas: " + codigo);
 
-        et_peso = (EditText) findViewById(R.id.data_peso_kg);
+        et_peso = (EditText) findViewById(R.id.data_peso);
         et_estatura = (EditText) findViewById(R.id.data_estatura);
         et_cintura = (EditText) findViewById(R.id.data_cintura);
         et_cadera = (EditText) findViewById(R.id.data_cadera);
+        et_nombres = (EditText) findViewById(R.id.data_nombres);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.ayuda, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_ayuda:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Medidas.this);
+
+                alertDialog.setTitle("Ayuda Medidas:");
+
+                alertDialog.setMessage("" +
+                        "- Recuerda ingresar los nombres y apellidos completos del encuestado. \n\n" +
+                        "- El peso esta dado en kilogramos y admite 2 decimales. \n\n" +
+                        "- El estandar para la delimitacion de decimales es el punto y no la coma. \n\n" +
+                        "- La estatura debe estar en cms, no admite decimales. \n\n" +
+                        "- La medida de la cintura debe estar en cms, no admite decimales. \n\n" +
+                        "- La medida de las caderas debe estar en cms, no admite decimales. \n\n");
+
+                // Setting Icon to Dialog
+                alertDialog.setIcon(R.mipmap.ayuda_b);
+
+                // Setting Netural "Cancel" Button
+                alertDialog.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDialog.show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     private String guardarJson(){
 
         JSONArray jarray_datos;
         JSONObject temp1;
+        result = 2;
 
         //Obtenemos el UUID del dispositivo desde que ha sido creado el JSON.
         TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -81,6 +138,12 @@ public class Medidas extends AppCompatActivity {
         hora_encuesta = calendar.getTime().toString();
 
         hm_medidas.clear();
+
+        data_nombres = et_nombres.getText().toString();
+        if (data_nombres.matches(".*\\w.*") && !data_nombres.isEmpty())
+            hm_medidas.put("nombres", data_nombres);
+        else
+            return "No has ingresado los nombres del encuestado.";
 
 
         peso = et_peso.getText().toString();
