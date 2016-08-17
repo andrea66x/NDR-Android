@@ -26,18 +26,13 @@ public class MenuPrincipal extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void formularios(View view){
-        Intent intent = new Intent(this, Secciones.class);
-        startActivity(intent);
-    }
-
     public void sincronizarBase(View view){
-        Intent intent = new Intent(this, Secciones.class);
+        Intent intent = new Intent(this, SincronizarEncuestas.class);
         startActivity(intent);
     }
 
     public void informacion(View view){
-        Intent intent = new Intent(this, Secciones.class);
+        Intent intent = new Intent(this, InfoContacto.class);
         startActivity(intent);
     }
 
