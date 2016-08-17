@@ -87,12 +87,12 @@
 
     <string-array name="opcionesOcupacion">
         <item>Seleccionar</item>
-        <item>Jubilado</item>
-        <item>No Trabaja</item>
-        <item>Estudia</item>
-        <item>Ama de Casa</item>
         <item>Empleado</item>
         <item>Cuenta Propia</item>
+        <item>No Trabaja</item>
+        <item>Estudia</item>
+        <item>Jubilado</item>
+        <item>Ama de Casa</item>
     </string-array>
 
     <string-array name="opcionesEstudios">

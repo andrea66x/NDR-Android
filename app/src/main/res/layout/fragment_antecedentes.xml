@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:focusableInTouchMode="true"
     tools:context="fiec.ndr.inf_general.AntecedentesFragment">
 
     <ScrollView
@@ -337,10 +338,11 @@
                     android:id="@+id/datos_ant_enf_renal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/txtbox"
-                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:inputType="textCapCharacters"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚ "
+                    android:singleLine="true"
                     android:gravity="bottom|start"
-                    android:inputType="textPersonName" />
+                    android:background="@drawable/txtbox"/>
             </LinearLayout>
 
             <View

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -95,6 +96,34 @@ public class EconomiaFragment extends Fragment {
 
         // Coloco la data en el spinner deseado
         sp_ocupacion.setAdapter(dataAdapter1);
+
+        sp_ocupacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                switch (position){
+                    case 1:
+                    case 2:
+                        et_trabajo.setText("");
+                        et_trabajo.setEnabled(true);
+                        break;
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                        et_trabajo.setText(sp_ocupacion.getItemAtPosition(position).toString().toUpperCase());
+                        et_trabajo.setEnabled(false);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
         // Paso el array de las opciones y el aspecto que tendra la caja selectora.
         ArrayAdapter<CharSequence> dataAdapter2 = ArrayAdapter.createFromResource(rootView.getContext(),

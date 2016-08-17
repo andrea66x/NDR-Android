@@ -1,19 +1,15 @@
 package fiec.ndr.inf_general;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.NumberPicker;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -28,13 +24,17 @@ import fiec.ndr.R;
 
 public class DatosFragment extends Fragment {
 
-    static ImageButton btn_calendario;
-    static EditText et_nombres, et_apellidos, et_telefono,et_edad, et_dia, et_mes, et_anio;
+
+    static EditText et_nombres, et_apellidos, et_telefono,et_edad;
     static RadioGroup rg_sexo;
     static Spinner sp_EstCivil, sp_origen;
+    static NumberPicker np_dia, np_mes, np_anio;
+    final String[] values= {"Enero","Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    boolean bisiesto= false;
+    int dia=1,mes=1,anio=1900;
 
-    private GregorianCalendar cal;
-    private String data_nombres, data_apellidos, data_fecha_nac, data_etnia, data_estado_civil, data_edad, data_sexo, data_telefono;
+    private GregorianCalendar calendar = new GregorianCalendar();
+    String data_nombres, data_apellidos, data_fecha_nac, data_etnia, data_estado_civil, data_sexo, data_telefono;
     private Map<String, String> datos_inf_gen = new HashMap<String, String>();
 
 
@@ -84,23 +84,14 @@ public class DatosFragment extends Fragment {
         et_nombres = (EditText) rootView.findViewById(R.id.datos_nombres);
         et_apellidos = (EditText) rootView.findViewById(R.id.datos_apellidos);
         rg_sexo = (RadioGroup) rootView.findViewById(R.id.rg_sexo);
-        et_dia = (EditText) rootView.findViewById(R.id.datos_fecha_dia);
-        et_mes = (EditText) rootView.findViewById(R.id.datos_fecha_mes);
-        et_anio = (EditText) rootView.findViewById(R.id.datos_fecha_anio);
-        et_edad = (EditText) rootView.findViewById(R.id.datos_edad);
+        np_dia = (NumberPicker) rootView.findViewById(R.id.np_dia);
+        np_mes = (NumberPicker) rootView.findViewById(R.id.np_mes);
+        np_anio = (NumberPicker) rootView.findViewById(R.id.np_anio);
         et_telefono = (EditText) rootView.findViewById(R.id.datos_telefono);
         sp_EstCivil = (Spinner) rootView.findViewById(R.id.datos_estado_civil);
         sp_origen = (Spinner) rootView.findViewById(R.id.datos_etnia);
 
-        btn_calendario = (ImageButton) rootView.findViewById(R.id.btn_dato_fecha);
-
-        btn_calendario.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Show the DatePickerDialog
-                showDatePicker();
-            }
-        });
-
+        fechaPicker(np_mes,np_dia,np_anio);
 
         // Paso el array de las opciones y el aspecto que tendra la caja selectora.
         ArrayAdapter<CharSequence> dataAdapter1 = ArrayAdapter.createFromResource(rootView.getContext(),
@@ -132,59 +123,57 @@ public class DatosFragment extends Fragment {
             }
         });
 
+        //Set a value change listener for NumberPicker
+        np_mes.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+               @Override
+               public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+
+                   switch (values[newVal])
+                   {
+                       case "Enero":
+                           np_dia.setMaxValue(31);
+                           break;
+                       case "Febrero":
+                           if(bisiesto)
+                                np_dia.setMaxValue(29);
+                           else
+                               np_dia.setMaxValue(28);
+                           break;
+                       case "Marzo":
+                           np_dia.setMaxValue(30);
+                           break;
+                       default:
+                           np_dia.setMaxValue(31);
+                           break;
+                   }
+                   mes= newVal;
+               }
+
+        });
+
+        //Set a value change listener for NumberPicker
+        np_anio.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+
+                if (calendar.isLeapYear(newVal))
+                    bisiesto=true;
+                else
+                    bisiesto=false;
+                anio = newVal;
+            }
+        });
+
+        np_dia.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal){
+                dia= newVal;
+            }
+        });
+
         return rootView;
     }
 
-    private void showDatePicker() {
-        DatePickerFragment date = new DatePickerFragment();
-        //Seteamos la fecha actual en el dialog.
-
-        Calendar calender = Calendar.getInstance();
-        Bundle args = new Bundle();
-        args.putInt("year", calender.get(Calendar.YEAR));
-        args.putInt("month", calender.get(Calendar.MONTH));
-        args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
-        date.setArguments(args);
-
-        date.setCallBack(ondate);
-        date.show(getFragmentManager(), "Fecha");
-    }
-
-    DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
-
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            setearFecha(dayOfMonth,monthOfYear,year);
-            setearEdad(dayOfMonth,monthOfYear,year);
-        }
-    };
-
-
-    public static class DatePickerFragment extends DialogFragment {
-        DatePickerDialog.OnDateSetListener ondateSet;
-        private int year, month, day;
-
-        public DatePickerFragment() {
-        }
-
-        public void setCallBack(DatePickerDialog.OnDateSetListener ondate) {
-            ondateSet = ondate;
-        }
-
-        @SuppressLint("NewApi")
-        @Override
-        public void setArguments(Bundle args) {
-            super.setArguments(args);
-            year = args.getInt("year");
-            month = args.getInt("month");
-            day = args.getInt("day");
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return new DatePickerDialog(getActivity(), ondateSet, year, month, day);
-        }
-    }
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////// FIN - INICIALIZAR COMPONENTES ///////////////////////////////////
@@ -210,34 +199,25 @@ public class DatosFragment extends Fragment {
     }
 
 
-    public void setearFecha(int dia, int mes, int anio){
+    public void fechaPicker(NumberPicker np_m, NumberPicker np_d, NumberPicker np_a){
 
-        et_dia.setText(String.valueOf(dia));
-        et_mes.setText(String.valueOf(mes+1));
-        et_anio.setText(String.valueOf(anio));
+        np_m.setMinValue(0);
+        np_m.setMaxValue(values.length-1);
+        np_m.setDisplayedValues(values);
+        np_m.setWrapSelectorWheel(true);
 
+        np_d.setMinValue(1);
+        np_d.setMaxValue(31);
+        np_d.setWrapSelectorWheel(true);
+
+        np_a.setMinValue(1900);
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        np_a.setMaxValue(year);
+        np_a.setValue(1990);
+        np_a.setWrapSelectorWheel(false);
     }
-    public void setearEdad(int dia, int mes, int anio){
 
-        cal = new GregorianCalendar();
-        int y, m, d, a;
-
-        y = cal.get(Calendar.YEAR);
-        m = cal.get(Calendar.MONTH)+1;
-        d = cal.get(Calendar.DAY_OF_MONTH);
-        cal.set(anio, mes, dia);
-        a = y - cal.get(Calendar.YEAR);
-        if ((m < cal.get(Calendar.MONTH))
-                || ((m == cal.get(Calendar.MONTH)) && (d < cal
-                .get(Calendar.DAY_OF_MONTH)))) {
-            --a;
-        }
-        if(a < 0)
-            throw new IllegalArgumentException("Age < 0");
-
-        data_edad = String.valueOf(a);
-        et_edad.setText(data_edad);
-    }
 
 
     public void setearHash(){
@@ -269,21 +249,15 @@ public class DatosFragment extends Fragment {
             datos_inf_gen.put("sexo", "-1");
 
         //Colectamos los datos de la fecha de nacimiento.
+        calendar.set(anio, mes, dia);
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-        if(cal != null){
-            data_fecha_nac = format1.format(cal.getTime());
+        if(calendar != null){
+            data_fecha_nac = format1.format(calendar.getTime());
             datos_inf_gen.put("fecha_nac", data_fecha_nac);
         }
         else
             datos_inf_gen.put("fecha_nac", "-1");
 
-        //Colectamos los datos de la edad.
-        if (data_edad != null && !data_edad.isEmpty() && Integer.valueOf(data_edad)>=0)
-            datos_inf_gen.put("edad", data_edad);
-        else if (data_edad == null || Integer.valueOf(data_edad)<=0)
-            datos_inf_gen.put("edad", "-1");
-        else
-            datos_inf_gen.put("edad", "-1");
 
         //Colectamos los datos del telefono.
         data_telefono = et_telefono.getText().toString();

@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -208,6 +210,101 @@ public class InformacionGeneral extends AppCompatActivity
 
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.ayuda, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_ayuda:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(InformacionGeneral.this);
+
+                switch (mViewPager.getCurrentItem()){
+                    case 0:
+                        alertDialog.setTitle("Ayuda Datos Personales:");
+                        alertDialog.setMessage(
+                                "- Debes ingresar los nombres y apellidos completos del encuestado. \n\n" +
+                                        "- El sexo determinara algunas opciones mas adelante, no olvides seleccionarlo. \n\n" +
+                                        "- La fecha de nacimiento tiene el orden: año, mes y dia. \n\n" +
+                                        "- Ingresa solamente un telefono, el mas importante. \n\n" +
+                                        "- El estado civil es obligatorio, se prudente al solicitarlo. \n\n" +
+                                        "- Exponle los tipos de etnia que estan disponibles para que el encuestado se decida por uno. \n");
+                        break;
+                    case 1:
+                        alertDialog.setTitle("Ayuda Vivienda:");
+                        alertDialog.setMessage(
+                                "- La provincia y el cantón son los de residencia actual. \n\n" +
+                                        "- La provincia, el cantón, donde se ubica la vivienda y la dirección,son los de residencia actual. \n\n" +
+                                        "- Debes ingresar el numero total de personas con las que vive incluyendolo. \n\n" +
+                                        "- La manera que llega el agua al hogar se refiere al suministro de agua potable.\n\n" +
+                                        "- Cloacas se refiere al servicio higienico.\n" );
+                        break;
+                    case 2:
+                        alertDialog.setTitle("Ayuda Economía Familiar:");
+                        alertDialog.setMessage(
+                                "- Cabeza de familia se refiere a si sostiene el hogar. \n\n" +
+                                        "- Ingresos propios, percibe sueldo. \n\n" +
+                                        "- Llega a fin de mes, si le alcanza sus ingresos para sus necesidades mes a mes. \n\n" +
+                                        "- Si seleccion que no trabaja o alguna opcion similar, entonces no necesita llenar de que trabaja. \n\n" +
+                                        "- Estudios, se refiere al nivel que estudios que posee actualmente. \n");
+                        break;
+                    case 3:
+                        alertDialog.setTitle("Ayuda Salud:");
+                        alertDialog.setMessage(
+                                "- Debes ingresar solamente un seguro medio, el principal. \n\n" +
+                                        "- El formato de chequeos de salud es Cuantas veces cada cuantos meses.\nEj: 2 veces cada 5 meses. \n\n" +
+                                        "- Si desconoce algun dato solicitado, colocar no. \n\n" +
+                                        "- En algunas opciones seleccionar si, despliega un nuevo cuadro de texto para dar información detallada. \n");
+                        break;
+                    case 4:
+                        alertDialog.setTitle("Ayuda Medicamentos:");
+                        alertDialog.setMessage(
+                                "- Si tiene diabetes y no toma ni insulina, ni hipoglucemias, seleccione la razon por la que no las toma. \n\n" +
+                                        "- Las opciones de Ibertasan, Enalapril y Captopril son medicamentos para la presión arterial. \n" +
+                                        "Estan presentadas en sus nombres tecnicos, pueden tener otros nombres genericos.\n\n" +
+                                        "- La opcion de otro medicamento es ideal para colocar un medicamento que no sepa ubicar en ninguna categoria expuesta. \n");
+                        break;
+                    case 5:
+                        alertDialog.setTitle("Ayuda Antecedentes:");
+                        alertDialog.setMessage(
+                                "- Los familiares directos se refiere al nucleo familiar, esposo o esposa e hijos. \n\n" +
+                                        "- Los demas familiares son: tios, primos, abuelos, etc. \n");
+                        break;
+                    case 6:
+                        alertDialog.setTitle("Ayuda Hábitos:");
+                        alertDialog.setMessage(
+                                "- La frecuencia de consumo de tabaco es diaria, no incluye el uso de drogas como la marihuana. \n Ej: 4 tabacos al día.\n\n" +
+                                        "- La frecuencia de consumo de alcohol es semanal, en cualquier presentación. \n Ej: 5 veces a la semana.\n\n" +
+                                        "- Otros, se refiere a otros tipos de estupefacientes, sea prudente al consultar esto. \n");
+                        break;
+                    default:
+                        alertDialog.setTitle("Ayuda Informacion General:");
+                        alertDialog.setMessage(
+                                "- Estas en el activity de información general, HACKER!");
+                        break;
+                }
+
+                // Setting Icon to Dialog
+                alertDialog.setIcon(R.mipmap.ayuda_b);
+
+                // Setting Netural "Cancel" Button
+                alertDialog.setPositiveButton("Entendido!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                alertDialog.show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     public String revisarCampos(){

@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:focusableInTouchMode="true"
     tools:context="fiec.ndr.inf_general.SaludFragment">
 
     <ScrollView
@@ -71,9 +72,10 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
                     android:id="@+id/datos_seguro_medico"
-                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:inputType="textCapCharacters"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚ "
+                    android:singleLine="true"
                     android:gravity="bottom|start"
                     android:background="@drawable/txtbox"/>
             </LinearLayout>
@@ -132,21 +134,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:ems="3"
-                    android:maxLength="3"
+                    android:ems="2"
+                    android:maxLength="2"
                     android:id="@+id/datos_veces_chequeo"
-                    android:layout_gravity="center"
                     android:background="@drawable/txtbox"
-                    android:textAlignment="center"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:id="@+id/txtV_meses_chequeo"
                     style="@style/lblTextStyle"
-                    android:text="veces cada mes"
+                    android:text="veces cada"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp" />
 
@@ -154,15 +155,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:ems="3"
-                    android:maxLength="3"
+                    android:ems="2"
+                    android:maxLength="2"
                     android:id="@+id/datos_meses_chequeo"
-                    android:layout_gravity="center"
                     android:background="@drawable/txtbox"
-                    android:textAlignment="center"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:gravity="center" />
+
+                <TextView
+                    style="@style/lblTextStyle"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/textView13"
+                    android:text="meses"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -229,8 +237,8 @@
                     android:maxLength="3"
                     android:id="@+id/datos_tiempo_diabetes"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:background="@drawable/txtbox"
-                    android:textAlignment="center"
                     android:textStyle="bold"
                     android:layout_weight="1" />
             </LinearLayout>
@@ -331,9 +339,10 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
                     android:id="@+id/datos_enfermedad_renal"
-                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:inputType="textCapCharacters"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚ "
+                    android:singleLine="true"
                     android:gravity="bottom|start"
                     android:background="@drawable/txtbox"/>
             </LinearLayout>
@@ -395,9 +404,10 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
                     android:id="@+id/datos_enfermedad_otra"
-                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:inputType="textCapCharacters"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚ "
+                    android:singleLine="true"
                     android:gravity="bottom|start"
                     android:background="@drawable/txtbox"/>
             </LinearLayout>
