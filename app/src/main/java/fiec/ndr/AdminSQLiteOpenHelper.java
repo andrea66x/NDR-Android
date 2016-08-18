@@ -9,9 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Andrea on 20/07/2016.
- */
+
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "administracion.db";
@@ -19,12 +17,13 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public AdminSQLiteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         //aquí creamos las tablas
 
-        db.execSQL("create table responsable(" +
-                "id_responsable integer primary key, " +
+        db.execSQL("create table usuarios(" +
+                "id_usuario integer primary key, " +
                 "user text, " +
                 "password text, " +
                 "rol integer)");
@@ -36,55 +35,50 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table preparacion(" +
                 "id_preparacion integer primary key, " +
+                "codigo text, " +
                 "ruta_json text, " +
                 "ruta_img text, " +
-                "fecha text, " +
-                "lugar text, " +
-                "ayunas text, " +
-                "id_responsable integer, " +
-                "FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+                "registrador_nom text, " +
+                "registrador_ci text, " +
+                "estado bool, " +
+                "id_usuario integer)");
 
         db.execSQL("create table inf_general(" +
                 "id_inf_general integer primary key, " +
+                "codigo text, " +
                 "ruta_json text, " +
-                "fecha text, " +
-                "id_responsable integer, " +
-                "FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+                "registrador_nom text, " +
+                "registrador_ci text, " +
+                "estado bool, " +
+                "id_usuario integer)");
 
         db.execSQL("create table medidas(" +
                 "id_medidas integer primary key, " +
+                "codigo text, " +
                 "ruta_json text, " +
-                "fecha text, " +
-                "id_responsable integer, " +
-                "FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+                "registrador_nom text, " +
+                "registrador_ci text, " +
+                "estado bool, " +
+                "id_usuario integer)");
 
         db.execSQL("create table presion_arterial(" +
                 "id_presion integer primary key, " +
+                "codigo text, " +
                 "ruta_json text, " +
-                "fecha text, " +
-                "id_responsable integer, " +
-                "FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
+                "registrador_nom text, " +
+                "registrador_ci text, " +
+                "estado bool, " +
+                "id_usuario integer)");
 
         db.execSQL("create table laboratorio(" +
                 "id_laboratorio integer primary key, " +
-                "ruta_json text, " +
-                "fecha text, " +
-                "id_responsable integer, " +
-                "FOREIGN KEY (id_responsable) REFERENCES responsable (id_responsable))");
-
-        db.execSQL("create table formulario(" +
-                "id_formulario integer primary key, " +
                 "codigo text, " +
-                "id_preparacion integer NULL, " +
-                "id_inf_general integer NULL, " +
-                "id_medidas integer NULL, " +
-                "id_presion integer NULL, " +
-                "id_laboratorio integer NULL, " +
-                "FOREIGN KEY(id_preparacion) REFERENCES preparacion (id_preparacion)," +
-                "FOREIGN KEY(id_inf_general) REFERENCES inf_general (id_inf_general)," +
-                "FOREIGN KEY(id_medidas) REFERENCES medidas (id_medidas)," +
-                "FOREIGN KEY(id_presion) REFERENCES presion_arterial (id_presion)," +
-                "FOREIGN KEY(id_laboratorio) REFERENCES laboratorio (id_laboratorio))");
+                "ruta_json text, " +
+                "registrador_nom text, " +
+                "registrador_ci text, " +
+                "estado bool, " +
+                "id_usuario integer)");
+
 
         insertarLocalidades(db);
         insertarUsuarios(db);
@@ -627,36 +621,43 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     public void insertarUsuarios(SQLiteDatabase db){
+        
         ContentValues registro = new ContentValues();
 
-        registro.put("id_responsable",0);
+        registro.put("id_usuario",0);
         registro.put("user","admin");
-        registro.put("password","admin123");
-        registro.put("rol",1);
-        db.insert("responsable", null, registro);
+        registro.put("password","12345");
+        registro.put("rol",0);
+        db.insert("usuarios", null, registro);
 
-        registro.put("id_responsable",1);
-        registro.put("user","user01");
+        registro.put("id_usuario",1);
+        registro.put("user","preparacion");
+        registro.put("password","12345");
+        registro.put("rol",1);
+        db.insert("usuarios", null, registro);
+
+        registro.put("id_usuario",2);
+        registro.put("user","informacion");
         registro.put("password","12345");
         registro.put("rol",2);
-        db.insert("responsable", null, registro);
+        db.insert("usuarios", null, registro);
 
-        registro.put("id_responsable",2);
-        registro.put("user","user02");
+        registro.put("id_usuario",3);
+        registro.put("user","medidas");
         registro.put("password","12345");
         registro.put("rol",3);
-        db.insert("responsable", null, registro);
+        db.insert("usuarios", null, registro);
 
-        registro.put("id_responsable",3);
-        registro.put("user","user03");
+        registro.put("id_usuario",4);
+        registro.put("user","presion");
         registro.put("password","12345");
-        registro.put("rol",3);
-        db.insert("responsable", null, registro);
+        registro.put("rol",4);
+        db.insert("usuarios", null, registro);
 
-        registro.put("id_responsable",4);
-        registro.put("user","user04");
+        registro.put("id_usuario",5);
+        registro.put("user","laboratorio");
         registro.put("password","12345");
-        registro.put("rol",3);
-        db.insert("responsable", null, registro);
+        registro.put("rol",5);
+        db.insert("usuarios", null, registro);
     }
 }

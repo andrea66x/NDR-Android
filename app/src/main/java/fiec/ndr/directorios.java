@@ -5,8 +5,12 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
@@ -14,13 +18,13 @@ public class Directorios {
 
     final static String root = "/NDR";
 
-    final static String forms_preparacion = root + "/Preparación";
+    final static String forms_preparacion = root + "/Preparacion";
     final static String forms_fotos = forms_preparacion + "/Consentimientos-Informados";
     final static String forms = forms_preparacion + "/Inicial";
 
     final static String forms_general = root + "/Informacion-General";
     final static String forms_medidas = root + "/Medidas";
-    final static String forms_presion = root + "/Presión";
+    final static String forms_presion = root + "/Presion";
     final static String forms_laboratorio = root + "/Laboratorio";
 
 
@@ -39,8 +43,6 @@ public class Directorios {
         }
 
     }
-
-
 
     public File existeDir(String ruta){
         File folder = new File(Environment.getExternalStorageDirectory(), ruta);
@@ -140,6 +142,47 @@ public class Directorios {
 
     }
 
-}
+    public void moveFile(String inputPath, String inputFile, String outputPath) {
+
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+
+            //create output directory if it doesn't exist
+            File dir = new File(outputPath);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+
+            in = new FileInputStream(inputPath + "/" + inputFile);
+            out = new FileOutputStream(outputPath + "/"+ inputFile);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            in = null;
+
+            // write the output file
+            out.flush();
+            out.close();
+            out = null;
+
+            // delete the original file
+            new File(inputPath + inputFile).delete();
+
+
+        } catch (FileNotFoundException fnfe1) {
+            Log.e("tag", fnfe1.getMessage());
+        } catch (Exception e) {
+            Log.e("tag", e.getMessage());
+        }
+    }
+
+
+    }
 
 

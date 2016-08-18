@@ -3,6 +3,7 @@ package fiec.ndr;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,7 +31,11 @@ public class LoginActivity extends AppCompatActivity{
         mPasswordView = (EditText) findViewById(R.id.contrasena);
         Button mEmailSignInButton = (Button) findViewById(R.id.btn_ingreso);
 
+        String temp = this.getDatabasePath("administracion.db").toString();
+        Directorios tempdir = new Directorios(false);
+        tempdir.moveFile("/data/data/fiec.ndr/databases/", "administracion.db", Environment.getExternalStorageDirectory().getPath());
 
+        assert mEmailSignInButton != null;
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +103,7 @@ public class LoginActivity extends AppCompatActivity{
     private boolean ingresoExitoso(String usuario, String password){
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this);
         SQLiteDatabase bd = admin.getReadableDatabase();
-        Cursor fila = bd.rawQuery("select user, password, rol from responsable where user = '" + usuario + "'", null);
+        Cursor fila = bd.rawQuery("select user, password, rol from usuarios where user = '" + usuario + "'", null);
         String d1,d2,d3;
 
         //Verificar si existe el usuario
