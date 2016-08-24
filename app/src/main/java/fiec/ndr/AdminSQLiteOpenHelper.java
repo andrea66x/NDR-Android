@@ -36,49 +36,32 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("create table preparacion(" +
                 "id_preparacion integer primary key, " +
                 "codigo text, " +
-                "ruta_json text, " +
-                "ruta_img text, " +
-                "registrador_nom text, " +
-                "registrador_ci text, " +
                 "estado bool, " +
-                "id_usuario integer)");
+                "fecha_subida text)");
 
         db.execSQL("create table inf_general(" +
                 "id_inf_general integer primary key, " +
                 "codigo text, " +
-                "ruta_json text, " +
-                "registrador_nom text, " +
-                "registrador_ci text, " +
                 "estado bool, " +
-                "id_usuario integer)");
+                "fecha_subida text)");
 
         db.execSQL("create table medidas(" +
                 "id_medidas integer primary key, " +
                 "codigo text, " +
-                "ruta_json text, " +
-                "registrador_nom text, " +
-                "registrador_ci text, " +
                 "estado bool, " +
-                "id_usuario integer)");
+                "fecha_subida text)");
 
         db.execSQL("create table presion_arterial(" +
                 "id_presion integer primary key, " +
                 "codigo text, " +
-                "ruta_json text, " +
-                "registrador_nom text, " +
-                "registrador_ci text, " +
                 "estado bool, " +
-                "id_usuario integer)");
+                "fecha_subida text)");
 
         db.execSQL("create table laboratorio(" +
                 "id_laboratorio integer primary key, " +
                 "codigo text, " +
-                "ruta_json text, " +
-                "registrador_nom text, " +
-                "registrador_ci text, " +
                 "estado bool, " +
-                "id_usuario integer)");
-
+                "fecha_subida text)");
 
         insertarLocalidades(db);
         insertarUsuarios(db);

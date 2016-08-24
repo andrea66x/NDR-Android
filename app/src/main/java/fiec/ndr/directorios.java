@@ -16,16 +16,16 @@ import java.io.Writer;
 
 public class Directorios {
 
-    final static String root = "/NDR";
+    final public static String root = "/NDR";
 
-    final static String forms_preparacion = root + "/Preparacion";
-    final static String forms_fotos = forms_preparacion + "/Consentimientos-Informados";
-    final static String forms = forms_preparacion + "/Inicial";
+    final public static String forms_preparacion = root + "/Preparacion";
+    final public static String forms_fotos = forms_preparacion + "/Consentimientos-Informados";
+    final public static String forms = forms_preparacion + "/Inicial";
 
-    final static String forms_general = root + "/Informacion-General";
-    final static String forms_medidas = root + "/Medidas";
-    final static String forms_presion = root + "/Presion";
-    final static String forms_laboratorio = root + "/Laboratorio";
+    final public static String forms_general = root + "/Informacion-General";
+    final public static String forms_medidas = root + "/Medidas";
+    final public static String forms_presion = root + "/Presion";
+    final public static String forms_laboratorio = root + "/Laboratorio";
 
 
 
@@ -42,6 +42,9 @@ public class Directorios {
             existeDir(forms_laboratorio);
         }
 
+    }
+
+    public Directorios(){
     }
 
     public File existeDir(String ruta){

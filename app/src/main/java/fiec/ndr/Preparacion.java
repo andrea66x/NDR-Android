@@ -53,6 +53,7 @@ public class Preparacion extends AppCompatActivity {
     EditText et_cod_encuesta, et_lugar, et_nombres;
     RadioGroup rg_ayunas;
     ImageView img_consent;
+    Directorios dir = new Directorios(false);
     private Map<String, String> hm_preparacion = new HashMap<String, String>();
 
 
@@ -156,6 +157,29 @@ public class Preparacion extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            try {
+                bitmap_foto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(ruta_foto));
+                img_consent.setImageBitmap(bitmap_foto);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        codigo = et_cod_encuesta.getText().toString();
+        String imageFileName = "cons_"+ codigo + ".jpg";
+        File storageDir = new File(Environment.getExternalStorageDirectory(), dir.forms_fotos);
+        File image = new File (storageDir, imageFileName);
+        ruta_foto = "file:" + image.getAbsolutePath();
+        return image;
+    }
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.ayuda, menu);
         return true;
@@ -193,27 +217,6 @@ public class Preparacion extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            try {
-                bitmap_foto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(ruta_foto));
-                img_consent.setImageBitmap(bitmap_foto);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        codigo = et_cod_encuesta.getText().toString();
-        String imageFileName = "cons_"+ codigo + ".jpg";
-        File storageDir = new File(Environment.getExternalStorageDirectory(), "/NDR/Preparación/Consentimientos-Informados");
-        File image = new File (storageDir, imageFileName);
-        ruta_foto = "file:" + image.getAbsolutePath();
-        return image;
     }
 
     private String guardarJson(){
@@ -286,7 +289,6 @@ public class Preparacion extends AppCompatActivity {
             json_preparacion.put("uuid_creado", UUID);
             json_preparacion.put("hora_creacion", hora_encuesta);
             json_preparacion.put("preparacion", jarray_datos);
-            Directorios dir = new Directorios(false);
             result= dir.guardarAchivo(json_preparacion.toString(),codigo,1);
             if (result == 1)
                 return "El formulario "+ codigo + " ha sido guardado exitosamente.";
