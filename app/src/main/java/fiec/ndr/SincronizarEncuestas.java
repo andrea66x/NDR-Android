@@ -6,9 +6,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +28,7 @@ import cz.msebera.android.httpclient.Header;
 public class SincronizarEncuestas extends AppCompatActivity {
 
     Directorios dir_ndr = new Directorios();
-    static final String direccion_post = "http://192.168.1.200:8000/recibirjson";
+    static String direccion_post = "http://192.168.1.200:8000/recibirjson";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,6 +171,26 @@ public class SincronizarEncuestas extends AppCompatActivity {
             parent.findViewById(R.id.lyt_laboratorio).setVisibility(View.GONE);
 
         setContentView(parent);
+
+        AlertDialog.Builder alertDialog =new AlertDialog.Builder(SincronizarEncuestas.this);
+        alertDialog.setTitle("GG");
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
+        alertDialog.setView(input);
+        alertDialog.setMessage("Ingresa la direccion ip del servidor:");
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                direccion_post = input.getText().toString();
+            }
+        });
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialog.setIcon(android.R.drawable.ic_menu_upload).show();
 
     }
 
