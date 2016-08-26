@@ -194,6 +194,7 @@
                     android:inputType="phone"
                     android:ems="20"
                     android:maxLength="20"
+                    android:digits="0123456789"
                     android:id="@+id/datos_telefono"
                     android:layout_gravity="center"
                     android:background="@drawable/txtbox"

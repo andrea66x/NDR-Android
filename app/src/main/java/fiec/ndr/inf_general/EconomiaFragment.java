@@ -103,7 +103,6 @@ public class EconomiaFragment extends Fragment {
                 switch (position){
                     case 1:
                     case 2:
-                        et_trabajo.setText("");
                         et_trabajo.setEnabled(true);
                         break;
                     case 3:
