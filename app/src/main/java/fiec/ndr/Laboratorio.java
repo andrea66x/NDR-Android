@@ -19,8 +19,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -128,7 +130,8 @@ public class Laboratorio extends AppCompatActivity {
 
         TimeZone.setDefault(TimeZone.getTimeZone("America/Guayaquil"));
         Calendar calendar = Calendar.getInstance();
-        hora_encuesta = calendar.getTime().toString();
+        SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM d yyyy, h:mm a", Locale.US);
+        hora_encuesta = format.format(calendar.getTime());
 
         hm_laboratorio.clear();
 
@@ -179,7 +182,7 @@ public class Laboratorio extends AppCompatActivity {
             json_laboratorio.put("tipo_formulario", "Laboratorio");
             json_laboratorio.put("uuid_creado", UUID);
             json_laboratorio.put("hora_creacion", hora_encuesta);
-            json_laboratorio.put("Resultados", jarray_datos);
+            json_laboratorio.put("resultados", jarray_datos);
             Directorios dir = new Directorios(false);
 
             result= dir.guardarAchivo(json_laboratorio.toString(),codigo,5);

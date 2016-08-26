@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -135,7 +136,8 @@ public class Medidas extends AppCompatActivity {
 
         TimeZone.setDefault(TimeZone.getTimeZone("America/Guayaquil"));
         Calendar calendar = Calendar.getInstance();
-        hora_encuesta = calendar.getTime().toString();
+        SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM d yyyy, h:mm a", Locale.US);
+        hora_encuesta = format.format(calendar.getTime());
 
         hm_medidas.clear();
 

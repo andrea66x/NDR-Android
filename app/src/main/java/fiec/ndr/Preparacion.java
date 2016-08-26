@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
@@ -231,7 +232,8 @@ public class Preparacion extends AppCompatActivity {
 
         TimeZone.setDefault(TimeZone.getTimeZone("America/Guayaquil"));
         Calendar calendar = Calendar.getInstance();
-        hora_encuesta = calendar.getTime().toString();
+        SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM d yyyy, h:mm a", Locale.US);
+        hora_encuesta = format.format(calendar.getTime());
 
         hm_preparacion.clear();
 
@@ -264,11 +266,8 @@ public class Preparacion extends AppCompatActivity {
         else
             return "No has ingresado el lugar de la encuesta aun.";
 
-
-        SimpleDateFormat simpleDate =  new SimpleDateFormat("dd/MM/yyyy");
-        strDt = simpleDate.format(new Date());
-        if (!strDt.isEmpty())
-            hm_preparacion.put("fecha_encuesta", strDt);
+        if (!hora_encuesta.isEmpty())
+            hm_preparacion.put("fecha_encuesta", hora_encuesta);
         else
             return "Algo salió mal con la fecha, intentalo de nuevo.";
 

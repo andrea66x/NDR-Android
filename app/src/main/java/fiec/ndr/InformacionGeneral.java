@@ -18,9 +18,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -100,7 +102,8 @@ public class InformacionGeneral extends AppCompatActivity
 
         TimeZone.setDefault(TimeZone.getTimeZone("America/Guayaquil"));
         Calendar calendar = Calendar.getInstance();
-        hora_encuesta = calendar.getTime().toString();
+        SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM d yyyy, h:mm a", Locale.US);
+        hora_encuesta = format.format(calendar.getTime());
 
         JSONObject JSON_Formulario = new JSONObject();
         if(codigo!=null && !codigo.isEmpty()) {
@@ -164,7 +167,7 @@ public class InformacionGeneral extends AppCompatActivity
             if(validador_json){
                 try {
                     JSON_Formulario.put("id_formulario", codigo);
-                    JSON_Formulario.put("tipo_formulario", "Información General");
+                    JSON_Formulario.put("tipo_formulario", "Informacion_General");
                     JSON_Formulario.put("uuid_creado", UUID);
                     JSON_Formulario.put("hora_creacion", hora_encuesta);
                     JSON_Formulario.put("informacion_general", jarray_datos);

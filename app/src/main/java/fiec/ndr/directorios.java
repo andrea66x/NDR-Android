@@ -77,31 +77,31 @@ public class Directorios {
             //Preparacion: Ruta /NDR/Preparacion/Inicial
             case 1:
                 carpeta = existeDir(forms);
-                fname = "prepa_"+ codigo +".json";
+                fname = "prep_"+ codigo +".json";
                 break;
 
             //Informacion General: Ruta /NDR/Informacion-General
             case 2:
                 carpeta = existeDir(forms_general);
-                fname = "infog_"+ codigo +".json";
+                fname = "info_"+ codigo +".json";
                 break;
 
             //Medidas: Ruta /NDR/Medidas
             case 3:
                 carpeta = existeDir(forms_medidas);
-                fname = "medidas_"+ codigo +".json";
+                fname = "medi_"+ codigo +".json";
                 break;
 
             //Presion: Ruta /NDR/Presion
             case 4:
                 carpeta = existeDir(forms_presion);
-                fname = "presion_"+ codigo +".json";
+                fname = "pres_"+ codigo +".json";
                 break;
 
             //Medidas: Ruta /NDR/Laboratorio
             case 5:
                 carpeta = existeDir(forms_laboratorio);
-                fname = "lab_"+ codigo +".json";
+                fname = "labo_"+ codigo +".json";
                 break;
 
             default:
