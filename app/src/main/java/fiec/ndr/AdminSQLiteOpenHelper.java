@@ -528,7 +528,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         registro.put("padre_id",4);
         db.insert("localidad", null, registro);
 
-        registro.put("id_localidad",19);
+        registro.put("id_localidad",90);
         registro.put("nombre","Portovelo");
         registro.put("padre_id",4);
         db.insert("localidad", null, registro);

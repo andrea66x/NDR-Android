@@ -1,6 +1,8 @@
 package fiec.ndr;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
@@ -17,7 +19,6 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity{
 
-    // UI references.
     private EditText mEmailView;
     private EditText mPasswordView;
 
@@ -31,9 +32,9 @@ public class LoginActivity extends AppCompatActivity{
         mPasswordView = (EditText) findViewById(R.id.contrasena);
         Button mEmailSignInButton = (Button) findViewById(R.id.btn_ingreso);
 
-        String temp = this.getDatabasePath("administracion.db").toString();
         Directorios tempdir = new Directorios(false);
-        tempdir.moveFile("/data/data/fiec.ndr/databases/", "administracion.db", Environment.getExternalStorageDirectory().getPath());
+        String temp = Environment.getDataDirectory()+ "/data/fiec.ndr/databases/";
+        tempdir.moveFile(temp, "administracion.db", Environment.getExternalStorageDirectory().getPath());
 
         assert mEmailSignInButton != null;
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -59,22 +60,23 @@ public class LoginActivity extends AppCompatActivity{
         View focusView = null;
 
         // Revisamos si es una contraseña valida o si ingreso una.
-        /*
+
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_contrasena_corta));
             focusView = mPasswordView;
             cancel = true;
-        }*/
+        }
 
 
         // Revisamos si ingreso un correo y si tiene el formato correcto.
-        /*else if (!isEmailValid(email)) {
+        else if (!isUserValid(email)) {
             mEmailView.setError(getString(R.string.error_correo_invalido));
             focusView = mEmailView;
             cancel = true;
-        }*/
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_requerido));
+        }
+
+        if(!ingresoExitoso(email,password)){
+            mEmailView.setError("Error en combinación de Usuario/Contraseña");
             focusView = mEmailView;
             cancel = true;
         }
@@ -82,18 +84,19 @@ public class LoginActivity extends AppCompatActivity{
         if (cancel) {
             //Hubo algun error, hacemos focus al campo requerido.
             focusView.requestFocus();
-        } else if(ingresoExitoso(email,password)){
+        }
+        else{
             Intent int_ingreso = new Intent(this,MenuPrincipal.class);
             startActivity(int_ingreso);
             finish();
         }
-        else{
-            Toast.makeText(this, "Usuario o contraseña inválida!", Toast.LENGTH_LONG).show();
-        }
     }
 
-    private boolean isEmailValid(String email) {
-        return email.contains("@");
+    private boolean isUserValid(String email) {
+        if (email.matches(".*\\w.*"))
+            return true;
+        else
+            return false;
     }
 
     private boolean isPasswordValid(String password) {
@@ -104,22 +107,26 @@ public class LoginActivity extends AppCompatActivity{
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this);
         SQLiteDatabase bd = admin.getReadableDatabase();
         Cursor fila = bd.rawQuery("select user, password, rol from usuarios where user = '" + usuario + "'", null);
-        String d1,d2,d3;
+        String user,pass;
+        Integer rol;
 
         //Verificar si existe el usuario
 
         if (fila.moveToFirst()) {
-            d1 = fila.getString(0);
-            d2 = fila.getString(1);
-            d3 = fila.getString(2);
+            user = fila.getString(0);
+            pass = fila.getString(1);
+            rol = Integer.valueOf(fila.getString(2));
         } else{
             bd.close();
             return false;
         }
 
-        // Contraseña válida
-
-        if(d2.equals(password)){
+        if(pass.equals(password)){
+            SharedPreferences prefs =  getSharedPreferences("NDR_PREF", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("usuario", user);
+            editor.putInt("rol", rol);
+            editor.apply();
             bd.close();
             return true;
         } else{

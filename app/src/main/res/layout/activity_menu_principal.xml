@@ -68,35 +68,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="5dp"
-                android:onClick="buscarEncuesta">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/textView"
-                    android:layout_weight="1"
-                    android:layout_gravity="start|center"
-                    android:text="@string/lbl_buscar" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btn_buscar"
-                    android:src="@mipmap/buscar"
-                    android:background="@drawable/rounded_corners"
-                    android:layout_gravity="center|end"
-                    android:minWidth="50dp"
-                    android:maxWidth="50dp"
-                    android:onClick="buscarEncuesta" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
                 android:onClick="sincronizarBase">
 
                 <TextView
@@ -119,6 +90,35 @@
                     android:minWidth="50dp"
                     android:maxWidth="50dp"
                     android:onClick="sincronizarBase" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:onClick="configuracion">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textView"
+                    android:layout_weight="1"
+                    android:layout_gravity="start|center"
+                    android:text="@string/lbl_configurar" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_buscar"
+                    android:src="@mipmap/configurar"
+                    android:background="@drawable/rounded_corners"
+                    android:layout_gravity="center|end"
+                    android:minWidth="50dp"
+                    android:maxWidth="50dp"
+                    android:onClick="configuracion" />
             </LinearLayout>
 
             <LinearLayout

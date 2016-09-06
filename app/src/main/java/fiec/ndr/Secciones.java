@@ -1,6 +1,8 @@
 package fiec.ndr;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -13,11 +15,16 @@ import android.widget.Toast;
 
 public class Secciones extends AppCompatActivity {
     Button btnGeneral;
+    String user;
+    Integer rol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secciones);
+        SharedPreferences prefs =  getSharedPreferences("NDR_PREF", Context.MODE_PRIVATE);
+        user = prefs.getString("usuario", "desconocido");
+        rol = prefs.getInt("rol", 100);
     }
 
     public void onClickBtnSecciones(View v) {
@@ -49,32 +56,52 @@ public class Secciones extends AppCompatActivity {
                 if (codigoCorrecto(txtCodigo.getText().toString().trim())) {
                     switch (btnGeneral.getId()) {
                         case R.id.btn_inf_general:
-                            Intent int_info_general = new Intent(getApplicationContext(), InformacionGeneral.class);
-                            codigo = txtCodigo.getText().toString();
-                            int_info_general.putExtra("CODIGO",codigo);
-                            startActivity(int_info_general);
-                            codigoDialog.dismiss();
+                            if(rol!=2){
+                                niveldeAcceso();
+                            }
+                            else {
+                                Intent int_info_general = new Intent(getApplicationContext(), InformacionGeneral.class);
+                                codigo = txtCodigo.getText().toString();
+                                int_info_general.putExtra("CODIGO",codigo);
+                                startActivity(int_info_general);
+                                codigoDialog.dismiss();
+                            }
                             break;
                         case R.id.btn_medidas:
-                            Intent int_medidas = new Intent(getApplicationContext(), Medidas.class);
-                            codigo = txtCodigo.getText().toString();
-                            int_medidas.putExtra("CODIGO",codigo);
-                            startActivity(int_medidas);
-                            codigoDialog.dismiss();
+                            if(rol!=3){
+                                niveldeAcceso();
+                            }
+                            else {
+                                Intent int_medidas = new Intent(getApplicationContext(), Medidas.class);
+                                codigo = txtCodigo.getText().toString();
+                                int_medidas.putExtra("CODIGO", codigo);
+                                startActivity(int_medidas);
+                                codigoDialog.dismiss();
+                            }
                             break;
                         case R.id.btn_presion:
-                            Intent int_presion = new Intent(getApplicationContext(), Presion_arterial.class);
-                            codigo = txtCodigo.getText().toString();
-                            int_presion.putExtra("CODIGO",codigo);
-                            startActivity(int_presion);
-                            codigoDialog.dismiss();
+                            if(rol!=4){
+                                niveldeAcceso();
+                            }
+                            else {
+                                Intent int_presion = new Intent(getApplicationContext(), Presion_arterial.class);
+                                codigo = txtCodigo.getText().toString();
+                                int_presion.putExtra("CODIGO", codigo);
+                                startActivity(int_presion);
+                                codigoDialog.dismiss();
+                            }
                             break;
                         case R.id.btn_laboratorio:
-                            Intent int_laboratorio = new Intent(getApplicationContext(), Laboratorio.class);
-                            codigo = txtCodigo.getText().toString();
-                            int_laboratorio.putExtra("CODIGO",codigo);
-                            startActivity(int_laboratorio);
-                            codigoDialog.dismiss();
+                            if(rol!=5){
+                                niveldeAcceso();
+                            }
+                            else {
+                                Intent int_laboratorio = new Intent(getApplicationContext(), Laboratorio.class);
+                                codigo = txtCodigo.getText().toString();
+                                int_laboratorio.putExtra("CODIGO", codigo);
+                                startActivity(int_laboratorio);
+                                codigoDialog.dismiss();
+                            }
                             break;
 
                         default:
@@ -95,11 +122,53 @@ public class Secciones extends AppCompatActivity {
         });
 
         // Make dialog box visible.
-        if (btnGeneral.getId() != R.id.btn_encuesta)
-            codigoDialog.show();
+        if (btnGeneral.getId() != R.id.btn_encuesta){
+            switch (btnGeneral.getId()) {
+                case R.id.btn_inf_general:
+                    if(rol!=2){
+                        niveldeAcceso();
+                    }
+                    else {
+                        codigoDialog.show();
+                    }
+                    break;
+                case R.id.btn_medidas:
+                    if(rol!=3){
+                        niveldeAcceso();
+                    }
+                    else {
+                        codigoDialog.show();
+                    }
+                    break;
+                case R.id.btn_presion:
+                    if(rol!=4){
+                        niveldeAcceso();
+                    }
+                    else {
+                        codigoDialog.show();
+                    }
+                    break;
+                case R.id.btn_laboratorio:
+                    if(rol!=5){
+                        niveldeAcceso();
+                    }
+                    else {
+                        codigoDialog.show();
+                    }
+                    break;
+                default:
+                    codigoDialog.show();
+                    break;
+            }
+        }
         else {
-            Intent int_encuesta = new Intent(this, Preparacion.class);
-            startActivity(int_encuesta);
+            if(rol!=1){
+                niveldeAcceso();
+            }
+            else {
+                Intent int_encuesta = new Intent(this, Preparacion.class);
+                startActivity(int_encuesta);
+            }
         }
     }
 
@@ -123,4 +192,25 @@ public class Secciones extends AppCompatActivity {
             return false;
     }
 
+    public void niveldeAcceso() {
+
+        final Dialog codigoDialog = new Dialog(this);
+        codigoDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        codigoDialog.setCancelable(false);
+        codigoDialog.setContentView(R.layout.acceso_dialog);
+
+        TextView titulo = (TextView) codigoDialog.findViewById(R.id.titulo);
+        titulo.setText("Usted no tiene permiso para ingresar a esta sección");
+
+        // Init button of login GUI
+        Button btnEntrar = (Button) codigoDialog.findViewById(R.id.btnAceptar);
+
+        btnEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                codigoDialog.dismiss();
+            }
+        });
+        codigoDialog.show();
+    }
 }

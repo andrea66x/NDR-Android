@@ -45,7 +45,7 @@
 
     <!-- *** Labels Menú Principal  *** -->
     <string name="lbl_nuevo">Nueva Encuesta:</string>
-    <string name="lbl_buscar">Buscar Encuesta:</string>
+    <string name="lbl_configurar">Configuración:</string>
     <string name="lbl_informacion">Información y Contacto:</string>
     <string name="lbl_salir">Salir del Sistema:</string>
     <string name="lbl_sincronizar">Sincronizar Encuestas:</string>
@@ -130,6 +130,26 @@
         <item>Tanquero</item>
         <item>Tanqueo</item>
     </string-array>
+    <string name="title_activity_configuracion">Configuración</string>
+
+
+
+    <string name="lbl_descripcion_pro">Esta aplicación se ha desarrollado como parte del proyecto:\n
+        DESARROLLO DE HERRAMIENTAS DE BIOMEDICINA PARA EL ESTUDIO DE LA NEFROPATÍA DIABÉTICA EN ECUADOR\n
+        de la materia integradora para el proceso de graduación de los estudiantes:\n\n
+        - Andrea Torres Rangel (ESPOL)\n
+        - Rolando Sornoza Mosquera (ESPOL)\n\n
+        y bajo la dirección de los docentes:\n\n
+        - Dra. Lorena Carlo Unda (ESPOL)\n
+        - Dr. Daniel Ochoa Donoso (ESPOL)\n
+        - Dra. Delma Verón (UNEMI)\n
+        </string>
+
+    <string name="lbl_conta_1">
+        Desarrollador: Rolando Andres Sornoza Mosquera:\nCorreo: rolansor@espol.edu.ec\nTeléfono: 0990464145\n</string>
+
+    <string name="lbl_conta_des">Si necesita soporte técnico por favor sirvase a comunicarse con los desarrolladores:</string>
+
 
 
 </resources>

@@ -32,7 +32,8 @@
             android:hint="@string/hint_usuario"
             android:inputType="text"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:text="admin" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -50,7 +51,8 @@
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:text="12345" />
 
     </android.support.design.widget.TextInputLayout>
 
