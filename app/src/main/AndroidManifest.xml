@@ -51,7 +51,7 @@
         <activity
             android:name=".InformacionGeneral"
             android:label="@string/info_general"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Preparacion"
             android:label="@string/title_activity_preparacion"
@@ -61,22 +61,30 @@
             android:name=".Medidas"
             android:label="@string/title_activity_medidas"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Presion_arterial"
             android:label="@string/title_activity_presion_arterial"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Laboratorio"
             android:label="@string/title_activity_laboratorio"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SincronizarEncuestas"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SincronizarEncuestas" />
-        <activity android:name=".InfoContacto" />
+            />
+        <activity
+            android:name=".InfoContacto"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".Configuracion"
-            android:label="@string/title_activity_configuracion" />
+            android:label="@string/title_activity_configuracion"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

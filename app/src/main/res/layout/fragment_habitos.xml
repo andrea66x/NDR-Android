@@ -58,13 +58,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/dato_marginv"
-                android:visibility="gone"
-                android:id="@+id/lyt_tabaco">
+                android:id="@+id/lyt_tabaco"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/txtV_frc_tabaco"
                     style="@style/lblTextStyle"
-                    android:text="¿Con que frecuencia al día?:"
+                    android:text="¿Cuantos tabacos al día consume?:"
                     android:gravity="top|start" />
 
                 <EditText
@@ -126,13 +126,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/dato_marginv"
-                android:visibility="gone"
-                android:id="@+id/lyt_alcohol">
+                android:id="@+id/lyt_alcohol"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/txtV_frc_alcohol"
                     style="@style/lblTextStyle"
-                    android:text="¿Con que frecuencia a la semana?:"
+                    android:text="¿Cuántas veces en la semana lo ingiere?:"
                     android:gravity="top|start" />
 
                 <EditText
@@ -196,13 +196,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/dato_marginv"
-                android:visibility="gone"
-                android:id="@+id/lyt_otros">
+                android:id="@+id/lyt_otros"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/txtV_vicios"
                     style="@style/lblTextStyle"
-                    android:text="¿Cuál?:"
+                    android:text="¿Cuál otro Hábito?:"
                     android:gravity="top|start" />
 
                 <EditText
@@ -257,39 +257,11 @@
                         android:layout_gravity="center"
                         android:src="@mipmap/drop"
                         android:layout_centerVertical="true"
-                        android:layout_alignEnd="@+id/sp_ejercicios" />
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight= "true"/>
 
                 </RelativeLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center">
-
-                <Button
-                    style="@style/btn_cod_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="GUARDAR"
-                    android:id="@+id/btn_guardar"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/btn_verde"
-                    android:layout_margin="10dp" />
-
-                <Button
-                    style="@style/btn_cod_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CANCELAR"
-                    android:id="@+id/btn_cancelar"
-                    android:background="@drawable/btn_rojo"
-                    android:layout_margin="10dp" />
             </LinearLayout>
 
         </LinearLayout>

@@ -3,7 +3,11 @@ package fiec.ndr;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +16,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -47,11 +52,11 @@ public class InformacionGeneral extends AppCompatActivity
 
     private Map<String, String> hm_datos, hm_vivienda, hm_economia, hm_salud, hm_medicamentos, hm_antecedentes, hm_habitos;
     private boolean validador_json, faltan_campos;
-
-    int result;
-
+    String nombres_encuestador, cedula_encuestador;
+    SharedPreferences prefs;
+    int result, tabFaltante;
     public int sexo=-1, tiene_diabetes;
-
+    FloatingActionButton fab;
 
 
     @Override
@@ -80,11 +85,66 @@ public class InformacionGeneral extends AppCompatActivity
         }
         setTitle("Información General: " + codigo);
 
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.hide();
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (faltan_campos){
+                    Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + mViewPager.getCurrentItem());
+                    if (page != null) {
+                        switch (mViewPager.getCurrentItem()){
+                            case 0:
+                                ((DatosFragment)page).setearHash();
+                                break;
+                            case 1:
+                                ((ViviendaFragment)page).setearHash();
+                                break;
+                            case 2:
+                                ((EconomiaFragment)page).setearHash();
+                                break;
+                            case 3:
+                                ((SaludFragment)page).setearHash();
+                                break;
+                            case 4:
+                                ((MedicamentosFragment)page).setearHash();
+                                break;
+                            case 5:
+                                ((AntecedentesFragment)page).setearHash();
+                                break;
+                            case 6:
+                                ((HabitosFragment)page).setearHash();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                Snackbar.make(view, constructJSON(), Snackbar.LENGTH_LONG).setCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        if ((event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT || event == Snackbar.Callback.DISMISS_EVENT_SWIPE) && result == 1)
+                            finish();
+                    }
+
+                    @Override
+                    public void onShown(Snackbar snackbar) {
+
+                    }
+                }).show();
+            }
+        });
+
         validador_json = false;
+
+        prefs =  getSharedPreferences("NDR_PREF", Context.MODE_PRIVATE);
+        nombres_encuestador = prefs.getString("nombre_encuestador", "") + "" +  prefs.getString("apellido_encuestador", "");
+        cedula_encuestador =  prefs.getString("cedula_encuestador", "");
 
     }
 
-    public void constructJSON()
+    public String constructJSON()
     {
         JSONArray jarray_datos, jarray_vivienda, jarray_economia, jarray_salud, jarray_medicamentos, jarray_antecedentes, jarray_habitos;
         JSONObject temp1, temp2, temp3, temp4, temp5, temp6, temp7;
@@ -169,6 +229,8 @@ public class InformacionGeneral extends AppCompatActivity
                     JSON_Formulario.put("id_formulario", codigo);
                     JSON_Formulario.put("tipo_formulario", "Informacion_General");
                     JSON_Formulario.put("uuid_creado", UUID);
+                    JSON_Formulario.put("nombres_encuestador", nombres_encuestador);
+                    JSON_Formulario.put("cedula_encuestador", cedula_encuestador);
                     JSON_Formulario.put("hora_creacion", hora_encuesta);
                     JSON_Formulario.put("informacion_general", jarray_datos);
                     JSON_Formulario.put("vivienda", jarray_vivienda);
@@ -180,28 +242,26 @@ public class InformacionGeneral extends AppCompatActivity
                     Directorios dir = new Directorios(false);
                     result= dir.guardarAchivo(JSON_Formulario.toString(),codigo,2);
                     if (result == 1)
-                        Toast.makeText(getApplicationContext(), "El formulario "+ codigo + " ha sido guardado exitosamente.", Toast.LENGTH_SHORT).show();
+                        return "El formulario "+ codigo + " ha sido guardado exitosamente.";
                     else if (result == 0)
-                        Toast.makeText(getApplicationContext(), "El formulario asociado a este codigo: " + codigo +" ya existe", Toast.LENGTH_SHORT).show();
+                        return "El formulario asociado a este codigo: " + codigo +" ya existe";
                     else if (result == -1)
-                        Toast.makeText(getApplicationContext(), "Existe un problema con tu sistemas de archivos, llama a sistemas ahora.", Toast.LENGTH_SHORT).show();
+                        return  "Existe un problema con tu sistemas de archivos, llama a sistemas ahora.";
                     else
-                        Toast.makeText(getApplicationContext(), "Algo raro ha pasado, intenta de nuevo por favor.", Toast.LENGTH_SHORT).show();
-
+                        return  "Algo raro ha pasado, intenta de nuevo por favor.";
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
             else
-                Toast.makeText(getApplicationContext(),
-                        "Aun no estamos listos para guardar, revisa nuevamente", Toast.LENGTH_SHORT).show();
+                return "Aun no estamos listos para guardar, revisa nuevamente";
         }
-        else
-            Toast.makeText(getApplicationContext(),
-                    "Faltan los campos: \n" + campos, Toast.LENGTH_LONG).show();
+        else{
+            mViewPager.setCurrentItem(tabFaltante);
+            return "Falta el campo: \n" + camposStyle(campos);
+        }
 
-
-
+        return "";
     }
 
     @Override
@@ -299,127 +359,260 @@ public class InformacionGeneral extends AppCompatActivity
         }
     }
 
+
     public String revisarCampos(){
         Iterator it;
-        String campos_faltantes = "";
-        String campos_datos = "Datos: ", campos_vivienda = "Vivienda: ";
-        String campos_economia = "Economia Familiar: ", campos_salud = "Salud: ";
-        String campos_medicamentos = "Medicamentos: ", campos_antecedentes="Antecedentes: ", campos_habitos = "Habitos: ";
         faltan_campos = false;
         result = 2;
+        tabFaltante = 0;
+        String campo= "";
 
         it = hm_datos.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             if (pair.getValue().equals("-1")) {
-                campos_datos = campos_datos + pair.getKey().toString() + " - ";
+                tabFaltante =0;
                 faltan_campos = true;
+                return pair.getKey().toString();
             }
         }
-        if (campos_datos.endsWith("- ")) {
-            campos_datos = campos_datos.substring(0, campos_datos.length() - 2);
-        }
-
         it = hm_vivienda.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             if(pair.getValue().equals("-1")){
-                campos_vivienda =  campos_vivienda + pair.getKey().toString() + " - ";
+                tabFaltante =1;
                 faltan_campos = true;
+                return pair.getKey().toString();
             }
-        }
-        if (campos_vivienda.endsWith("- ")) {
-            campos_vivienda = campos_vivienda.substring(0, campos_vivienda.length() - 2);
         }
 
         it = hm_economia.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             if (pair.getValue().equals("-1")) {
-                campos_economia = campos_economia + pair.getKey().toString() + " - ";
+                tabFaltante =2;
                 faltan_campos = true;
+                return pair.getKey().toString();
             }
         }
-        if (campos_economia.endsWith("- ")) {
-            campos_economia = campos_economia.substring(0, campos_economia.length() - 2);
-        }
+
 
         it = hm_salud.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             if (pair.getValue().equals("-1")) {
-                campos_salud = campos_salud + pair.getKey().toString() + " - ";
+                tabFaltante =3;
                 faltan_campos = true;
+                return pair.getKey().toString();
             }
-        }
-        if (campos_salud.endsWith("- ")) {
-            campos_salud = campos_salud.substring(0, campos_salud.length() - 2);
         }
 
         it = hm_medicamentos.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             if (pair.getValue().equals("-1")) {
-                campos_medicamentos = campos_medicamentos + pair.getKey().toString() + " - ";
+                tabFaltante =4;
                 faltan_campos = true;
+                return pair.getKey().toString();
             }
         }
-        if (campos_medicamentos.endsWith("- ")) {
-            campos_medicamentos = campos_medicamentos.substring(0, campos_medicamentos.length() - 2);
-        }
+
 
         it = hm_antecedentes.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             if (pair.getValue().equals("-1")) {
-                campos_antecedentes = campos_antecedentes + pair.getKey().toString() + " - ";
+                tabFaltante =5;
                 faltan_campos = true;
+                return pair.getKey().toString();
             }
-        }
-        if (campos_antecedentes.endsWith("- ")) {
-            campos_antecedentes = campos_antecedentes.substring(0, campos_antecedentes.length() - 2);
         }
 
         it = hm_habitos.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             if (pair.getValue().equals("-1")) {
-                campos_habitos = campos_habitos + pair.getKey().toString() + " - ";
+                tabFaltante =6;
                 faltan_campos = true;
+                return pair.getKey().toString();
             }
         }
-        if (campos_habitos.endsWith("- ")) {
-            campos_habitos = campos_habitos.substring(0, campos_habitos.length() - 2);
+        return campo;
+    }
+
+    public String camposStyle(String campo){
+        String descripcion= "";
+        switch (campo){
+            case "nombres":
+                descripcion = "Nombres del Encuestado.";
+                break;
+            case "apellidos":
+                descripcion = "Apellidos del Encuestado.";
+                break;
+            case "sexo":
+                descripcion = "Sexo del Encuestado.";
+                break;
+            case "fecha_nac":
+                descripcion = "Fecha de Nacimiento del Encuestado.";
+                break;
+            case "telefono":
+                descripcion = "Telefono del Encuestado.";
+                break;
+            case "estado_civil":
+                descripcion = "Estado Civil del Encuestado.";
+                break;
+            case "provincia":
+                descripcion = "Provincia de residencia actual.";
+                break;
+            case "canton":
+                descripcion = "Cantón de residencia actual.";
+                break;
+            case "vivienda":
+                descripcion = "¿Donde esta su vivienda?.";
+                break;
+            case "direccion":
+                descripcion = "Dirección del domicilio del encuestado.";
+                break;
+            case "personas":
+                descripcion = "¿Con cuántas personas vive?";
+                break;
+            case "agua":
+                descripcion = "¿Cómo llega el agua a su hogar?";
+                break;
+            case "cloacas":
+                descripcion = "¿Posee Cloacas? (Servicios Sanitarios)";
+                break;
+            case "cbzfam":
+                descripcion = "¿Es usted cabeza de familia?";
+                break;
+            case "ingresos":
+                descripcion = "¿Tiene ingresos propios?";
+                break;
+            case "llegafin":
+                descripcion = "¿Llega a fin de mes?";
+                break;
+            case "ocupacion":
+                descripcion = "Ocupación del encuestado";
+                break;
+            case "trabajo":
+                descripcion = "¿De qué trabaja?";
+                break;
+            case "estudios":
+                descripcion = "Estudios del encuestado";
+                break;
+            case "seguro":
+                descripcion = "¿Tiene seguro médico?";
+                break;
+            case "det_seguro":
+                descripcion = "Descripción del seguro medico que posee.";
+                break;
+            case "chequeos":
+                descripcion = "¿Hace chequeos de su salud?";
+                break;
+            case "det_mes_chequeo":
+                descripcion = "¿Cada cuantos meses se chequea?";
+                break;
+            case "det_vec_chequeo":
+                descripcion = "¿Cuantas veces se chequea en su periodo?";
+                break;
+            case "diabetes":
+                descripcion = "¿Tiene diabetes?";
+                break;
+            case "det_tmp_diabetes":
+                descripcion = "¿Hace cuántos años?";
+                break;
+            case "presion":
+                descripcion = "¿Tiene presión alta?";
+                break;
+            case "renal":
+                descripcion = "¿Tiene enfermedad renal?";
+                break;
+            case "det_renal":
+                descripcion = "¿Que enfermedad renal tiene?";
+                break;
+            case "enfermedad":
+                descripcion = "¿Tiene otra enfermedad?";
+                break;
+            case "det_enfermedad":
+                descripcion = "¿Qué otra enfermedad tiene?";
+                break;
+            case "insulina":
+                descripcion = "¿Toma insulina?";
+                break;
+            case "hipoglucemias":
+                descripcion = "¿Toma hipoglucemias orales?";
+                break;
+            case "det_hipoglucemias":
+                descripcion = "¿Cuáles hipoglucemias toma?";
+                break;
+            case "medicina_presion":
+                descripcion = "¿Toma medicinas para la presión arterial?";
+                break;
+            case "det_medicina_presion":
+                descripcion = "¿Cuál medicina para la presión toma?";
+                break;
+            case "analgesicos":
+                descripcion = "¿Toma analgesicos o aspirinas?";
+                break;
+            case "det_analgesicos":
+                descripcion = "¿Cuál analgesico toma?";
+                break;
+            case "medicinas_otros":
+                descripcion = "¿Toma otro medicamento?";
+                break;
+            case "det_medicinas_otros":
+                descripcion = "¿Cuál otro medicamento toma?";
+                break;
+            case "ant_glucosa":
+                descripcion = "¿Ha tenido glucosa alta en la sangre?";
+                break;
+            case "ant_familia":
+                descripcion = "¿Sus familiares directos tienen diabetes?";
+                break;
+            case "ant_parientes":
+                descripcion = "¿Sus demás familiares tienen diabetes?";
+                break;
+            case "ant_embarazo":
+                descripcion = "¿Tuvo diabetes en el embarazo?";
+                break;
+            case "ant_pso_hijos":
+                descripcion = "¿Tuvo hijos de mas de 4kg al nacer?";
+                break;
+            case "ant_presion":
+                descripcion = "¿Tiene familiares con presión arterial alta?";
+                break;
+            case "ant_renal":
+                descripcion = "¿Sus familiares directos tienen alguna enfermedad renal?";
+                break;
+            case "det_ant_enf_renal":
+                descripcion = "¿Cuál enfermedad renal tienen?";
+                break;
+            case "tabaco":
+                descripcion = "¿Consume Tabaco?";
+                break;
+            case "det_frc_tabaco":
+                descripcion = "¿Cuántos tabacos al dia consume?";
+                break;
+            case "alcohol":
+                descripcion = "¿Alcohol?";
+                break;
+            case "det_frc_alcohol":
+                descripcion = "¿Cuántas veces en la semana lo ingiere?";
+                break;
+            case "otros":
+                descripcion = "¿Otros?";
+                break;
+            case "det_frc_otros":
+                descripcion = "¿Cuál otro hábito?";
+                break;
+            case "ejercicios":
+                descripcion = "¿Ejercicios?";
+                break;
+            default:
+                descripcion = campo;
+                break;
         }
-
-
-        if(faltan_campos){
-            if (!campos_datos.endsWith("Datos: ")) {
-                campos_faltantes = campos_faltantes + campos_datos + "\n\n";
-            }
-            if (!campos_vivienda.endsWith("Vivienda: ")) {
-                campos_faltantes = campos_faltantes + campos_vivienda + "\n\n";
-            }
-            if (!campos_economia.endsWith("Economia Familiar: ")) {
-                campos_faltantes = campos_faltantes + campos_economia + "\n\n";
-            }
-            if (!campos_salud.endsWith("Salud: ")) {
-                campos_faltantes = campos_faltantes + campos_salud + "\n\n";
-            }
-            if (!campos_medicamentos.endsWith("Medicamentos: ")) {
-                campos_faltantes = campos_faltantes + campos_medicamentos + "\n\n";
-            }
-            if (!campos_antecedentes.endsWith("Antecedentes: ")) {
-                campos_faltantes = campos_faltantes + campos_antecedentes + "\n\n";
-            }
-            if (!campos_habitos.endsWith("Habitos: ")) {
-                campos_faltantes = campos_faltantes + campos_habitos;
-            }
-
-        }
-        else
-            campos_faltantes = "";
-        return campos_faltantes;
+        return descripcion;
     }
 
     /*Metodo para prevenir salir del formulario al presionar el boton atras*/
@@ -453,6 +646,10 @@ public class InformacionGeneral extends AppCompatActivity
         hm_datos = new HashMap<String, String>();
         hm_datos = datos_inf_gen;
         sexo = Integer.valueOf(hm_datos.get("sexo"));
+        if(hm_datos!=null && hm_vivienda!=null && hm_economia!=null && hm_salud!=null && hm_medicamentos!=null && hm_antecedentes!=null && hm_habitos!=null)
+            fab.show();
+        else
+            fab.hide();
     }
 
     @Override
@@ -470,6 +667,10 @@ public class InformacionGeneral extends AppCompatActivity
         */
         hm_vivienda = new HashMap<String, String>();
         hm_vivienda = datos_vivienda;
+        if(hm_datos!=null && hm_vivienda!=null && hm_economia!=null && hm_salud!=null && hm_medicamentos!=null && hm_antecedentes!=null && hm_habitos!=null)
+            fab.show();
+        else
+            fab.hide();
     }
 
     @Override
@@ -486,7 +687,10 @@ public class InformacionGeneral extends AppCompatActivity
         */
         hm_economia = new HashMap<String, String>();
         hm_economia = datos_economia;
-
+        if(hm_datos!=null && hm_vivienda!=null && hm_economia!=null && hm_salud!=null && hm_medicamentos!=null && hm_antecedentes!=null && hm_habitos!=null)
+            fab.show();
+        else
+            fab.hide();
     }
 
     @Override
@@ -510,6 +714,10 @@ public class InformacionGeneral extends AppCompatActivity
         hm_salud = new HashMap<String, String>();
         hm_salud = datos_salud;
         tiene_diabetes = Integer.valueOf(hm_salud.get("diabetes"));
+        if(hm_datos!=null && hm_vivienda!=null && hm_economia!=null && hm_salud!=null && hm_medicamentos!=null && hm_antecedentes!=null && hm_habitos!=null)
+            fab.show();
+        else
+            fab.hide();
 
     }
 
@@ -542,6 +750,10 @@ public class InformacionGeneral extends AppCompatActivity
         */
         hm_medicamentos = new HashMap<String, String>();
         hm_medicamentos = datos_medicamentos;
+        if(hm_datos!=null && hm_vivienda!=null && hm_economia!=null && hm_salud!=null && hm_medicamentos!=null && hm_antecedentes!=null && hm_habitos!=null)
+            fab.show();
+        else
+            fab.hide();
 
     }
 
@@ -561,6 +773,10 @@ public class InformacionGeneral extends AppCompatActivity
         */
         hm_antecedentes = new HashMap<String, String>();
         hm_antecedentes = datos_antecedentes;
+        if(hm_datos!=null && hm_vivienda!=null && hm_economia!=null && hm_salud!=null && hm_medicamentos!=null && hm_antecedentes!=null && hm_habitos!=null)
+            fab.show();
+        else
+            fab.hide();
     }
 
     @Override
@@ -578,7 +794,10 @@ public class InformacionGeneral extends AppCompatActivity
         */
         hm_habitos = new HashMap<String, String>();
         hm_habitos = datos_habitos;
-        constructJSON();
+        if(hm_datos!=null && hm_vivienda!=null && hm_economia!=null && hm_salud!=null && hm_medicamentos!=null && hm_antecedentes!=null && hm_habitos!=null)
+            fab.show();
+        else
+            fab.hide();
     }
 }
 

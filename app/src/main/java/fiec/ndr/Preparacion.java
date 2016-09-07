@@ -3,6 +3,7 @@ package fiec.ndr;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,6 +50,8 @@ public class Preparacion extends AppCompatActivity {
     String ruta_foto, codigo, dia, mes, anio, ayunas, lugar, strDt, data_nombres;
     String UUID, hora_encuesta;
     int result;
+    String nombres_encuestador, cedula_encuestador;
+    SharedPreferences prefs;
 
 
     EditText et_cod_encuesta, et_lugar, et_nombres;
@@ -154,6 +157,10 @@ public class Preparacion extends AppCompatActivity {
                 ayunas = String.valueOf(radioGroup.indexOfChild(radioButton));
             }
         });
+
+        prefs =  getSharedPreferences("NDR_PREF", Context.MODE_PRIVATE);
+        nombres_encuestador = prefs.getString("nombre_encuestador", "") + "" +  prefs.getString("apellido_encuestador", "");
+        cedula_encuestador =  prefs.getString("cedula_encuestador", "");
 
     }
 
@@ -286,6 +293,8 @@ public class Preparacion extends AppCompatActivity {
             json_preparacion.put("id_formulario", codigo);
             json_preparacion.put("tipo_formulario", "Preparacion");
             json_preparacion.put("uuid_creado", UUID);
+            json_preparacion.put("nombres_encuestador", nombres_encuestador);
+            json_preparacion.put("cedula_encuestador", cedula_encuestador);
             json_preparacion.put("hora_creacion", hora_encuesta);
             json_preparacion.put("preparacion", jarray_datos);
             result= dir.guardarAchivo(json_preparacion.toString(),codigo,1);

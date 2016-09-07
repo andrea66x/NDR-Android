@@ -3,6 +3,7 @@ package fiec.ndr;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -31,6 +32,8 @@ public class Presion_arterial extends AppCompatActivity {
     String codigo, UUID, hora_encuesta;
     String data_min_1, data_min_2, data_min_3, data_max_1, data_max_2, data_max_3, data_nombres;
     int result;
+    String nombres_encuestador, cedula_encuestador;
+    SharedPreferences prefs;
 
     private EditText et_min_1, et_min_2, et_min_3, et_max_1, et_max_2, et_max_3, et_nombres;
 
@@ -77,6 +80,10 @@ public class Presion_arterial extends AppCompatActivity {
         et_max_2 = (EditText) findViewById(R.id.data_prs_max_2);
         et_max_3 = (EditText) findViewById(R.id.data_prs_max_3);
         et_nombres = (EditText) findViewById(R.id.data_nombres);
+
+        prefs =  getSharedPreferences("NDR_PREF", Context.MODE_PRIVATE);
+        nombres_encuestador = prefs.getString("nombre_encuestador", "") + "" +  prefs.getString("apellido_encuestador", "");
+        cedula_encuestador =  prefs.getString("cedula_encuestador", "");
     }
 
     @Override
@@ -189,6 +196,8 @@ public class Presion_arterial extends AppCompatActivity {
             json_presion.put("id_formulario", codigo);
             json_presion.put("tipo_formulario", "Presion");
             json_presion.put("uuid_creado", UUID);
+            json_presion.put("nombres_encuestador", nombres_encuestador);
+            json_presion.put("cedula_encuestador", cedula_encuestador);
             json_presion.put("hora_creacion", hora_encuesta);
             json_presion.put("presion", jarray_datos);
             Directorios dir = new Directorios(false);

@@ -3,6 +3,7 @@ package fiec.ndr;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -32,6 +33,8 @@ public class Laboratorio extends AppCompatActivity {
     String data_glucosa_min, data_glucosa_max, data_hba1c, data_ualbum, data_creatinina, data_nombres;
     EditText et_glucosa_min, et_glucosa_max, et_hba1c, et_ualbum, et_creatinina, et_nombres;
     int result;
+    String nombres_encuestador, cedula_encuestador;
+    SharedPreferences prefs;
 
     private Map<String, String> hm_laboratorio = new HashMap<String, String>();
 
@@ -76,6 +79,10 @@ public class Laboratorio extends AppCompatActivity {
         et_hba1c = (EditText) findViewById(R.id.data_hba1c);
         et_ualbum = (EditText) findViewById(R.id.data_ualbum);
         et_nombres = (EditText) findViewById(R.id.data_nombres);
+
+        prefs =  getSharedPreferences("NDR_PREF", Context.MODE_PRIVATE);
+        nombres_encuestador = prefs.getString("nombre_encuestador", "") + "" +  prefs.getString("apellido_encuestador", "");
+        cedula_encuestador =  prefs.getString("cedula_encuestador", "");
     }
 
     @Override
@@ -181,6 +188,8 @@ public class Laboratorio extends AppCompatActivity {
             json_laboratorio.put("id_formulario", codigo);
             json_laboratorio.put("tipo_formulario", "Laboratorio");
             json_laboratorio.put("uuid_creado", UUID);
+            json_laboratorio.put("nombres_encuestador", nombres_encuestador);
+            json_laboratorio.put("cedula_encuestador", cedula_encuestador);
             json_laboratorio.put("hora_creacion", hora_encuesta);
             json_laboratorio.put("resultados", jarray_datos);
             Directorios dir = new Directorios(false);

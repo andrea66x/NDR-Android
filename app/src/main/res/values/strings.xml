@@ -3,6 +3,7 @@
     <string name="menu">Home</string>
 
     <string name="ayuda">Ayuda</string>
+    <string name="guardar_conf">Ayuda</string>
 
     <!-- *** Activity Secciones  *** -->
     <string name="secciones">Secciones</string>

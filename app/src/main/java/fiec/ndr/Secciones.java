@@ -203,9 +203,9 @@ public class Secciones extends AppCompatActivity {
         titulo.setText("Usted no tiene permiso para ingresar a esta sección");
 
         // Init button of login GUI
-        Button btnEntrar = (Button) codigoDialog.findViewById(R.id.btnAceptar);
+        Button btnAceptar = (Button) codigoDialog.findViewById(R.id.btnAceptar);
 
-        btnEntrar.setOnClickListener(new View.OnClickListener() {
+        btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 codigoDialog.dismiss();

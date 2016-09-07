@@ -2,6 +2,7 @@ package fiec.ndr;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,7 +28,8 @@ import cz.msebera.android.httpclient.Header;
 public class SincronizarEncuestas extends AppCompatActivity {
 
     Directorios dir_ndr = new Directorios();
-    static String direccion_post = "http://192.168.1.200:8000/recibirjson";
+    static String direccion_post = "";
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class SincronizarEncuestas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout parent = (LinearLayout) inflater.inflate(R.layout.activity_sincronizar_encuestas, null);
+        prefs =  getSharedPreferences("NDR_PREF", Context.MODE_PRIVATE);
+        direccion_post =  prefs.getString("ruta_servidor", "http://192.168.1.200:8000/recibirjson");
 
         List<File> encuestas_pre = getListFiles(new File("/storage/emulated/0" + dir_ndr.forms));
         List<File> encuestas_pre_img = getListFiles(new File("/storage/emulated/0" + dir_ndr.forms_fotos));
@@ -170,27 +174,7 @@ public class SincronizarEncuestas extends AppCompatActivity {
             parent.findViewById(R.id.lyt_laboratorio).setVisibility(View.GONE);
 
         setContentView(parent);
-
-        AlertDialog.Builder alertDialog =new AlertDialog.Builder(SincronizarEncuestas.this);
-        alertDialog.setTitle("GG");
-        final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
-        alertDialog.setView(input);
-        alertDialog.setMessage("Ingresa la direccion ip del servidor:");
-        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                direccion_post = input.getText().toString();
-            }
-        });
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        alertDialog.setIcon(android.R.drawable.ic_menu_upload).show();
-
+        Toast.makeText(getApplicationContext(),direccion_post,Toast.LENGTH_LONG).show();
     }
 
 

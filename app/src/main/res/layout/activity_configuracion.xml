@@ -27,7 +27,8 @@
             android:text="ENCUESTADOR"
             android:id="@+id/textView26"
             android:layout_gravity="center"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -46,9 +47,12 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/editText" />
+                android:inputType="textCapCharacters"
+                android:singleLine="true"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ ÁÉÍÓÚ"
+                android:gravity="bottom|start"
+                android:background="@drawable/txtbox"
+                android:id="@+id/conf_nombre" />
         </LinearLayout>
 
         <LinearLayout
@@ -69,9 +73,12 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/editText2" />
+                android:inputType="textCapCharacters"
+                android:singleLine="true"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ ÁÉÍÓÚ"
+                android:gravity="bottom|start"
+                android:background="@drawable/txtbox"
+                android:id="@+id/conf_apellidos" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,9 +99,13 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/editText3" />
+                android:singleLine="true"
+                android:gravity="bottom|start"
+                android:background="@drawable/txtbox"
+                android:id="@+id/conf_cedula"
+                android:inputType="number"
+                android:numeric="integer"
+                android:maxLength="10" />
         </LinearLayout>
 
         <TextView
@@ -104,7 +115,8 @@
             android:text="SERVIDOR"
             android:id="@+id/textView27"
             android:layout_gravity="center_horizontal"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -124,9 +136,11 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/editText4" />
+                android:inputType="textCapCharacters"
+                android:singleLine="true"
+                android:gravity="bottom|start"
+                android:background="@drawable/txtbox"
+                android:id="@+id/conf_direccion" />
         </LinearLayout>
 
         <LinearLayout
@@ -147,9 +161,13 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/editText5" />
+                android:singleLine="true"
+                android:gravity="bottom|start"
+                android:background="@drawable/txtbox"
+                android:id="@+id/conf_puerto"
+                android:numeric="integer"
+                android:inputType="number"
+                android:maxLength="6" />
         </LinearLayout>
 
         <LinearLayout
@@ -164,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Borrar Formularios"
-                android:id="@+id/button"
+                android:id="@+id/btn_borrar_formularios"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/btn_rojo"
                 style="@style/btn_style" />

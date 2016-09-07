@@ -3,6 +3,7 @@ package fiec.ndr;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -36,6 +37,8 @@ public class Medidas extends AppCompatActivity {
     String codigo, UUID, hora_encuesta;
     String peso, estatura, med_cintura, med_cadera, data_nombres;
     int result;
+    String nombres_encuestador, cedula_encuestador;
+    SharedPreferences prefs;
 
     private EditText et_peso, et_estatura, et_cintura, et_cadera, et_nombres;
     private Map<String, String> hm_medidas = new HashMap<String, String>();
@@ -80,6 +83,10 @@ public class Medidas extends AppCompatActivity {
         et_cintura = (EditText) findViewById(R.id.data_cintura);
         et_cadera = (EditText) findViewById(R.id.data_cadera);
         et_nombres = (EditText) findViewById(R.id.data_nombres);
+
+        prefs =  getSharedPreferences("NDR_PREF", Context.MODE_PRIVATE);
+        nombres_encuestador = prefs.getString("nombre_encuestador", "") + "" +  prefs.getString("apellido_encuestador", "");
+        cedula_encuestador =  prefs.getString("cedula_encuestador", "");
 
     }
 
@@ -183,6 +190,8 @@ public class Medidas extends AppCompatActivity {
             json_medidas.put("id_formulario", codigo);
             json_medidas.put("tipo_formulario", "Medidas");
             json_medidas.put("uuid_creado", UUID);
+            json_medidas.put("nombres_encuestador", nombres_encuestador);
+            json_medidas.put("cedula_encuestador", cedula_encuestador);
             json_medidas.put("hora_creacion", hora_encuesta);
             json_medidas.put("medidas", jarray_datos);
             Directorios dir = new Directorios(false);

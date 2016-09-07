@@ -33,7 +33,7 @@
             android:inputType="text"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="admin" />
+            android:text="informacion" />
 
     </android.support.design.widget.TextInputLayout>
 

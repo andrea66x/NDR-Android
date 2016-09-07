@@ -93,7 +93,6 @@ public class HabitosFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_habitos, container, false);
 
-
         lyt_tabaco = (LinearLayout) rootView.findViewById(R.id.lyt_tabaco);
         lyt_alcohol = (LinearLayout) rootView.findViewById(R.id.lyt_alcohol);
         lyt_otros = (LinearLayout) rootView.findViewById(R.id.lyt_otros);
@@ -186,32 +185,8 @@ public class HabitosFragment extends Fragment {
 
         sp_ejercicios.setAdapter(dataAdapter);
 
-        Button guardar = (Button) rootView.findViewById(R.id.btn_guardar);
-        Button cancelar = (Button) rootView.findViewById(R.id.btn_cancelar);
-        guardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Rellenamos el hash con los datos obtenidos de los componentes.
-                setearHash();
-                //Llamamos al interface.
-                interface_Habitos.onChangeTabHabitos(datos_habitos);
-            }
-        });
-
-        cancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Salir")
-                        .setMessage("¿Estás seguro de querer salir?")
-                        .setNegativeButton(android.R.string.no, null)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                getActivity().finish();
-                            }
-                        }).create().show();
-            }
-        });
+        setearHash();
+        interface_Habitos.onChangeTabHabitos(datos_habitos);
 
         return rootView;
     }
@@ -219,6 +194,20 @@ public class HabitosFragment extends Fragment {
     /////////////////// FIN - INICIALIZAR COMPONENTES ///////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
 
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        // Nos aseguramos que el tab sea visible.
+        if (this.isVisible())
+            //Comprobamos si el fragment ya no es visible para el usuario.
+            if (!isVisibleToUser) {
+                //Rellenamos el hash con los datos obtenidos de los componentes.
+                setearHash();
+                //Llamamos al interface.
+                interface_Habitos.onChangeTabHabitos(datos_habitos);
+            }
+    }
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////// INICIO - METODOS AUXILIARES /////////////////////////////////////
