@@ -27,8 +27,7 @@
         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
         android:maxLength="7"
         android:inputType="textCapCharacters"
-        android:gravity="center"
-        android:text="AA91921" />
+        android:gravity="center" />
 
 
     <LinearLayout

@@ -190,6 +190,11 @@ public class SincronizarEncuestas extends AppCompatActivity {
         AsyncHttpClient client = new AsyncHttpClient();
         client.post(direccion_post, params, new AsyncHttpResponseHandler() {
             @Override
+            public void onStart() {
+                Toast.makeText(getApplicationContext(), "Empezando", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
 
                 AlertDialog.Builder alertDialog =new AlertDialog.Builder(SincronizarEncuestas.this);
@@ -208,6 +213,11 @@ public class SincronizarEncuestas extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] bytes, Throwable throwable) {
                 Toast.makeText(getApplicationContext(), "Bronza", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                Toast.makeText(getApplicationContext(), "Reintentando", Toast.LENGTH_LONG).show();
             }
         });
 

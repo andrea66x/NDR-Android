@@ -14,9 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -71,6 +74,7 @@ public class InformacionGeneral extends AppCompatActivity
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         assert mViewPager != null;
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
 
         // Configuramos el TabLayout con el ViewPager.
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -136,13 +140,24 @@ public class InformacionGeneral extends AppCompatActivity
             }
         });
 
+
         validador_json = false;
 
         prefs =  getSharedPreferences("NDR_PREF", Context.MODE_PRIVATE);
         nombres_encuestador = prefs.getString("nombre_encuestador", "") + "" +  prefs.getString("apellido_encuestador", "");
         cedula_encuestador =  prefs.getString("cedula_encuestador", "");
 
+        AlertDialog.Builder alertDialog =new AlertDialog.Builder(InformacionGeneral.this);
+        alertDialog.setTitle("Ayuda Inicial");
+        alertDialog.setMessage("Usa el gesto de deslizar tus dedos sobre la pantalla para desplazarte por el formulario.");
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        alertDialog.setIcon(android.R.drawable.ic_menu_upload).show();
+
     }
+
 
     public String constructJSON()
     {

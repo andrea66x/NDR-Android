@@ -1,11 +1,14 @@
 package fiec.ndr.inf_general;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -173,7 +176,6 @@ public class DatosFragment extends Fragment {
 
         return rootView;
     }
-
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////// FIN - INICIALIZAR COMPONENTES ///////////////////////////////////
