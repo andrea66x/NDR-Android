@@ -174,7 +174,7 @@ public class SincronizarEncuestas extends AppCompatActivity {
             parent.findViewById(R.id.lyt_laboratorio).setVisibility(View.GONE);
 
         setContentView(parent);
-        Toast.makeText(getApplicationContext(),direccion_post,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),direccion_post,Toast.LENGTH_LONG).show();
     }
 
 
@@ -191,28 +191,39 @@ public class SincronizarEncuestas extends AppCompatActivity {
         client.post(direccion_post, params, new AsyncHttpResponseHandler() {
             @Override
             public void onStart() {
-                Toast.makeText(getApplicationContext(), "Empezando", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
-
-                AlertDialog.Builder alertDialog =new AlertDialog.Builder(SincronizarEncuestas.this);
-                alertDialog.setTitle("Envío de Archios");
-                alertDialog.setMessage("La encuesta ha sido correctamente recibida por el servidor, procederemos a borrar el archivo.");
-                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                alertDialog.setIcon(android.R.drawable.ic_menu_upload).show();
-                boton_sinc.setBackgroundResource(R.drawable.btn_rojo);
-                boton_sinc.setText("SUBIDO");
+                boton_sinc.setBackgroundResource(R.drawable.btn_amarillo);
+                boton_sinc.setText("Enviando");
                 boton_sinc.setEnabled(false);
             }
 
             @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] bytes) {
+                if (statusCode==200) {
+                    boton_sinc.setBackgroundResource(R.drawable.btn_rojo);
+                    boton_sinc.setText("Subido");
+                    boton_sinc.setEnabled(false);
+                }
+                else if (statusCode == 201){
+                    AlertDialog.Builder alertDialog =new AlertDialog.Builder(SincronizarEncuestas.this);
+                    alertDialog.setTitle("Envío de Archios");
+                    alertDialog.setMessage("El archivo que intenta subir ya existe, asegurate de su consistencia.");
+                    alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    alertDialog.setIcon(android.R.drawable.ic_menu_upload).show();
+                    boton_sinc.setBackgroundResource(R.drawable.btn_morado);
+                    boton_sinc.setText("Duplicado");
+                    boton_sinc.setEnabled(false);
+                }
+
+            }
+
+            @Override
             public void onFailure(int statusCode, Header[] headers, byte[] bytes, Throwable throwable) {
-                Toast.makeText(getApplicationContext(), "Bronza", Toast.LENGTH_LONG).show();
+                boton_sinc.setBackgroundResource(R.drawable.btn_azul);
+                boton_sinc.setText("Reintentar");
+                boton_sinc.setEnabled(true);
             }
 
             @Override
