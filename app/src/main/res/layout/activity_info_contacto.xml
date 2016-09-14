@@ -107,7 +107,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/lbl_conta_1"
+                android:text="@string/lbl_conta_2"
                 android:id="@+id/textView22"
                 android:layout_marginTop="10dp" />
         </LinearLayout>
